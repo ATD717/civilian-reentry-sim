@@ -29,49 +29,6 @@ st.markdown("""
         color: #94A3B8;
         margin-bottom: 24px;
     }
-    
-    /* Academic Callout Box */
-    .citation-box {
-        background-color: #1E293B !important;
-        color: #F8FAFC !important;
-        border-left: 5px solid #0EA5E9;
-        border-top: 1px solid #334155;
-        border-right: 1px solid #334155;
-        border-bottom: 1px solid #334155;
-        padding: 20px 24px;
-        border-radius: 8px;
-        margin-top: 18px;
-        margin-bottom: 24px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    }
-    .citation-box h4 {
-        color: #38BDF8 !important;
-        margin-top: 0px;
-        font-size: 1.1rem;
-        letter-spacing: 0.03em;
-    }
-    
-    /* Scenario Cards */
-    .scenario-card {
-        background-color: #1E293B;
-        border: 1px solid #334155;
-        padding: 24px;
-        border-radius: 10px;
-        margin-bottom: 24px;
-        line-height: 1.6;
-        color: #F1F5F9;
-        font-size: 1.05rem;
-    }
-    
-    /* Sidebar Dossier */
-    .dossier-card {
-        background-color: #1E293B;
-        color: #F8FAFC;
-        padding: 18px;
-        border-radius: 8px;
-        border: 1px solid #334155;
-        margin-bottom: 15px;
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -128,7 +85,7 @@ with st.sidebar:
     if st.session_state.char_key:
         char = CHARACTERS[st.session_state.char_key]
         st.markdown(f"### 📋 Active Dossier: {char['name']}")
-        st.markdown(f"**Rank:** {char['rank']}<br>**Service:** {char['service']}<br><br>**Context:** {char['background']}", unsafe_allow_html=True)
+        st.markdown(f"**Rank:** {char['rank']}\n\n**Service:** {char['service']}\n\n**Context:** {char['background']}")
         
         st.markdown("### 📊 Transition Metrics")
         col_s1, col_s2, col_s3 = st.columns(3)
@@ -190,19 +147,19 @@ elif st.session_state.state == "NODE_1":
     c1, c2, c3 = st.columns(3)
     
     with c1:
-        st.subheader("Option A")
+        st.markdown("### Option A")
         st.write("Spend dedicated morning hours coordinating with veteran advocates, tracking medical verification queues, and securing official service documentation before taking on new external commitments.")
         if st.button("Select Option A", key="n1_a", use_container_width=True):
             apply_choice(ot_change=-5, rc_change=-5, sni_change=20, next_node="NODE_2", choice_id="1A")
 
     with c2:
-        st.subheader("Option B")
+        st.markdown("### Option B")
         st.write("Channel your energy into submitting corporate applications, attending virtual networking events, and interviewing, letting administrative records process in the background.")
         if st.button("Select Option B", key="n1_b", use_container_width=True):
             apply_choice(ot_change=20, rc_change=-5, sni_change=-10, next_node="NODE_2", choice_id="1B")
 
     with c3:
-        st.subheader("Option C")
+        st.markdown("### Option C")
         st.write("Prioritize home life, partner alignment, and establishing household routines during the first month, taking time to decompress before committing to rigid application or paperwork schedules.")
         if st.button("Select Option C", key="n1_c", use_container_width=True):
             apply_choice(ot_change=-10, rc_change=20, sni_change=-5, next_node="NODE_2", choice_id="1C")
@@ -217,4 +174,88 @@ elif st.session_state.state == "NODE_2":
     st.warning("""
     **🔬 Academic Citation & Research Analysis**  
     *Source: Schuetz (1945) — Homecoming Theory / Demers (2011)*  
-    Reintegration is relational rather
+    Reintegration is relational rather than isolated. Schuetz's Homecoming Theory demonstrates that both the returning service member and their home community evolve independently during separation. When a veteran returns, established household routines must be renegotiated. Assuming the household can instantly resume past patterns or adapt to military-style domestic management leads to subtle marital friction.
+    """)
+
+    st.header(f"Month 3: Domestic Boundaries & Expectations — {char['name']}")
+    
+    st.info("""
+    You have been home for ninety days. During your active service deployments, your partner managed all daily domestic choices, finances, and household logistics independently.
+
+    Lately, friction arises over daily routines and decision-making authority. After a disagreement regarding household schedules, your partner remarks that you are treating the home like a military unit rather than a shared partnership.
+    """)
+
+    st.subheader("How do you respond to this domestic friction?")
+
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+        st.markdown("### Option A")
+        st.write("Step back from domestic management entirely, leaving daily decisions to your partner while focusing strictly on your personal work or job search tasks.")
+        if st.button("Select Option A", key="n2_a", use_container_width=True):
+            apply_choice(ot_change=5, rc_change=-15, sni_change=0, next_node="NODE_3", choice_id="2A")
+
+    with c2:
+        st.markdown("### Option B")
+        st.write("Initiate a structured weekly household check-in where both you and your partner explicitly map out responsibilities, financial goals, and personal expectations.")
+        if st.button("Select Option B", key="n2_b", use_container_width=True):
+            apply_choice(ot_change=0, rc_change=20, sni_change=5, next_node="NODE_3", choice_id="2B")
+
+    with c3:
+        st.markdown("### Option C")
+        st.write("Keep your internal stress private and avoid discussing household roles further, believing that time and routine will naturally smooth out the tension.")
+        if st.button("Select Option C", key="n2_c", use_container_width=True):
+            apply_choice(ot_change=0, rc_change=-20, sni_change=-5, next_node="NODE_3", choice_id="2C")
+
+# -----------------------------------------------------------------------------
+# NODE 3: MONTH 6 — WORKPLACE INTEGRATION & COMMUNICATION
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_3":
+    char = CHARACTERS[st.session_state.char_key]
+    st.progress(0.42, text="Node 3 of 7: Month 6 — Corporate Culture & Team Friction")
+
+    st.warning("""
+    **🔬 Academic Citation & Research Analysis**  
+    *Source: Zoli, Maury, & Fay (2015) — IVMF / Syracuse University*  
+    Research indicates that military operational culture relies on rapid, direct communication, precise SOPs, and absolute command responsibility. In civilian corporate spaces, this directness frequently clashes with norms centered on consensus-building and indirect feedback. The inability of civilian HR systems to translate military leadership assets—combined with veteran frustration over corporate ambiguity—creates a primary barrier to long-term post-service employment retention.
+    """)
+
+    st.header(f"Month 6: The Project Review — {char['name']}")
+    
+    st.info("""
+    You are six months into your new corporate position. During a major cross-functional meeting, a key project deadline slips because two department leads disagree on resource allocation.
+
+    Your manager turns to you and asks how you would align the team to resolve the impasse and keep deliverables moving forward.
+    """)
+
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+        st.markdown("### Option A")
+        st.write("Establish a formal project tracking matrix with clear, documented ownership for every task, scheduling a joint review session where team leads publicly account for roadblocks.")
+        if st.button("Select Option A", key="n3_a", use_container_width=True):
+            apply_choice(ot_change=-10, rc_change=0, sni_change=5, next_node="NODE_4", choice_id="3A")
+
+    with c2:
+        st.markdown("### Option B")
+        st.write("Hold informal, one-on-one alignment discussions with each department lead outside the main meeting to understand their constraints and co-create a compromise before updating the schedule.")
+        if st.button("Select Option B", key="n3_b", use_container_width=True):
+            apply_choice(ot_change=20, rc_change=10, sni_change=0, next_node="NODE_4", choice_id="3B")
+
+    with c3:
+        st.markdown("### Option C")
+        st.write("Focus on delivering your assigned components ahead of schedule while providing clear technical status updates to leadership, letting the project owner manage stakeholder friction.")
+        if st.button("Select Option C", key="n3_c", use_container_width=True):
+            apply_choice(ot_change=-15, rc_change=-10, sni_change=-5, next_node="NODE_4", choice_id="3C")
+
+# -----------------------------------------------------------------------------
+# NODE 4: MONTH 9 — SOCIAL NETWORKS & PEER ISOLATION
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_4":
+    char = CHARACTERS[st.session_state.char_key]
+    st.progress(0.57, text="Node 4 of 7: Month 9 — Social Connection & Community")
+
+    st.warning("""
+    **🔬 Academic Citation & Research Analysis**  
+    *Source: Smith & True (2014) / Romaniuk et al. (2020)*  
+    Post-military social adjustment often involves a sense of cultural isolation when civilian peer groups lack shared operational experiences. Smith & True note that veterans frequently navigate 'warring identities' when attempting
