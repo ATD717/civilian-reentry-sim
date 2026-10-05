@@ -1,7 +1,7 @@
 import streamlit as st
 
 # -----------------------------------------------------------------------------
-# PAGE CONFIGURATION & STYLING
+# PAGE CONFIGURATION & ENHANCED UI STYLING
 # -----------------------------------------------------------------------------
 st.set_page_config(
     page_title="Operation Civilian Re-Entry | MVS 100",
@@ -11,54 +11,106 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    .main-header { font-size: 2.2rem; font-weight: 800; color: #1E293B; margin-bottom: 0px; }
-    .sub-header { font-size: 1.1rem; color: #64748B; margin-bottom: 20px; }
+    /* Dark Theme Overrides & Global Typography */
+    .stApp {
+        background-color: #0F172A;
+        color: #E2E8F0;
+    }
+    
+    .main-header {
+        font-size: 2.4rem;
+        font-weight: 800;
+        color: #38BDF8;
+        margin-bottom: 4px;
+        letter-spacing: -0.02em;
+    }
+    .sub-header {
+        font-size: 1.15rem;
+        color: #94A3B8;
+        margin-bottom: 24px;
+    }
+    
+    /* Academic Callout Box */
     .citation-box {
         background-color: #1E293B !important;
         color: #F8FAFC !important;
-        border-left: 5px solid #3B82F6;
-        padding: 18px 22px;
-        border-radius: 6px;
-        margin-top: 15px;
-        margin-bottom: 20px;
+        border-left: 5px solid #0EA5E9;
+        border-top: 1px solid #334155;
+        border-right: 1px solid #334155;
+        border-bottom: 1px solid #334155;
+        padding: 20px 24px;
+        border-radius: 8px;
+        margin-top: 18px;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     }
-    .citation-box h4 { color: #60A5FA !important; margin-top: 0px; }
+    .citation-box h4 {
+        color: #38BDF8 !important;
+        margin-top: 0px;
+        font-size: 1.1rem;
+        letter-spacing: 0.03em;
+    }
+    
+    /* Scenario Cards */
+    .scenario-card {
+        background-color: #1E293B;
+        border: 1px solid #334155;
+        padding: 24px;
+        border-radius: 10px;
+        margin-bottom: 24px;
+        line-height: 1.6;
+        color: #F1F5F9;
+        font-size: 1.05rem;
+    }
+    
+    /* Sidebar Dossier */
     .dossier-card {
-        background-color: #0F172A;
+        background-color: #1E293B;
         color: #F8FAFC;
         padding: 18px;
         border-radius: 8px;
+        border: 1px solid #334155;
         margin-bottom: 15px;
+    }
+    
+    /* Custom Choice Containers */
+    .choice-container {
+        background-color: #1E293B;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 20px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .choice-title {
+        color: #38BDF8;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# CHARACTER DEFINITIONS (All Active Duty, Gender-Neutral Names)
+# CHARACTER DEFINITIONS (Active Duty, Gender-Neutral Names, No Pay Grades)
 # -----------------------------------------------------------------------------
 CHARACTERS = {
     "ALEX": {
         "name": "Alex Vance",
-        "rank": "Gunnery Sergeant / SFC (E-7)",
-        "service": "12 Years Active Duty — Infantry / Operations",
-        "background": "Married with children; spouse managed domestic operations through multiple combat deployments.",
-        "challenge": "Translating direct command leadership into consensus-driven corporate culture; renegotiating household authority and overcoming military stoicism.",
+        "rank": "Master Sergeant",
+        "service": "Active Duty — Infantry / Operations Specialist",
+        "background": "Married with children; spouse managed domestic operations and household decisions through multiple long combat deployments.",
+        "challenge": "Translating direct leadership into consensus-driven corporate culture; renegotiating household authority and overcoming military cultural stoicism.",
         "stats": {"OT": 45, "RC": 40, "SNI": 50}
-    },
-    "JORDAN": {
-        "name": "Jordan Harper",
-        "rank": "Specialist / Corporal (E-4)",
-        "service": "4 Years Active Duty — Cyber Intelligence Analysis",
-        "background": "Single, transitioning into a major urban technology hub away from primary family networks.",
-        "challenge": "Navigating corporate ambiguity and underemployment; building a non-military peer network from scratch without established family infrastructure.",
-        "stats": {"OT": 55, "RC": 50, "SNI": 35}
     },
     "MORGAN": {
         "name": "Morgan Ellis",
-        "rank": "Captain (O-3)",
-        "service": "6 Years Active Duty — Logistics & Supply Chain Officer",
-        "background": "Dual-career household (no children); partner holds a demanding corporate leadership position.",
-        "challenge": "Re-aligning executive expectations (managing large military budgets vs. entry-level corporate politics); balancing partner's career priorities with transition friction.",
+        "rank": "Captain",
+        "service": "Active Duty — Logistics & Supply Chain Officer",
+        "background": "Dual-career household (no children); partner holds a demanding corporate leadership position in a major city.",
+        "challenge": "Re-aligning executive expectations (managing large military operational budgets vs. corporate office politics); balancing partner's career priorities with transition friction.",
         "stats": {"OT": 60, "RC": 45, "SNI": 40}
     }
 }
@@ -96,8 +148,8 @@ with st.sidebar:
         st.markdown(f"### 📋 Active Dossier: {char['name']}")
         st.markdown(f"""
         <div class="dossier-card">
-            <b>Rank/Branch:</b> {char['rank']}<br>
-            <b>Service:</b> {char['service']}<br>
+            <b>Rank:</b> {char['rank']}<br>
+            <b>Service:</b> {char['service']}<br><br>
             <b>Context:</b> {char['background']}
         </div>
         """, unsafe_allow_html=True)
@@ -122,71 +174,119 @@ with st.sidebar:
 # -----------------------------------------------------------------------------
 if st.session_state.state == "CHAR_SELECT":
     st.markdown('<p class="main-header">OPERATION CIVILIAN RE-ENTRY</p>', unsafe_allow_html=True)
-    st.markdown('<p class="sub-header">A 24-Month Interactive Transition Simulation</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">An Interactive 24-Month Reintegration Simulation</p>', unsafe_allow_html=True)
     st.divider()
 
     st.subheader("Select a Service Member Dossier")
     st.markdown("Choose a subject to guide through their 24-month post-discharge transition journey:")
 
-    cols = st.columns(3)
+    cols = st.columns(2)
     for idx, (key, char) in enumerate(CHARACTERS.items()):
         with cols[idx]:
             st.markdown(f"### {char['name']}")
-            st.write(f"**{char['rank']}**")
-            st.write(f"*{char['service']}*")
-            st.info(char['background'])
+            st.write(f"**{char['rank']}** — *{char['service']}*")
+            st.info(f"**Background:** {char['background']}")
             st.warning(f"**Key Challenge:** {char['challenge']}")
             
             if st.button(f"Select {char['name'].split()[0]}", key=f"sel_{key}", use_container_width=True, type="primary"):
                 st.session_state.char_key = key
                 st.session_state.stats = char['stats'].copy()
-                st.session_state.state = "PHASE_1"
+                st.session_state.state = "NODE_1"
                 st.rerun()
 
 # -----------------------------------------------------------------------------
-# SCREEN 2: PHASE 1 (WEEKS 1–4 — DISCHARGE & SEPARATION)
+# NODE 1: MONTH 1 — ADMINISTRATIVE & IMMEDIATE SEPARATION
 # -----------------------------------------------------------------------------
-elif st.session_state.state == "PHASE_1":
+elif st.session_state.state == "NODE_1":
     char = CHARACTERS[st.session_state.char_key]
-    st.progress(0.25, text="Phase 1/4: Immediate Separation (Weeks 1–4)")
-    st.header(f"Phase 1: The Administrative & Relocation Handshake — {char['name']}")
+    st.progress(0.14, text="Node 1 of 7: Month 1 — Immediate Separation & Priorities")
+    st.header(f"Month 1: The Administrative Handshake — {char['name']}")
     
     st.markdown("""
-    **Setting:** Week 2 post-discharge. Your active-duty term is complete, and your DD-214 is in hand. 
-    You are settling into your new residence when you receive a notification from the VA stating that your military electronic health records 
-    require manual verification before your primary care team can be assigned, creating a 60-day backlog. 
-    Meanwhile, household setup and career opportunities compete for your immediate focus.
-    """)
+    <div class="scenario-card">
+    It is Week 2 post-discharge. Your active-duty service is complete, and your official discharge papers are in hand. 
+    You receive a notification from the VA stating that your military electronic health records require manual verification before your primary care team can be assigned, creating a 60-day administrative delay.<br><br>
+    Simultaneously, household setup, financial budgeting, and initial corporate networking opportunities demand your immediate focus.
+    </div>
+    """, unsafe_allow_html=True)
 
-    st.subheader("Decision Node 1: How do you prioritize your focus in the first 30 days?")
+    st.subheader("How do you allocate your primary focus during this first month?")
 
     c1, c2, c3 = st.columns(3)
     
     with c1:
-        st.markdown("#### Option 1A: System & Structure Priority")
-        st.write("Focus heavily on clearing the administrative backlog first. Spend dedicated morning hours coordinating with VSOs, tracking medical verification queues, and securing official documentation before taking on new external commitments.")
-        if st.button("Choose 1A: System Priority", use_container_width=True):
-            apply_choice(ot_change=-5, rc_change=-5, sni_change=20, next_node="PHASE_2_SYS", choice_id="1A")
+        st.markdown("<div class="choice-title">Option A</div>", unsafe_allow_html=True)
+        st.write("Spend dedicated morning hours coordinating with veteran advocates, tracking medical verification queues, and securing official service documentation before taking on new external commitments.")
+        if st.button("Select Option A", key="n1_a", use_container_width=True):
+            apply_choice(ot_change=-5, rc_change=-5, sni_change=20, next_node="NODE_2", choice_id="1A")
 
     with c2:
-        st.markdown("#### Option 1B: Workforce & Financial Momentum")
-        st.write("Treat career placement as the urgent priority. Channel your energy into submitting job applications, attending networking calls, and interviewing, letting administrative processing run its course in the background.")
-        if st.button("Choose 1B: Career Priority", use_container_width=True):
-            apply_choice(ot_change=20, rc_change=-5, sni_change=-10, next_node="PHASE_2_EMP", choice_id="1B")
+        st.markdown("<div class="choice-title">Option B</div>", unsafe_allow_html=True)
+        st.write("Channel your energy into submitting corporate applications, attending virtual networking events, and interviewing, letting administrative records process in the background.")
+        if st.button("Select Option B", key="n1_b", use_container_width=True):
+            apply_choice(ot_change=20, rc_change=-5, sni_change=-10, next_node="NODE_2", choice_id="1B")
 
     with c3:
-        st.markdown("#### Option 1C: Domestic & Relational Alignment")
-        st.write("Focus primarily on home life, partner alignment, and establishing household routines during the first month, taking time to decompress before committing to rigid application or paperwork schedules.")
-        if st.button("Choose 1C: Domestic Priority", use_container_width=True):
-            apply_choice(ot_change=-10, rc_change=20, sni_change=-5, next_node="PHASE_2_DOM", choice_id="1C")
+        st.markdown("<div class="choice-title">Option C</div>", unsafe_allow_html=True)
+        st.write("Prioritize home life, partner alignment, and establishing household routines during the first month, taking time to decompress before committing to rigid application or paperwork schedules.")
+        if st.button("Select Option C", key="n1_c", use_container_width=True):
+            apply_choice(ot_change=-10, rc_change=20, sni_change=-5, next_node="NODE_2", choice_id="1C")
 
 # -----------------------------------------------------------------------------
-# SCREEN 3: PHASE 2 (MONTHS 2–6 — EMPLOYMENT & CULTURAL ADAPTATION)
+# NODE 2: MONTH 3 — EARLY RELATIONSHIP & HOUSEHOLD DYNAMICS
 # -----------------------------------------------------------------------------
-elif st.session_state.state.startswith("PHASE_2"):
+elif st.session_state.state == "NODE_2":
     char = CHARACTERS[st.session_state.char_key]
-    st.progress(0.50, text="Phase 2/4: Employment & Cultural Adaptation (Months 2–6)")
+    st.progress(0.28, text="Node 2 of 7: Month 3 — Household Role Renegotiation")
     
+    st.markdown("""
+    <div class="citation-box">
+        <h4>🔬 Academic Citation & Research Analysis</h4>
+        <b>Source: Schuetz (1945) — Homecoming Theory / Demers (2011)</b><br><br>
+        Reintegration is relational rather than isolated. Schuetz's <i>Homecoming Theory</i> demonstrates that both the returning service member 
+        and their home community evolve independently during separation. When a veteran returns, established household routines must be renegotiated. 
+        Assuming the household can instantly resume past patterns or adapt to military-style domestic management leads to subtle marital friction.
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.header(f"Month 3: Domestic Boundaries & Expectations — {char['name']}")
+    
+    st.markdown("""
+    <div class="scenario-card">
+    You have been home for ninety days. During your active service deployments, your partner managed all daily domestic choices, finances, and household logistics independently.<br><br>
+    Lately, friction arises over daily routines and decision-making authority. After a disagreement regarding household schedules, your partner remarks that you are treating the home like a military unit rather than a shared partnership.
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.subheader("How do you respond to this domestic friction?")
+
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+        st.markdown("<div class="choice-title">Option A</div>", unsafe_allow_html=True)
+        st.write("Step back from domestic management entirely, leaving daily decisions to your partner while focusing strictly on your personal work or job search tasks.")
+        if st.button("Select Option A", key="n2_a", use_container_width=True):
+            apply_choice(ot_change=5, rc_change=-15, sni_change=0, next_node="NODE_3", choice_id="2A")
+
+    with c2:
+        st.markdown("<div class="choice-title">Option B</div>", unsafe_allow_html=True)
+        st.write("Initiate a structured weekly household check-in where both you and your partner explicitly map out responsibilities, financial goals, and personal expectations.")
+        if st.button("Select Option B", key="n2_b", use_container_width=True):
+            apply_choice(ot_change=0, rc_change=20, sni_change=5, next_node="NODE_3", choice_id="2B")
+
+    with c3:
+        st.markdown("<div class="choice-title">Option C</div>", unsafe_allow_html=True)
+        st.write("Keep your internal stress private and avoid discussing household roles further, believing that time and routine will naturally smooth out the tension.")
+        if st.button("Select Option C", key="n2_c", use_container_width=True):
+            apply_choice(ot_change=0, rc_change=-20, sni_change=-5, next_node="NODE_3", choice_id="2C")
+
+# -----------------------------------------------------------------------------
+# NODE 3: MONTH 6 — WORKPLACE INTEGRATION & COMMUNICATION
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_3":
+    char = CHARACTERS[st.session_state.char_key]
+    st.progress(0.42, text="Node 3 of 7: Month 6 — Corporate Culture & Team Friction")
+
     st.markdown("""
     <div class="citation-box">
         <h4>🔬 Academic Citation & Research Analysis</h4>
@@ -198,93 +298,185 @@ elif st.session_state.state.startswith("PHASE_2"):
     </div>
     """, unsafe_allow_html=True)
 
-    st.header(f"Phase 2: Corporate Integration & Team Dynamics — {char['name']}")
+    st.header(f"Month 6: The Project Review — {char['name']}")
     
     st.markdown("""
-    **Setting:** Month 4 Post-Discharge. You are in a cross-functional project meeting at your new workplace. 
-    A key project milestone slipped because two department leads disagree on resource allocation and ownership. 
-    The hiring manager/interviewer asks: *"How would you step in to align this team and keep the deliverable on track?"*
-    """)
+    <div class="scenario-card">
+    You are six months into your new corporate position. During a major cross-functional meeting, a key project deadline slips because two department leads disagree on resource allocation.<br><br>
+    Your manager turns to you and asks how you would align the team to resolve the impasse and keep deliverables moving forward.
+    </div>
+    """, unsafe_allow_html=True)
 
     c1, c2, c3 = st.columns(3)
 
     with c1:
-        st.markdown("#### Option 2A: Framework & Accountability Focus")
-        st.write("Establish a formal project tracking matrix with clear, documented ownership for every task, scheduling a joint review session where team leads publicly walk through their commitments and roadblocks.")
-        if st.button("Choose 2A: Framework Approach", use_container_width=True):
-            apply_choice(ot_change=-10, rc_change=0, sni_change=5, next_node="PHASE_3_DIRECT", choice_id="2A")
+        st.markdown("<div class="choice-title">Option A</div>", unsafe_allow_html=True)
+        st.write("Establish a formal project tracking matrix with clear, documented ownership for every task, scheduling a joint review session where team leads publicly account for roadblocks.")
+        if st.button("Select Option A", key="n3_a", use_container_width=True):
+            apply_choice(ot_change=-10, rc_change=0, sni_change=5, next_node="NODE_4", choice_id="3A")
 
     with c2:
-        st.markdown("#### Option 2B: Relational & Diplomatic Focus")
-        st.write("Hold informal, one-on-one alignment discussions with each department lead outside the main meeting to understand their individual constraints and co-create a compromise before updating the schedule.")
-        if st.button("Choose 2B: Diplomatic Approach", use_container_width=True):
-            apply_choice(ot_change=20, rc_change=10, sni_change=0, next_node="PHASE_3_CONSENSUS", choice_id="2B")
+        st.markdown("<div class="choice-title">Option B</div>", unsafe_allow_html=True)
+        st.write("Hold informal, one-on-one alignment discussions with each department lead outside the main meeting to understand their constraints and co-create a compromise before updating the schedule.")
+        if st.button("Select Option B", key="n3_b", use_container_width=True):
+            apply_choice(ot_change=20, rc_change=10, sni_change=0, next_node="NODE_4", choice_id="3B")
 
     with c3:
-        st.markdown("#### Option 2C: Role Boundaries & Execution Focus")
+        st.markdown("<div class="choice-title">Option C</div>", unsafe_allow_html=True)
         st.write("Focus on delivering your assigned components ahead of schedule while providing clear technical status updates to leadership, letting the project owner manage stakeholder friction.")
-        if st.button("Choose 2C: Execution Approach", use_container_width=True):
-            apply_choice(ot_change=-15, rc_change=-10, sni_change=-5, next_node="PHASE_3_PASSIVE", choice_id="2C")
+        if st.button("Select Option C", key="n3_c", use_container_width=True):
+            apply_choice(ot_change=-15, rc_change=-10, sni_change=-5, next_node="NODE_4", choice_id="3C")
 
 # -----------------------------------------------------------------------------
-# SCREEN 4: PHASE 3 (MONTHS 7–12 — DOMESTIC & COMMUNITY RE-ENTRY)
+# NODE 4: MONTH 9 — SOCIAL NETWORKS & PEER ISOLATION
 # -----------------------------------------------------------------------------
-elif st.session_state.state.startswith("PHASE_3"):
+elif st.session_state.state == "NODE_4":
     char = CHARACTERS[st.session_state.char_key]
-    st.progress(0.75, text="Phase 3/4: Social & Community Adjustment (Months 7–12)")
+    st.progress(0.57, text="Node 4 of 7: Month 9 — Social Connection & Community")
 
     st.markdown("""
     <div class="citation-box">
         <h4>🔬 Academic Citation & Research Analysis</h4>
-        <b>Source: Schuetz (1945) / Demers (2011) / Smith & True (2014)</b><br><br>
-        Reintegration is relational, not isolated. Schuetz's <i>Homecoming Theory</i> notes that both the returning service member 
-        and the home community evolve independently during separation. Military conditioning instills a 'cultural stoicism' and 
-        collectivist bond that requires intentional renegotiation of domestic roles upon return to avoid long-term isolation or domestic strain.
+        <b>Source: Smith & True (2014) / Romaniuk et al. (2020)</b><br><br>
+        Post-military social adjustment often involves a sense of cultural isolation when civilian peer groups lack shared operational experiences. 
+        Smith & True note that veterans frequently navigate 'warring identities' when attempting to connect with civilian peers who operate under different social values. 
+        Re-establishing meaningful community ties is essential for long-term psychological well-being.
     </div>
     """, unsafe_allow_html=True)
 
-    st.header(f"Phase 3: Domestic & Social Adjustment — {char['name']}")
+    st.header(f"Month 9: Community & Social Networks — {char['name']}")
     
     st.markdown("""
-    **Setting:** Month 9 Post-Discharge. Household and social routines have hit a plateau. 
-    You notice that between work requirements and routine daily stress, you spend most of your free time decompressed alone or staying in touch with distant service friends online, 
-    leading to subtle disconnects in local social and family life.
-    """)
+    <div class="scenario-card">
+    Nine months post-discharge, you realize that most of your non-work social interaction consists of messaging former service members online. 
+    While supportive, these distant conversations leave you feeling somewhat isolated in your local community. Coworkers invite you to join an informal weekend recreational league.
+    </div>
+    """, unsafe_allow_html=True)
 
     c1, c2, c3 = st.columns(3)
 
     with c1:
-        st.markdown("#### Option 3A: Self-Reliant Space & Composure")
-        st.write("Manage your personal stress independently through daily personal routines and quiet time, protecting your family and coworkers from your internal frustration while maintaining daily stability.")
-        if st.button("Choose 3A: Self-Reliant Path", use_container_width=True):
-            apply_choice(ot_change=0, rc_change=-20, sni_change=-10, next_node="PHASE_4_STOIC", choice_id="3A")
+        st.markdown("<div class="choice-title">Option A</div>", unsafe_allow_html=True)
+        st.write("Decline the coworker invitation and instead join a local veteran service organization focused on community action projects with former military peers.")
+        if st.button("Select Option A", key="n4_a", use_container_width=True):
+            apply_choice(ot_change=5, rc_change=10, sni_change=15, next_node="NODE_5", choice_id="4A")
 
     with c2:
-        st.markdown("#### Option 3B: Direct Personal Vulnerability")
-        st.write("Initiate direct conversations with your partner or close family about your ongoing adjustment friction, proposing joint counseling or open family check-ins to recalibrate expectations together.")
-        if st.button("Choose 3B: Vulnerability Path", use_container_width=True):
-            apply_choice(ot_change=5, rc_change=25, sni_change=10, next_node="PHASE_4_OPEN", choice_id="3B")
+        st.markdown("<div class="choice-title">Option B</div>", unsafe_allow_html=True)
+        st.write("Accept the coworker invitation, actively using the casual environment to build civilian friendships outside of professional or military topics.")
+        if st.button("Select Option B", key="n4_b", use_container_width=True):
+            apply_choice(ot_change=15, rc_change=15, sni_change=0, next_node="NODE_5", choice_id="4B")
 
     with c3:
-        st.markdown("#### Option 3C: External Community & Shared Purpose")
-        st.write("Channel your weekend energy into structured local civic projects or community service organizations, building a new network of peers through shared, action-oriented goals.")
-        if st.button("Choose 3C: Civic Path", use_container_width=True):
-            apply_choice(ot_change=10, rc_change=15, sni_change=15, next_node="PHASE_4_CIVIC", choice_id="3C")
+        st.markdown("<div class="choice-title">Option C</div>", unsafe_allow_html=True)
+        st.write("Politely decline social invitations to protect your personal weekend downtime, focusing your energy strictly on family and rest.")
+        if st.button("Select Option C", key="n4_c", use_container_width=True):
+            apply_choice(ot_change=0, rc_change=-10, sni_change=-5, next_node="NODE_5", choice_id="4C")
 
 # -----------------------------------------------------------------------------
-# SCREEN 5: PHASE 4 & FINAL DEBRIEF (MONTHS 13–24)
+# NODE 5: MONTH 12 — HEALTHCARE & SYSTEM NAVIGATION
 # -----------------------------------------------------------------------------
-elif st.session_state.state.startswith("PHASE_4"):
+elif st.session_state.state == "NODE_5":
     char = CHARACTERS[st.session_state.char_key]
-    st.progress(1.00, text="Phase 4/4: Long-Term Identity & Reintegration (Months 13–24)")
+    st.progress(0.71, text="Node 5 of 7: Month 12 — Institutional Health Navigation")
+
+    st.markdown("""
+    <div class="citation-box">
+        <h4>🔬 Academic Citation & Research Analysis</h4>
+        <b>Source: Mobbs & Bonanno (2018) — Transition Stress Framework</b><br><br>
+        Navigating complex institutional bureaucracies during post-service transition can trigger significant frustration. 
+        Mobbs & Bonanno emphasize that administrative delays in benefits or healthcare processing often compound everyday transition stress, 
+        making proactive institutional advocacy a key factor in long-term stability.
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.header(f"Month 12: Healthcare & Claims Follow-Up — {char['name']}")
+    
+    st.markdown("""
+    <div class="scenario-card">
+    One year post-discharge, an administrative review reveals that a service-connected disability claim was deferred due to incomplete medical records transfer between DOD and VA systems. 
+    Resolving it requires resubmitting clinical evidence and attending additional appointments during work hours.
+    </div>
+    """, unsafe_allow_html=True)
+
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+        st.markdown("<div class="choice-title">Option A</div>", unsafe_allow_html=True)
+        st.write("Take time off work to personally coordinate with accredited Veteran Service Officers (VSOs) and congressional liaison offices to resolve the claim file.")
+        if st.button("Select Option A", key="n5_a", use_container_width=True):
+            apply_choice(ot_change=-5, rc_change=5, sni_change=25, next_node="NODE_6", choice_id="5A")
+
+    with c2:
+        st.markdown("<div class="choice-title">Option B</div>", unsafe_allow_html=True)
+        st.write("File a standard online extension request through official web portals, maintaining your regular work schedule while letting the system process standard queues.")
+        if st.button("Select Option B", key="n5_b", use_container_width=True):
+            apply_choice(ot_change=5, rc_change=0, sni_change=5, next_node="NODE_6", choice_id="5B")
+
+    with c3:
+        st.markdown("<div class="choice-title">Option C</div>", unsafe_allow_html=True)
+        st.write("Delay the appeal process for now to avoid taking time away from current career and domestic commitments, intending to address it later.")
+        if st.button("Select Option C", key="n5_c", use_container_width=True):
+            apply_choice(ot_change=5, rc_change=-5, sni_change=-20, next_node="NODE_6", choice_id="5C")
+
+# -----------------------------------------------------------------------------
+# NODE 6: MONTH 18 — CAREER TRAJECTORY & IDENTITY RECONSTRUCTION
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_6":
+    char = CHARACTERS[st.session_state.char_key]
+    st.progress(0.85, text="Node 6 of 7: Month 18 — Career Trajectory & Purpose")
 
     st.markdown("""
     <div class="citation-box">
         <h4>🔬 Academic Citation & Research Analysis</h4>
         <b>Source: Mobbs & Bonanno (2018) / Romaniuk et al. (2020)</b><br><br>
-        Mobbs & Bonanno argue that much of what is pathologized as clinical PTSD is actually 'transition stress'—an existential crisis 
-        triggered by losing one's primary institution, social status, and structured purpose. Successful 24-month reintegration relies 
-        on identity reconstruction outside military uniform constraints.
+        By month 18, the initial operational shift gives way to broader identity reconstruction. 
+        Transitioning out of a total military institution requires constructing a personal identity and sense of purpose that exists independently of rank, title, or uniform.
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.header(f"Month 18: Career Trajectory & Purpose — {char['name']}")
+    
+    st.markdown("""
+    <div class="scenario-card">
+    At 18 months post-discharge, your employer offers you an opportunity to lead a new internal initiative. 
+    One path involves taking over a highly structured operational role with predictable tasks; another path involves leading an exploratory cross-departmental team with high ambiguity but higher growth potential.
+    </div>
+    """, unsafe_allow_html=True)
+
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+        st.markdown("<div class="choice-title">Option A</div>", unsafe_allow_html=True)
+        st.write("Choose the structured operational role, leveraging your familiarity with clear logistics, defined processes, and predictable milestones.")
+        if st.button("Select Option A", key="n6_a", use_container_width=True):
+            apply_choice(ot_change=10, rc_change=0, sni_change=5, next_node="NODE_7", choice_id="6A")
+
+    with c2:
+        st.markdown("<div class="choice-title">Option B</div>", unsafe_allow_html=True)
+        st.write("Choose the exploratory cross-departmental lead role, intentionally stepping into organizational ambiguity to build broader civilian executive skills.")
+        if st.button("Select Option B", key="n6_b", use_container_width=True):
+            apply_choice(ot_change=25, rc_change=10, sni_change=0, next_node="NODE_7", choice_id="6B")
+
+    with c3:
+        st.markdown("<div class="choice-title">Option C</div>", unsafe_allow_html=True)
+        st.write("Decline the leadership promotion to focus on maintaining a stable work-life balance and dedicated home time.")
+        if st.button("Select Option C", key="n6_c", use_container_width=True):
+            apply_choice(ot_change=-10, rc_change=15, sni_change=0, next_node="NODE_7", choice_id="6C")
+
+# -----------------------------------------------------------------------------
+# NODE 7: MONTH 24 — FINAL DEBRIEF & SYNTHESIS
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_7":
+    char = CHARACTERS[st.session_state.char_key]
+    st.progress(1.00, text="Node 7 of 7: Month 24 — Reintegration Evaluation")
+
+    st.markdown("""
+    <div class="citation-box">
+        <h4>🔬 Academic Citation & Research Analysis</h4>
+        <b>Source: Synthesis of Course Research (Zoli et al., Schuetz, Demers, Mobbs & Bonanno)</b><br><br>
+        Two years post-discharge marks a critical stabilization milestone. Reintegration success is not measured by total conformity to civilian norms, 
+        but by establishing a sustainable balance across workforce contribution, domestic cohesion, and self-directed identity.
     </div>
     """, unsafe_allow_html=True)
 
@@ -315,7 +507,7 @@ elif st.session_state.state.startswith("PHASE_4"):
         st.warning("**Workforce Domain:** Experiencing ongoing organizational ambiguity or underemployment friction. Indicates a need for better employer onboarding systems (*Zoli et al., 2015*).")
 
     if rc_score >= 60:
-        st.success("**Domestic & Social Domain:** Strong relational cohesion established. Successfully negotiated role shifts and overcome military cultural stoicism (*Demers, 2011; Schuetz, 1945*).")
+        st.success("**Domestic & Social Domain:** Strong relational cohesion established. Successfully negotiated domestic role shifts and overcome military cultural stoicism (*Demers, 2011; Schuetz, 1945*).")
     else:
         st.error("**Domestic & Social Domain:** High social isolation or domestic strain noted. Highlights the risk of unaddressed military cultural stoicism (*Smith & True, 2014*).")
 
