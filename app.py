@@ -386,4 +386,5 @@ elif st.session_state.state == "NODE_7":
         st.session_state.state = "CHAR_SELECT"
         st.session_state.char_key = None
         st.session_state.path = []
-        st.session_state.stats = {"OT": 50, "RC
+        st.session_state.stats = {"OT": 50, "RC": 50, "SNI": 50}
+        st.rerun()
