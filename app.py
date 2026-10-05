@@ -72,14 +72,6 @@ st.markdown("""
         border: 1px solid #334155;
         margin-bottom: 15px;
     }
-    
-    /* Custom Choice Containers */
-    .choice-title {
-        color: #38BDF8;
-        font-weight: 700;
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -136,13 +128,7 @@ with st.sidebar:
     if st.session_state.char_key:
         char = CHARACTERS[st.session_state.char_key]
         st.markdown(f"### 📋 Active Dossier: {char['name']}")
-        st.markdown(f"""
-        <div class='dossier-card'>
-            <b>Rank:</b> {char['rank']}<br>
-            <b>Service:</b> {char['service']}<br><br>
-            <b>Context:</b> {char['background']}
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f"**Rank:** {char['rank']}<br>**Service:** {char['service']}<br><br>**Context:** {char['background']}", unsafe_allow_html=True)
         
         st.markdown("### 📊 Transition Metrics")
         col_s1, col_s2, col_s3 = st.columns(3)
@@ -163,8 +149,8 @@ with st.sidebar:
 # SCREEN 1: CHARACTER SELECTION
 # -----------------------------------------------------------------------------
 if st.session_state.state == "CHAR_SELECT":
-    st.markdown('<p class="main-header">OPERATION CIVILIAN RE-ENTRY</p>', unsafe_allow_html=True)
-    st.markdown('<p class="sub-header">An Interactive 24-Month Reintegration Simulation</p>', unsafe_allow_html=True)
+    st.markdown("### OPERATION CIVILIAN RE-ENTRY")
+    st.markdown("An Interactive 24-Month Reintegration Simulation")
     st.divider()
 
     st.subheader("Select a Service Member Dossier")
@@ -192,32 +178,31 @@ elif st.session_state.state == "NODE_1":
     st.progress(0.14, text="Node 1 of 7: Month 1 — Immediate Separation & Priorities")
     st.header(f"Month 1: The Administrative Handshake — {char['name']}")
     
-    st.markdown("""
-    <div class='scenario-card'>
+    st.info("""
     It is Week 2 post-discharge. Your active-duty service is complete, and your official discharge papers are in hand. 
-    You receive a notification from the VA stating that your military electronic health records require manual verification before your primary care team can be assigned, creating a 60-day administrative delay.<br><br>
+    You receive a notification from the VA stating that your military electronic health records require manual verification before your primary care team can be assigned, creating a 60-day administrative delay.
+
     Simultaneously, household setup, financial budgeting, and initial corporate networking opportunities demand your immediate focus.
-    </div>
-    """, unsafe_allow_html=True)
+    """)
 
     st.subheader("How do you allocate your primary focus during this first month?")
 
     c1, c2, c3 = st.columns(3)
     
     with c1:
-        st.markdown("<div class='choice-title'>Option A</div>", unsafe_allow_html=True)
+        st.subheader("Option A")
         st.write("Spend dedicated morning hours coordinating with veteran advocates, tracking medical verification queues, and securing official service documentation before taking on new external commitments.")
         if st.button("Select Option A", key="n1_a", use_container_width=True):
             apply_choice(ot_change=-5, rc_change=-5, sni_change=20, next_node="NODE_2", choice_id="1A")
 
     with c2:
-        st.markdown("<div class='choice-title'>Option B</div>", unsafe_allow_html=True)
+        st.subheader("Option B")
         st.write("Channel your energy into submitting corporate applications, attending virtual networking events, and interviewing, letting administrative records process in the background.")
         if st.button("Select Option B", key="n1_b", use_container_width=True):
             apply_choice(ot_change=20, rc_change=-5, sni_change=-10, next_node="NODE_2", choice_id="1B")
 
     with c3:
-        st.markdown("<div class='choice-title'>Option C</div>", unsafe_allow_html=True)
+        st.subheader("Option C")
         st.write("Prioritize home life, partner alignment, and establishing household routines during the first month, taking time to decompress before committing to rigid application or paperwork schedules.")
         if st.button("Select Option C", key="n1_c", use_container_width=True):
             apply_choice(ot_change=-10, rc_change=20, sni_change=-5, next_node="NODE_2", choice_id="1C")
@@ -229,77 +214,7 @@ elif st.session_state.state == "NODE_2":
     char = CHARACTERS[st.session_state.char_key]
     st.progress(0.28, text="Node 2 of 7: Month 3 — Household Role Renegotiation")
     
-    st.markdown("""
-    <div class='citation-box'>
-        <h4>🔬 Academic Citation & Research Analysis</h4>
-        <b>Source: Schuetz (1945) — Homecoming Theory / Demers (2011)</b><br><br>
-        Reintegration is relational rather than isolated. Schuetz's <i>Homecoming Theory</i> demonstrates that both the returning service member 
-        and their home community evolve independently during separation. When a veteran returns, established household routines must be renegotiated. 
-        Assuming the household can instantly resume past patterns or adapt to military-style domestic management leads to subtle marital friction.
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.header(f"Month 3: Domestic Boundaries & Expectations — {char['name']}")
-    
-    st.markdown("""
-    <div class='scenario-card'>
-    You have been home for ninety days. During your active service deployments, your partner managed all daily domestic choices, finances, and household logistics independently.<br><br>
-    Lately, friction arises over daily routines and decision-making authority. After a disagreement regarding household schedules, your partner remarks that you are treating the home like a military unit rather than a shared partnership.
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.subheader("How do you respond to this domestic friction?")
-
-    c1, c2, c3 = st.columns(3)
-
-    with c1:
-        st.markdown("<div class='choice-title'>Option A</div>", unsafe_allow_html=True)
-        st.write("Step back from domestic management entirely, leaving daily decisions to your partner while focusing strictly on your personal work or job search tasks.")
-        if st.button("Select Option A", key="n2_a", use_container_width=True):
-            apply_choice(ot_change=5, rc_change=-15, sni_change=0, next_node="NODE_3", choice_id="2A")
-
-    with c2:
-        st.markdown("<div class='choice-title'>Option B</div>", unsafe_allow_html=True)
-        st.write("Initiate a structured weekly household check-in where both you and your partner explicitly map out responsibilities, financial goals, and personal expectations.")
-        if st.button("Select Option B", key="n2_b", use_container_width=True):
-            apply_choice(ot_change=0, rc_change=20, sni_change=5, next_node="NODE_3", choice_id="2B")
-
-    with c3:
-        st.markdown("<div class='choice-title'>Option C</div>", unsafe_allow_html=True)
-        st.write("Keep your internal stress private and avoid discussing household roles further, believing that time and routine will naturally smooth out the tension.")
-        if st.button("Select Option C", key="n2_c", use_container_width=True):
-            apply_choice(ot_change=0, rc_change=-20, sni_change=-5, next_node="NODE_3", choice_id="2C")
-
-# -----------------------------------------------------------------------------
-# NODE 3: MONTH 6 — WORKPLACE INTEGRATION & COMMUNICATION
-# -----------------------------------------------------------------------------
-elif st.session_state.state == "NODE_3":
-    char = CHARACTERS[st.session_state.char_key]
-    st.progress(0.42, text="Node 3 of 7: Month 6 — Corporate Culture & Team Friction")
-
-    st.markdown("""
-    <div class='citation-box'>
-        <h4>🔬 Academic Citation & Research Analysis</h4>
-        <b>Source: Zoli, Maury, & Fay (2015) — IVMF / Syracuse University</b><br><br>
-        Research indicates that military operational culture relies on rapid, direct communication, precise SOPs, and absolute command responsibility. 
-        In civilian corporate spaces, this directness frequently clashes with norms centered on consensus-building and indirect feedback. 
-        The inability of civilian HR systems to translate military leadership assets—combined with veteran frustration over corporate ambiguity—creates 
-        a primary barrier to long-term post-service employment retention.
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.header(f"Month 6: The Project Review — {char['name']}")
-    
-    st.markdown("""
-    <div class='scenario-card'>
-    You are six months into your new corporate position. During a major cross-functional meeting, a key project deadline slips because two department leads disagree on resource allocation.<br><br>
-    Your manager turns to you and asks how you would align the team to resolve the impasse and keep deliverables moving forward.
-    </div>
-    """, unsafe_allow_html=True)
-
-    c1, c2, c3 = st.columns(3)
-
-    with c1:
-        st.markdown("<div class='choice-title'>Option A</div>", unsafe_allow_html=True)
-        st.write("Establish a formal project tracking matrix with clear, documented ownership for every task, scheduling a joint review session where team leads publicly account for roadblocks.")
-        if st.button("
+    st.warning("""
+    **🔬 Academic Citation & Research Analysis**  
+    *Source: Schuetz (1945) — Homecoming Theory / Demers (2011)*  
+    Reintegration is relational rather
