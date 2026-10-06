@@ -29,6 +29,19 @@ st.markdown(
         color: #94A3B8;
         margin-bottom: 24px;
     }
+    /* Fixed height flexbox cards to align buttons evenly */
+    .choice-card-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #1E293B;
+        border: 1px solid #334155;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        height: 280px; /* Uniform height for alignment */
+        box-sizing: border-box;
+    }
     .card-box {
         background-color: #1E293B;
         border: 1px solid #334155;
@@ -283,6 +296,20 @@ elif st.session_state.state == "NODE_1":
             st.session_state.state = "CHAR_SELECT"
             st.rerun()
 
+    # Visual Illustration Banner
+    st.markdown(
+        """
+        <div style="background-color: #1E293B; border: 1px solid #334155; padding: 15px; border-radius: 10px; display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <div>
+                <h4 style="margin: 0; color: #38BDF8;">Phase Illustration: Identity Reconstitution</h4>
+                <p style="margin: 0; color: #94A3B8; font-size: 0.95rem;">Stripped of daily uniform structure, the individual confronts the psychological gulf between military collectivism and civilian self-reliance.</p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
     st.info(
         "You have been out of uniform for two months. Stripped of your rank"
         " insignia and daily operational structure, you find yourself answering"
@@ -295,10 +322,12 @@ elif st.session_state.state == "NODE_1":
     c1, c2, c3 = st.columns(3)
     with c1:
         st.markdown(
-            "<div class='card-box'><h3>Option A (Isolation)</h3>"
+            "<div class='choice-card-container'>"
+            "<div><h3>Option A (Isolation)</h3>"
             "<p>Isolate yourself socially, relying solely on your own internal"
             " discipline to push through the transition without seeking"
-            " external validation or veteran networks.</p></div>",
+            " external validation or veteran networks.</p></div>"
+            "</div>",
             unsafe_allow_html=True,
         )
         if st.button("Select Option A", key="n1_a", use_container_width=True):
@@ -321,10 +350,12 @@ elif st.session_state.state == "NODE_1":
 
     with c2:
         st.markdown(
-            "<div class='card-box'><h3>Option B (Mentorship)</h3>"
+            "<div class='choice-card-container'>"
+            "<div><h3>Option B (Mentorship)</h3>"
             "<p>Connect proactively with a local veteran mentorship group to"
             " openly discuss the psychological shift of leaving service and"
-            " redefine your personal core values.</p></div>",
+            " redefine your personal core values.</p></div>"
+            "</div>",
             unsafe_allow_html=True,
         )
         if st.button("Select Option B", key="n1_b", use_container_width=True):
@@ -347,10 +378,12 @@ elif st.session_state.state == "NODE_1":
 
     with c3:
         st.markdown(
-            "<div class='card-box'><h3>Option C (Distraction)</h3>"
+            "<div class='choice-card-container'>"
+            "<div><h3>Option C (Distraction)</h3>"
             "<p>Immerse yourself immediately in civilian recreational hobbies"
             " and casual entertainment to distract yourself from thinking about"
-            " your military past.</p></div>",
+            " your military past.</p></div>"
+            "</div>",
             unsafe_allow_html=True,
         )
         if st.button("Select Option C", key="n1_c", use_container_width=True):
@@ -397,6 +430,20 @@ elif st.session_state.state == "NODE_2":
             st.session_state.state = "CHAR_SELECT"
             st.rerun()
 
+    # Visual Illustration Banner
+    st.markdown(
+        """
+        <div style="background-color: #1E293B; border: 1px solid #334155; padding: 15px; border-radius: 10px; display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <div>
+                <h4 style="margin: 0; color: #38BDF8;">Phase Illustration: Domestic Equilibrium</h4>
+                <p style="margin: 0; color: #94A3B8; font-size: 0.95rem;">Navigating home life after deployment requires balancing established household routines with newly returned family members.</p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
     st.info(
         "Four months post-discharge, friction arises over household routines."
         " Your partner notes that you are attempting to manage domestic life"
@@ -406,10 +453,12 @@ elif st.session_state.state == "NODE_2":
     c1, c2, c3 = st.columns(3)
     with c1:
         st.markdown(
-            "<div class='card-box'><h3>Option A (Abdicating)</h3>"
+            "<div class='choice-card-container'>"
+            "<div><h3>Option A (Abdicating)</h3>"
             "<p>Step back from domestic choices entirely, leaving all decisions"
             " to your partner while focusing strictly on personal job"
-            " applications.</p></div>",
+            " applications.</p></div>"
+            "</div>",
             unsafe_allow_html=True,
         )
         if st.button("Select Option A", key="n2_a", use_container_width=True):
@@ -432,10 +481,12 @@ elif st.session_state.state == "NODE_2":
 
     with c2:
         st.markdown(
-            "<div class='card-box'><h3>Option B (Structured Check-In)</h3>"
+            "<div class='choice-card-container'>"
+            "<div><h3>Option B (Structured Check-In)</h3>"
             "<p>Initiate a structured weekly household check-in where both you"
             " and your partner explicitly map out responsibilities, financial"
-            " goals, and personal expectations.</p></div>",
+            " goals, and personal expectations.</p></div>"
+            "</div>",
             unsafe_allow_html=True,
         )
         if st.button("Select Option B", key="n2_b", use_container_width=True):
@@ -458,10 +509,12 @@ elif st.session_state.state == "NODE_2":
 
     with c3:
         st.markdown(
-            "<div class='card-box'><h3>Option C (Silence)</h3>"
+            "<div class='choice-card-container'>"
+            "<div><h3>Option C (Silence)</h3>"
             "<p>Keep your internal stress private and avoid discussing"
             " household roles further, believing time will naturally smooth"
-            " out the tension.</p></div>",
+            " out the tension.</p></div>"
+            "</div>",
             unsafe_allow_html=True,
         )
         if st.button("Select Option C", key="n2_c", use_container_width=True):
@@ -488,483 +541,4 @@ elif st.session_state.state == "NODE_2":
 elif st.session_state.state == "NODE_3":
     char = get_current_char()
     st.progress(
-        50, text="Node 3 of 6: Month 8 — Corporate Culture & Team Friction"
-    )
-
-    st.warning(
-        "**🔬 Academic Citation & Research Analysis**\n\n"
-        "*Source: Zoli, Maury, & Fay (2015)*\n\n"
-        "Military operational culture relies on direct communication and SOPs."
-        " In civilian corporate spaces, this often clashes with"
-        " consensus-building and indirect office politics."
-    )
-
-    h_col1, h_col2 = st.columns([3, 1])
-    with h_col1:
-        st.header(f"Month 8: The Project Deadlock — {char['name']}")
-    with h_col2:
-        if st.button("⬅ Back to Dossiers", key="b_n3"):
-            st.session_state.state = "CHAR_SELECT"
-            st.rerun()
-
-    st.info(
-        "Eight months into your civilian career, a major cross-functional"
-        " project stalls because two department leads disagree on resource"
-        " allocation. Your manager asks for your approach."
-    )
-
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.markdown(
-            "<div class='card-box'><h3>Option A (Rigid SOP)</h3>"
-            "<p>Issue a formal project tracking matrix with rigid deadlines and"
-            " public accountability check-ins for all department leads.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option A", key="n3_a", use_container_width=True):
-            apply_choice(
-                -10,
-                -5,
-                0,
-                5,
-                "NODE_4",
-                "3A",
-                "Enforced rigid military-style tracking matrices on civilian staff.",
-                (
-                    "**[HIGH RISK / RED]** Illustrates institutional"
-                    " mismatch (Zoli et al., 2015). Forcing top-down military"
-                    " SOPs onto civilian peers creates cultural resistance and"
-                    " damages workplace relationships."
-                ),
-                "red",
-            )
-
-    with c2:
-        st.markdown(
-            "<div class='card-box'><h3>Option B (Compromise)</h3>"
-            "<p>Hold informal, one-on-one alignment discussions with each"
-            " leader outside meetings to understand constraints and co-create"
-            " a compromise.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option B", key="n3_b", use_container_width=True):
-            apply_choice(
-                25,
-                10,
-                10,
-                10,
-                "NODE_4",
-                "3B",
-                "Facilitated one-on-one alignments and co-created compromises.",
-                (
-                    "**[BEST PRACTICE / GREEN]** Demonstrates successful"
-                    " translation of leadership skills into civilian corporate"
-                    " currency by mastering consensus-building (*Zoli et al.,"
-                    " 2015*)."
-                ),
-                "green",
-            )
-
-    with c3:
-        st.markdown(
-            "<div class='card-box'><h3>Option C (Disengagement)</h3>"
-            "<p>Focus strictly on your own deliverables, letting the project"
-            " owner manage stakeholder friction without your direct"
-            " intervention.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option C", key="n3_c", use_container_width=True):
-            apply_choice(
-                -15,
-                0,
-                -5,
-                -5,
-                "NODE_4",
-                "3C",
-                "Withdrew from team conflict and siloed personal work.",
-                (
-                    "**[CAUTION / YELLOW]** Siloing stalls professional"
-                    " growth and underutilizes valuable leadership capacity,"
-                    " leading to underemployment friction."
-                ),
-                "yellow",
-            )
-
-# -----------------------------------------------------------------------------
-# NODE 4: MONTH 12 — COMMUNITY ENGAGEMENT & CIVIC SERVICE
-# -----------------------------------------------------------------------------
-elif st.session_state.state == "NODE_4":
-    char = get_current_char()
-    st.progress(
-        66,
-        text="Node 4 of 6: Month 12 — Community Embedding & Civic Service",
-    )
-
-    st.warning(
-        "**🔬 Academic Citation & Research Analysis**\n\n"
-        "*Source: Demers (2011) — Community Reintegration*\n\n"
-        "Civilian community networks often lack cultural competency regarding"
-        " military service, leading to isolation. Active civic engagement and"
-        " local community embedding are critical for bridging this gap."
-    )
-
-    h_col1, h_col2 = st.columns([3, 1])
-    with h_col1:
-        st.header(f"Month 12: Local Embedding — {char['name']}")
-    with h_col2:
-        if st.button("⬅ Back to Dossiers", key="b_n4"):
-            st.session_state.state = "CHAR_SELECT"
-            st.rerun()
-
-    st.info(
-        "One year post-discharge, you realize your life is split strictly"
-        " between your workplace and your immediate household. You feel"
-        " disconnected from your broader local town/city community."
-    )
-
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.markdown(
-            "<div class='card-box'><h3>Option A (Civic Leadership)</h3>"
-            "<p>Volunteer to lead a local youth mentorship or community"
-            " resilience program, translating your leadership skills into civic"
-            " action.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option A", key="n4_a", use_container_width=True):
-            apply_choice(
-                10,
-                10,
-                25,
-                15,
-                "NODE_5",
-                "4A",
-                "Volunteered to lead local youth mentorship and community programs.",
-                (
-                    "**[BEST PRACTICE / GREEN]** Directly fulfills Demers's"
-                    " (2011) recommendation for active civic embedding,"
-                    " bridging the military-civilian cultural divide."
-                ),
-                "green",
-            )
-
-    with c2:
-        st.markdown(
-            "<div class='card-box'><h3>Option B (Insular Circle)</h3>"
-            "<p>Join an exclusively veteran-focused social club online, keeping"
-            " your local civic engagement minimal and staying within familiar"
-            " military circles.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option B", key="n4_b", use_container_width=True):
-            apply_choice(
-                0,
-                5,
-                10,
-                10,
-                "NODE_5",
-                "4B",
-                "Confined social networking exclusively to online veteran groups.",
-                (
-                    "**[CAUTION / YELLOW]** Provides comfortable peer support"
-                    " but fails to embed the veteran into their local civilian"
-                    " community, leaving broader civic disconnect unaddressed."
-                ),
-                "yellow",
-            )
-
-    with c3:
-        st.markdown(
-            "<div class='card-box'><h3>Option C (Decline Involvement)</h3>"
-            "<p>Decline all local civic involvement to focus entirely on"
-            " personal relaxation and weekend recovery from work stress.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option C", key="n4_c", use_container_width=True):
-            apply_choice(
-                0,
-                -5,
-                -20,
-                -10,
-                "NODE_5",
-                "4C",
-                "Declined all civic involvement in favor of complete seclusion.",
-                (
-                    "**[HIGH RISK / RED]** Deepens social isolation and"
-                    " alienates the veteran from civilian community support"
-                    " networks (*Demers, 2011*)."
-                ),
-                "red",
-            )
-
-# -----------------------------------------------------------------------------
-# NODE 5: MONTH 18 — SYSTEM NAVIGATION & HEALTHCARE
-# -----------------------------------------------------------------------------
-elif st.session_state.state == "NODE_5":
-    char = get_current_char()
-    st.progress(
-        83, text="Node 5 of 6: Month 18 — Institutional System Navigation"
-    )
-
-    st.warning(
-        "**🔬 Academic Citation & Research Analysis**\n\n"
-        "*Source: Mobbs & Bonanno (2018)*\n\n"
-        "Administrative delays in benefits and healthcare processing compound"
-        " everyday transition stress. Proactive institutional navigation is"
-        " essential for long-term stability."
-    )
-
-    h_col1, h_col2 = st.columns([3, 1])
-    with h_col1:
-        st.header(f"Month 18: VA & Healthcare Bureaucracy — {char['name']}")
-    with h_col2:
-        if st.button("⬅ Back to Dossiers", key="b_n5"):
-            st.session_state.state = "CHAR_SELECT"
-            st.rerun()
-
-    st.info(
-        "At 18 months, an audit reveals that your service-connected disability"
-        " claim was stalled due to electronic medical record transfer errors"
-        " between DOD and VA systems."
-    )
-
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.markdown(
-            "<div class='card-box'><h3>Option A (Proactive"
-            " Navigation)</h3>"
-            "<p>Take time off work to personally coordinate with accredited"
-            " VSOs and congressional liaison offices to resolve your claim"
-            " file.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option A", key="n5_a", use_container_width=True):
-            apply_choice(
-                -5,
-                5,
-                10,
-                15,
-                "NODE_6",
-                "5A",
-                "Took proactive measures through VSOs and liaison offices.",
-                (
-                    "**[BEST PRACTICE / GREEN]** Overcomes administrative"
-                    " institutional friction through proactive navigation,"
-                    " mitigating transition stress (*Mobbs & Bonanno, 2018*)."
-                ),
-                "green",
-            )
-
-    with c2:
-        st.markdown(
-            "<div class='card-box'><h3>Option B (Passive Portal)</h3>"
-            "<p>Submit a standard online portal inquiry and wait for standard"
-            " bureaucratic processing queues to clear.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option B", key="n5_b", use_container_width=True):
-            apply_choice(
-                5,
-                0,
-                0,
-                0,
-                "NODE_6",
-                "5B",
-                "Submitted standard online portal tickets and waited passively.",
-                (
-                    "**[CAUTION / YELLOW]** Results in prolonged administrative"
-                    " delays due to known interoperability gaps between DOD and"
-                    " VA systems."
-                ),
-                "yellow",
-            )
-
-    with c3:
-        st.markdown(
-            "<div class='card-box'><h3>Option C (Abandon Claim)</h3>"
-            "<p>Abandon the claim process out of frustration, deciding the"
-            " administrative friction is not worth the effort.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option C", key="n5_c", use_container_width=True):
-            apply_choice(
-                0,
-                -5,
-                -10,
-                -20,
-                "NODE_6",
-                "5C",
-                "Abandoned the VA claim process out of bureaucratic"
-                " frustration.",
-                (
-                    "**[HIGH RISK / RED]** Surrendering to bureaucratic"
-                    " inertia compounds long-term psychological and financial"
-                    " distress (*Mobbs & Bonanno, 2018*)."
-                ),
-                "red",
-            )
-
-# -----------------------------------------------------------------------------
-# NODE 6: MONTH 24 — FINAL DEBRIEF & 4-DOMAIN AAR EVALUATION
-# -----------------------------------------------------------------------------
-elif st.session_state.state == "NODE_6":
-    char = get_current_char()
-    st.progress(100, text="Node 6 of 6: Month 24 — Reintegration Evaluation")
-
-    st.warning(
-        "**🔬 Academic Citation & Research Analysis**\n\n"
-        "*Source: Synthesis of Course Research (Zoli et al., Schuetz, Demers,"
-        " Mobbs & Bonanno)*\n\n"
-        "Two years post-discharge marks a critical stabilization milestone."
-        " Reintegration success is measured across workforce contribution,"
-        " relational cohesion, community embedding, and self-identity."
-    )
-
-    st.header(f"Month 24 After Action Report (AAR) — {char['name']}")
-    st.divider()
-
-    st.subheader("📊 Final 4-Domain Transition Scores & Visual Breakdown")
-
-    col_f1, col_f2, col_f3, col_f4 = st.columns(4)
-    col_f1.metric("Career (CT)", f"{st.session_state.stats['CT']}%")
-    col_f2.metric("Social/Rel. (SR)", f"{st.session_state.stats['SR']}%")
-    col_f3.metric("Community (CE)", f"{st.session_state.stats['CE']}%")
-    col_f4.metric("Self-Identity (SI)", f"{st.session_state.stats['SI']}%")
-
-    chart_data = pd.DataFrame(
-        {
-            "Domain": [
-                "Career Translation",
-                "Social & Relational",
-                "Community Engagement",
-                "Self-Identity",
-            ],
-            "Score (%)": [
-                st.session_state.stats["CT"],
-                st.session_state.stats["SR"],
-                st.session_state.stats["CE"],
-                st.session_state.stats["SI"],
-            ],
-        }
-    ).set_index("Domain")
-
-    st.bar_chart(chart_data, color="#38BDF8")
-
-    st.markdown("### Decision Trajectory Path")
-    st.code(" ➔ ".join(["START"] + st.session_state.path))
-
-    st.divider()
-    st.subheader("🎯 Core Takeaways: What This Interactive Program Teaches Us")
-    st.markdown("""
-    * **1. Transition is a 24-Month Cultural Reorganization, Not a Single Event:** 
-      As proven throughout the decision nodes, treating transition as a simple resume-writing or job-placement milestone ignores the deep psychological and cultural hurdles veterans face. Long-term stability depends on proactive adaptation across all life domains.
-    * **2. Institutional Friction is Structural, Not Personal:** 
-      Delays in VA claims and corporate cultural misalignments stem from structural disconnects between military and civilian institutions (*Zoli et al., 2015; Mobbs & Bonanno, 2018*). Veterans who navigate these systems proactively avoid prolonged stress.
-    * **3. Relational and Civic Embedding Dictate Success:** 
-      Isolation and rigid top-down communication lead to negative trajectories. Conversely, active domestic role renegotiation (*Schuetz, 1945*) and local civic volunteering (*Demers, 2011*) build sustainable post-service resilience.
-    """)
-
-    st.markdown(
-        """
-    <div class='card-box'>
-        <h3>🎒 Actionable Takeaways for Veterans</h3>
-        <ul>
-            <li><b>Redefine Identity Beyond the Uniform:</b> Actively seek veteran mentorship early to process the loss of rank and establish a civilian value system (<i>Smith & True, 2014</i>).</li>
-            <li><b>Communicate Proactively at Home:</b> Recognize that spouses and partners have built independent household routines during deployments; establish regular, structured check-ins rather than imposing military command structures.</li>
-            <li><b>Bridge the Corporate Culture Gap:</b> Balance direct military decisiveness with civilian consensus-building and active listening in cross-functional team environments.</li>
-            <li><b>Engage Locally:</b> Step outside insular veteran circles to embed yourself in local civic, youth, or community resilience initiatives.</li>
-        </ul>
-    </div>
-    """,
-        unsafe_allow_html=True,
-    )
-
-    st.divider()
-    st.subheader(
-        "📋 Step-by-Step Color-Coded Summary of Your Choices (Good vs. Caution vs."
-        " Bad)"
-    )
-    st.markdown(
-        "* 🟢 **Green (Best Practice):** Aligns fully with cited academic"
-        " literature and reduces transition friction.\n* 🟡 **Yellow (Caution):**"
-        " Neutral or passive response that delays necessary adaptation.\n* 🔴"
-        " **Red (High Risk / Violation):** Violates research recommendations and"
-        " compounds transition stress."
-    )
-    st.write("")
-
-    for idx, item in enumerate(st.session_state.choice_history, 1):
-        eval_class = "card-green"
-        if item["eval_type"] == "yellow":
-            eval_class = "card-yellow"
-        elif item["eval_type"] == "red":
-            eval_class = "card-red"
-
-        summary_text = item["summary"].replace('"', '\\"')
-        feedback_text = item["feedback"].replace('"', '\\"')
-
-        card_html = (
-            f"<div class='{eval_class}'>"
-            f"<h4>Decision {idx} ({item['node']}) — Choice: {item['choice_id']}</h4>"
-            f"<p><b>Action Taken:</b> {summary_text}</p>"
-            f"<p><b>Academic Feedback:</b> {feedback_text}</p>"
-            f"<p><b>Score Impact:</b> Career: {item['deltas']['CT']:+d}% | "
-            f"Social: {item['deltas']['SR']:+d}% | Community: "
-            f"{item['deltas']['CE']:+d}% | Identity: {item['deltas']['SI']:+d}%</p>"
-            f"</div>"
-        )
-        st.markdown(card_html, unsafe_allow_html=True)
-
-    st.divider()
-    st.subheader(
-        "📖 Detailed Research Findings & Literature Explanation"
-    )
-    st.write(
-        "This simulation's scoring model and trajectory outcomes directly"
-        " substantiate the research question and thesis by mapping user"
-        " decisions against empirical academic literature across four core"
-        " pillars:"
-    )
-
-    st.markdown("""
-    * **1. Theoretical Framework & Institutional Friction (*Schuetz, 1945; Zoli et al., 2015*):** 
-      Transitioning from a total military institution into fragmented civilian bureaucracies (DOD/VA) generates immediate structural friction. Alfred Schuetz's 'Homecomer' paradigm explains why returning veterans perceive civilian environments as unfamiliar cultural landscapes where military operational rules no longer apply.
-    * **2. Employment & Operational Translation (*Zoli et al., 2015; Mobbs & Bonanno, 2018*):** 
-      The operational score reflects the challenge of translating Military Occupational Specialties (MOS) into corporate currency. Research reveals that veterans face misaligned placement when civilian HR systems misunderstand military leadership structures, frequently converting what should be leadership assets into transitional stress.
-    * **3. Social Relationships & Domestic Role Renegotiation (*Demers, 2011; Romaniuk et al., 2020*):** 
-      The relational cohesion score mirrors household dynamics. Utilizing the M-CARM model, research shows that cultural reintegration requires actively renegotiating domestic roles, overcoming military stoicism, and bridging gaps with civilian community networks that lack operational cultural competency.
-    * **4. Self-Identity & Community Embedding (*Smith & True, 2014*):** 
-      By month 24, the simulation captures 'warring identities'—the internal friction between martial self-concepts (discipline, mission focus) and civilian expectations (ambiguity, individualism). Long-term stability requires structured community embedding rather than brief administrative milestones.
-    """)
-
-    st.divider()
-    st.subheader("Verified APA References")
-    st.markdown(
-        """* **Demers, A. (2011).** When veterans return: The role of community in"
-        " post-combat reintegration. *Journal of Loss and Trauma*, 16(2),"
-        " 160–179.\n- **Mobbs, M. C., & Bonanno, G. A. (2018).** Beyond war and"
-        " PTSD: The crucial role of transition stress in the lives of military"
-        " veterans. *Clinical Psychology Review*, 59, 137–144.\n-"
-        " **Romaniuk, M., et al. (2020).** Assessing psychological adjustment"
-        " and cultural reintegration after military service (M-CARM). *BMC"
-        " Psychiatry*, 20(1), 1–13.\n- **Schuetz, A. (1945).** The homecomer."
-        " *American Journal of Sociology*, 50(5), 369–376.\n- **Smith, R."
-        " T., & True, G. (2014).** Warring identities: Identity conflict and"
-        " the military-to-civilian transition. *Armed Forces & Society*, 40(1),"
-        " 147–156.\n- **Zoli, C., Maury, R., & Fay, D. (2015).** *Missing"
-        " perspectives: Servicemembers' transition from service to civilian"
-        " life*. Institute for Veterans and Military Families, Syracuse"
-        " University."""
-    )
-
-    if st.button(
-        "🔄 Restart Simulation with Another Character",
-        type="primary",
-        use_container_width=True,
-    ):
-        st.session_state.state = "CHAR_SELECT"
-        st.session_state.char_key = None
-        st.session_state.path = []
-        st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
-        st.session_state.choice_history = []
-        st.rerun()
+        50, text="Node 3 of
