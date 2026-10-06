@@ -379,4 +379,16 @@ elif st.session_state.state == "NODE_1":
 # =============================================================================
 # NODE 2: MONTH 6 — INSTITUTIONAL FRICTION & EMPLOYMENT
 # =============================================================================
-elif st.session_state.state == "NODE
+elif st.session_state.state == "NODE_2":
+    char = get_current_char()
+    st.progress(
+        33, text="Node 2 of 6: Month 6 — Institutional Friction & Employment"
+    )
+
+    st.warning(
+        "**🔬 Academic Citation & Research Analysis**\n\n"
+        "*Source: Zoli et al. (2015) — Coming Home: Veterans in Higher Education"
+        " and the Workforce*\n\n"
+        "Veterans frequently encounter 'institutional friction' when"
+        " transitioning from rigid military hierarchies to ambiguous corporate"
+        "
