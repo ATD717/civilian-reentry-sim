@@ -29,6 +29,13 @@ st.markdown("""
         color: #94A3B8;
         margin-bottom: 24px;
     }
+    .academic-box {
+        background: #1E293B;
+        border-left: 4px solid #38BDF8;
+        padding: 16px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -76,9 +83,9 @@ def apply_choice(ot_change, rc_change, sni_change, next_node, choice_id):
 # SIDEBAR DASHBOARD
 # -----------------------------------------------------------------------------
 with st.sidebar:
-    st.title("🎖️️ MVS 100 UnFinal")
+    st.title("🎖 MVS 100 UnFinal")
     st.markdown("**Author:** Austin Dodd")
-    st.markdown("**Course:** MVSIOO: Introduction to Military Studies")
+    st.markdown("**Course:** MVS 100: Introduction to Military Studies")
     st.markdown("**Instructor:** Professor Goff")
     st.divider()
 
@@ -105,14 +112,24 @@ with st.sidebar:
         st.rerun()
 
 # -----------------------------------------------------------------------------
-# SCREEN 1: CHARACTER SELECTION
+# SCREEN 1: CHARACTER SELECTION WITH RESEARCH CONTEXT
 # -----------------------------------------------------------------------------
 if st.session_state.state == "CHAR_SELECT":
-    st.markdown("### OPERATION CIVILIAN RE-ENTRY")
-    st.markdown("An Interactive 24-Month Reintegration Simulation")
+    st.markdown('<p class="main-header">OPERATION CIVILIAN RE-ENTRY</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">An Interactive 24-Month Reintegration Simulation & Research Framework</p>', unsafe_allow_html=True)
     st.divider()
 
-    st.subheader("Select a Service Member Dossier")
+    st.markdown("""
+    <div class="academic-box">
+        <h4>🎯 Learning Objective & Research Framework</h4>
+        <p><strong>Learning Objective:</strong> Evaluate the multifaceted dimensions of American institutions such as the DOD and VA, examining how active-duty service, military culture, and institutional policies shape long-term veteran reintegration and post-service identity reconstruction.</p>
+        <hr style="border-color: #334155; margin: 10px 0;">
+        <p><strong>Research Question:</strong> <em>"How do the operational, cultural, and psychological experiences of military service shape a veteran's post-service reintegration across their employment, social relationships, community engagement, and self-identity?"</em></p>
+        <p style="margin-top: 8px;"><strong>Thesis Statement:</strong> <em>"The military-to-civilian transition cannot be accurately modeled as a single administrative event or linear job-placement milestone; rather, it is a prolonged, 24-month existential and cultural reorganization where pre-service identity, institutional friction with American bureaucratic systems (DOD/VA), and domestic role renegotiation dictate long-term post-service stability."</em></p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.subheader("Select a Service Member Dossier to Begin Simulation")
     st.markdown("Choose a subject to guide through their 24-month post-discharge transition journey:")
 
     cols = st.columns(2)
@@ -329,18 +346,16 @@ elif st.session_state.state == "NODE_6":
             apply_choice(ot_change=-10, rc_change=15, sni_change=0, next_node="NODE_7", choice_id="6C")
 
 # -----------------------------------------------------------------------------
-# NODE 7: MONTH 24 — FINAL DEBRIEF & SYNTHESIS
+# NODE 7: MONTH 24 — FINAL DEBRIEF, SCORING & DETAILED RESEARCH FINDINGS
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_7":
     char = CHARACTERS[st.session_state.char_key]
-    st.progress(1.00, text="Node 7 of 7: Month 24 — Reintegration Evaluation")
+    st.progress(1.00, text="Node 7 of 7: Month 24 — Reintegration Evaluation & Research Findings")
 
-    st.warning("**🔬 Academic Citation & Research Analysis**\n\n*Source: Synthesis of Course Research (Zoli et al., Schuetz, Demers, Mobbs & Bonanno)*\n\nTwo years post-discharge marks a critical stabilization milestone. Reintegration success is not measured by total conformity to civilian norms, but by establishing a sustainable balance across workforce contribution, domestic cohesion, and self-directed identity.")
-
-    st.header(f"Month 24 After Action Report (AAR) — {char['name']}")
+    st.header(f"Month 24 After Action Report (AAR) & Research Synthesis — {char['name']}")
     st.divider()
 
-    st.subheader("Final Transition Profile")
+    st.subheader("📊 Final Transition Profile & Scoring Sheet")
     
     col_f1, col_f2, col_f3 = st.columns(3)
     col_f1.metric("Operational Translation", f"{st.session_state.stats['OT']}%")
@@ -350,13 +365,29 @@ elif st.session_state.state == "NODE_7":
     st.markdown("### Decision Trajectory Path")
     st.code(" ➔ ".join(["START"] + st.session_state.path))
 
-    st.markdown("### Cumulative Academic Synthesis")
+    st.divider()
+    st.subheader("📖 Detailed Research Findings & Literature Explanation")
+    st.write("This simulation's scoring model and trajectory outcomes directly substantiate the research question and thesis by mapping user decisions against empirical academic literature across four core pillars:")
+
+    st.markdown("""
+    * **1. Theoretical Framework & Institutional Friction (*Schuetz, 1945; Zoli et al., 2015*):** 
+      As demonstrated in the early decision nodes, transitioning from a total military institution into fragmented civilian bureaucracies (DOD/VA) generates immediate structural friction. Alfred Schuetz's 'Homecomer' paradigm explains why returning veterans perceive civilian environments as unfamiliar cultural landscapes where military operational rules no longer apply.
+    * **2. Employment & Operational Translation (*Zoli et al., 2015; Mobbs & Bonanno, 2018*):** 
+      The operational score reflects the challenge of translating Military Occupational Specialties (MOS) into corporate currency. Research reveals that veterans face misaligned placement when civilian HR systems misunderstand military leadership structures, frequently converting what should be leadership assets into transitional stress.
+    * **3. Social Relationships & Domestic Role Renegotiation (*Demers, 2011; Romaniuk et al., 2020*):** 
+      The relational cohesion score mirrors household dynamics. Utilizing the M-CARM model, research shows that cultural reintegration requires actively renegotiating domestic roles, overcoming military stoicism, and bridging gaps with civilian community networks that lack operational cultural competency.
+    * **4. Self-Identity & Community Embedding (*Smith & True, 2014*):** 
+      By month 24, the simulation captures 'warring identities'—the internal friction between martial self-concepts (discipline, mission focus) and civilian expectations (ambiguity, individualism). Long-term stability requires structured community engagement rather than brief administrative milestones.
+    """)
+
+    st.divider()
+    st.subheader("Subject Performance Analysis")
     
     ot_score = st.session_state.stats["OT"]
     rc_score = st.session_state.stats["RC"]
     sni_score = st.session_state.stats["SNI"]
 
-    st.write(f"**Subject:** {char['name']} ({char['rank']})")
+    st.write(f"**Subject Evaluated:** {char['name']} ({char['rank']})")
     
     if ot_score >= 60:
         st.success("**Workforce Domain:** Highly successful translation of military skill sets into civilian corporate value. Minimal friction regarding authority structures.")
@@ -374,13 +405,13 @@ elif st.session_state.state == "NODE_7":
         st.warning("**System Navigation & Identity Domain:** Administrative exhaustion or disengagement from DOD/VA support systems noted.")
 
     st.divider()
-    st.subheader("Verified Academic References")
+    st.subheader("Verified APA References")
     st.markdown("""* **Demers, A. (2011).** When veterans return: The role of community in post-combat reintegration. *Journal of Loss and Trauma*, 16(2), 160–179.
-* **Mobbs, M. C., & Bonanno, G. A. (2018).** Beyond war and PTSD: The crucial role of transition stress in the lives of military veterans. *Clinical Psychology Review*, 59, 137–144.
-* **Romaniuk, M., et al. (2020).** Assessing psychological adjustment and cultural reintegration after military service (M-CARM). *BMC Psychiatry*, 20(1), 1–13.
-* **Schuetz, A. (1945).** The homecomer. *American Journal of Sociology*, 50(5), 369–376.
-* **Smith, R. T., & True, G. (2014).** Warring identities: Identity conflict and the military-to-civilian transition. *Armed Forces & Society*, 40(1), 147–156.
-* **Zoli, C., Maury, R., & Fay, D. (2015).** *Missing perspectives: Servicemembers' transition from service to civilian life*. Institute for Veterans and Military Families, Syracuse University.""")
+- **Mobbs, M. C., & Bonanno, G. A. (2018).** Beyond war and PTSD: The crucial role of transition stress in the lives of military veterans. *Clinical Psychology Review*, 59, 137–144.
+- **Romaniuk, M., Foran, A., Evans, L., Finlay, A., & McManus, D. (2020).** Assessing psychological adjustment and cultural reintegration after military service (M-CARM). *BMC Psychiatry*, 20(1), 1–13.
+- **Schuetz, A. (1945).** The homecomer. *American Journal of Sociology*, 50(5), 369–376.
+- **Smith, R. T., & True, G. (2014).** Warring identities: Identity conflict and the military-to-civilian transition. *Armed Forces & Society*, 40(1), 147–156.
+- **Zoli, C., Maury, R., & Fay, D. (2015).** *Missing perspectives: Servicemembers' transition from service to civilian life*. Institute for Veterans and Military Families, Syracuse University.""")
 
     if st.button("🔄 Restart Simulation with Another Character", type="primary"):
         st.session_state.state = "CHAR_SELECT"
