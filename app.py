@@ -143,18 +143,11 @@ if st.session_state.state == "CHAR_SELECT":
     st.markdown("<div class='sub-header'>An Interactive 24-Month Reintegration Simulation & Research Model</div>", unsafe_allow_html=True)
     
     with st.expander("📖 View Research Question, Thesis & Academic Framework", expanded=True):
-        st.markdown(
-            "* **Research Question:** *\"How do the operational, cultural, and psychological experiences of "
-            "military service shape a veteran's post-service reintegration across their employment, social "
-            "relationships, community engagement, and self-identity?\"*\n"
-            "* **Thesis Statement:** *\"The military-to-civilian transition cannot be accurately modeled as a single "
-            "administrative event or linear job-placement milestone; rather, it is a prolonged, 24-month existential "
-            "and cultural reorganization where pre-service identity, institutional friction with American "
-            "bureaucratic systems (DOD/VA), and domestic role renegotiation dictate long-term post-service "
-            "stability.\"*\n"
-            "* **Core Framework:** Synthesizing Schuetz's (1945) Homecoming theory, Zoli et al. (2015) institutional "
-            "friction, and Mobbs & Bonanno (2018) transition stress."
-        )
+        st.markdown("""
+* **Research Question:** *"How do the operational, cultural, and psychological experiences of military service shape a veteran's post-service reintegration across their employment, social relationships, community engagement, and self-identity?"*
+* **Thesis Statement:** *"The military-to-civilian transition cannot be accurately modeled as a single administrative event or linear job-placement milestone; rather, it is a prolonged, 24-month existential and cultural reorganization where pre-service identity, institutional friction with American bureaucratic systems (DOD/VA), and domestic role renegotiation dictate long-term post-service stability."*
+* **Core Framework:** Synthesizing Schuetz's (1945) Homecoming theory, Zoli et al. (2015) institutional friction, and Mobbs & Bonanno (2018) transition stress.
+        """)
 
     st.divider()
     st.subheader("Select a Service Member Dossier")
@@ -215,6 +208,14 @@ elif st.session_state.state == "NODE_1":
             unsafe_allow_html=True
         )
         if st.button("Select Option A", key="n1_a", use_container_width=True):
-            apply_choice(0, -10, -10, -15, "NODE_2", "1A", 
-                         "Chose isolation and internal stoicism over peer support.",
-                         "**[WRONG / HIGH RISK]** Reflects withdrawal and suppressed identity conflict. Smith & True (2014) identify isolation
+            apply_choice(
+                0, -10, -10, -15, "NODE_2", "1A", 
+                "Chose isolation and internal stoicism over peer support.",
+                "**[WRONG / HIGH RISK]** Reflects withdrawal and suppressed identity conflict. Smith & True (2014) identify isolation as a primary driver of acute transition stress and identity fragmentation."
+            )
+
+    with c2:
+        st.markdown(
+            "<div class='card-box'><h3>Option B (Mentorship)</h3>"
+            "<p>Connect proactively with a local veteran mentorship group to openly discuss the psychological "
+            "shift of leaving service and redefine your personal core values.</p></div>",
