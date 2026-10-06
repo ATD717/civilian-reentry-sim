@@ -10,7 +10,8 @@ st.set_page_config(
     layout="wide",
 )
 
-st.markdown("""
+st.markdown(
+    """
 <style>
     .stApp {
         background-color: #0F172A;
@@ -36,7 +37,9 @@ st.markdown("""
         margin-bottom: 15px;
     }
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # -----------------------------------------------------------------------------
 # CHARACTER DEFINITIONS & 4-METRIC TRACKING
@@ -46,18 +49,32 @@ CHARACTERS = {
         "name": "Alex Vance",
         "rank": "Master Sergeant",
         "service": "Active Duty — Infantry / Operations Specialist",
-        "background": "Married with children; spouse managed domestic operations and household decisions through multiple long combat deployments.",
-        "challenge": "Translating direct leadership into consensus-driven corporate culture; renegotiating household authority and overcoming military cultural stoicism.",
-        "stats": {"CT": 45, "SR": 40, "CE": 40, "SI": 50}
+        "background": (
+            "Married with children; spouse managed domestic operations and"
+            " household decisions through multiple long combat deployments."
+        ),
+        "challenge": (
+            "Translating direct leadership into consensus-driven corporate"
+            " culture; renegotiating household authority and overcoming"
+            " military cultural stoicism."
+        ),
+        "stats": {"CT": 45, "SR": 40, "CE": 40, "SI": 50},
     },
     "MORGAN": {
         "name": "Morgan Ellis",
         "rank": "Captain",
         "service": "Active Duty — Logistics & Supply Chain Officer",
-        "background": "Dual-career household (no children); partner holds a demanding corporate leadership position in a major city.",
-        "challenge": "Re-aligning executive expectations (managing large military operational budgets vs. corporate office politics); balancing partner's career priorities with transition friction.",
-        "stats": {"CT": 60, "SR": 45, "CE": 35, "SI": 45}
-    }
+        "background": (
+            "Dual-career household (no children); partner holds a demanding"
+            " corporate leadership position in a major city."
+        ),
+        "challenge": (
+            "Re-aligning executive expectations (managing large military"
+            " operational budgets vs. corporate office politics);"
+            " balancing partner's career priorities with transition friction."
+        ),
+        "stats": {"CT": 60, "SR": 45, "CE": 35, "SI": 45},
+    },
 }
 
 # Initialize Session State
@@ -72,21 +89,47 @@ if "stats" not in st.session_state:
 if "choice_history" not in st.session_state:
     st.session_state.choice_history = []
 
-def apply_choice(ct_change, sr_change, ce_change, si_change, next_node, choice_id, choice_summary, feedback_text):
-    st.session_state.stats["CT"] = max(0, min(100, st.session_state.stats["CT"] + ct_change))
-    st.session_state.stats["SR"] = max(0, min(100, st.session_state.stats["SR"] + sr_change))
-    st.session_state.stats["CE"] = max(0, min(100, st.session_state.stats["CE"] + ce_change))
-    st.session_state.stats["SI"] = max(0, min(100, st.session_state.stats["SI"] + si_change))
+
+def apply_choice(
+    ct_change,
+    sr_change,
+    ce_change,
+    si_change,
+    next_node,
+    choice_id,
+    choice_summary,
+    feedback_text,
+):
+    st.session_state.stats["CT"] = max(
+        0, min(100, st.session_state.stats["CT"] + ct_change)
+    )
+    st.session_state.stats["SR"] = max(
+        0, min(100, st.session_state.stats["SR"] + sr_change)
+    )
+    st.session_state.stats["CE"] = max(
+        0, min(100, st.session_state.stats["CE"] + ce_change)
+    )
+    st.session_state.stats["SI"] = max(
+        0, min(100, st.session_state.stats["SI"] + si_change)
+    )
     st.session_state.path.append(choice_id)
-    st.session_state.choice_history.append({
-        "node": next_node,
-        "choice_id": choice_id,
-        "summary": choice_summary,
-        "feedback": feedback_text,
-        "deltas": {"CT": ct_change, "SR": sr_change, "CE": ce_change, "SI": si_change}
-    })
+    st.session_state.choice_history.append(
+        {
+            "node": next_node,
+            "choice_id": choice_id,
+            "summary": choice_summary,
+            "feedback": feedback_text,
+            "deltas": {
+                "CT": ct_change,
+                "SR": sr_change,
+                "CE": ce_change,
+                "SI": si_change,
+            },
+        }
+    )
     st.session_state.state = next_node
     st.rerun()
+
 
 # -----------------------------------------------------------------------------
 # SIDEBAR DASHBOARD WITH VISUAL BAR CHART
@@ -103,22 +146,22 @@ with st.sidebar:
         st.write(f"**Rank:** {char['rank']}")
         st.write(f"**Service:** {char['service']}")
         st.divider()
-        
+
         st.markdown("### 📊 4-Domain Metrics")
         stats = st.session_state.stats
-        
+
         st.write(f"**Career Translation (CT):** {stats['CT']}%")
-        st.progress(stats['CT'] / 100)
-        
+        st.progress(stats["CT"] / 100)
+
         st.write(f"**Social & Rel. (SR):** {stats['SR']}%")
-        st.progress(stats['SR'] / 100)
-        
+        st.progress(stats["SR"] / 100)
+
         st.write(f"**Community Eng. (CE):** {stats['CE']}%")
-        st.progress(stats['CE'] / 100)
-        
+        st.progress(stats["CE"] / 100)
+
         st.write(f"**Self-Identity (SI):** {stats['SI']}%")
-        st.progress(stats['SI'] / 100)
-        
+        st.progress(stats["SI"] / 100)
+
         st.divider()
 
     if st.button("🔄 Reset Simulation", use_container_width=True):
@@ -129,20 +172,31 @@ with st.sidebar:
         st.session_state.choice_history = []
         st.rerun()
 
+
 def get_current_char():
     key = st.session_state.get("char_key")
     if key in CHARACTERS:
         return CHARACTERS[key]
     return CHARACTERS["ALEX"]
 
+
 # -----------------------------------------------------------------------------
 # SCREEN 1: CHARACTER SELECTION & ACADEMIC FRAMEWORK
 # -----------------------------------------------------------------------------
 if st.session_state.state == "CHAR_SELECT":
-    st.markdown("<div class='main-header'>OPERATION CIVILIAN RE-ENTRY</div>", unsafe_allow_html=True)
-    st.markdown("<div class='sub-header'>An Interactive 24-Month Reintegration Simulation & Research Model</div>", unsafe_allow_html=True)
-    
-    with st.expander("📖 View Research Question, Thesis & Academic Framework", expanded=True):
+    st.markdown(
+        "<div class='main-header'>OPERATION CIVILIAN RE-ENTRY</div>",
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        "<div class='sub-header'>An Interactive 24-Month Reintegration"
+        " Simulation & Research Model</div>",
+        unsafe_allow_html=True,
+    )
+
+    with st.expander(
+        "📖 View Research Question, Thesis & Academic Framework", expanded=True
+    ):
         st.markdown("""
 * **Research Question:** *"How do the operational, cultural, and psychological experiences of military service shape a veteran's post-service reintegration across their employment, social relationships, community engagement, and self-identity?"*
 * **Thesis Statement:** *"The military-to-civilian transition cannot be accurately modeled as a single administrative event or linear job-placement milestone; rather, it is a prolonged, 24-month existential and cultural reorganization where pre-service identity, institutional friction with American bureaucratic systems (DOD/VA), and domestic role renegotiation dictate long-term post-service stability."*
@@ -152,7 +206,7 @@ if st.session_state.state == "CHAR_SELECT":
     st.divider()
     st.subheader("Select a Service Member Dossier")
     cols = st.columns(2)
-    
+
     for idx, (key, char) in enumerate(CHARACTERS.items()):
         with cols[idx]:
             st.markdown(
@@ -162,12 +216,17 @@ if st.session_state.state == "CHAR_SELECT":
                 f"<p><b>Background:</b> {char['background']}</p>"
                 f"<p><b>Key Challenge:</b> {char['challenge']}</p>"
                 f"</div>",
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
-            
-            if st.button(f"Select {char['name'].split()[0]}", key=f"sel_{key}", use_container_width=True, type="primary"):
+
+            if st.button(
+                f"Select {char['name'].split()[0]}",
+                key=f"sel_{key}",
+                use_container_width=True,
+                type="primary",
+            ):
                 st.session_state.char_key = key
-                st.session_state.stats = char['stats'].copy()
+                st.session_state.stats = char["stats"].copy()
                 st.session_state.choice_history = []
                 st.session_state.state = "NODE_1"
                 st.rerun()
@@ -177,14 +236,17 @@ if st.session_state.state == "CHAR_SELECT":
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_1":
     char = get_current_char()
-    st.progress(0.16, text="Node 1 of 6: Month 2 — Self-Identity & Uniform Separation")
-    
+    st.progress(
+        0.16, text="Node 1 of 6: Month 2 — Self-Identity & Uniform Separation"
+    )
+
     st.warning(
         "**🔬 Academic Citation & Research Analysis**\n\n"
         "*Source: Smith & True (2014) — Warring Identities*\n\n"
-        "Transitioning out of a total military institution triggers psychological friction between martial "
-        "self-concept and civilian individualism. Reconstructing a stable post-identity requires confronting "
-        "the immediate loss of rank, title, and mission."
+        "Transitioning out of a total military institution triggers"
+        " psychological friction between martial self-concept and civilian"
+        " individualism. Reconstructing a stable post-identity requires"
+        " confronting the immediate loss of rank, title, and mission."
     )
 
     h_col1, h_col2 = st.columns([3, 1])
@@ -194,8 +256,13 @@ elif st.session_state.state == "NODE_1":
         if st.button("⬅ Back to Dossiers"):
             st.session_state.state = "CHAR_SELECT"
             st.rerun()
-            
-    st.info("You have been out of uniform for two months. Stripped of your rank insignia and daily operational structure, you find yourself answering civilian acquaintances with vague descriptions of your past service. You feel an internal loss of purpose and professional validation.")
+
+    st.info(
+        "You have been out of uniform for two months. Stripped of your rank"
+        " insignia and daily operational structure, you find yourself answering"
+        " civilian acquaintances with vague descriptions of your past service."
+        " You feel an internal loss of purpose and professional validation."
+    )
 
     st.subheader("How do you handle the initial loss of identity and structure?")
 
@@ -203,19 +270,189 @@ elif st.session_state.state == "NODE_1":
     with c1:
         st.markdown(
             "<div class='card-box'><h3>Option A (Isolation)</h3>"
-            "<p>Isolate yourself socially, relying solely on your own internal discipline to push "
-            "through the transition without seeking external validation or veteran networks.</p></div>",
-            unsafe_allow_html=True
+            "<p>Isolate yourself socially, relying solely on your own internal"
+            " discipline to push through the transition without seeking"
+            " external validation or veteran networks.</p></div>",
+            unsafe_allow_html=True,
         )
         if st.button("Select Option A", key="n1_a", use_container_width=True):
             apply_choice(
-                0, -10, -10, -15, "NODE_2", "1A", 
+                0,
+                -10,
+                -10,
+                -15,
+                "NODE_2",
+                "1A",
                 "Chose isolation and internal stoicism over peer support.",
-                "**[WRONG / HIGH RISK]** Reflects withdrawal and suppressed identity conflict. Smith & True (2014) identify isolation as a primary driver of acute transition stress and identity fragmentation."
+                (
+                    "**[WRONG / HIGH RISK]** Reflects withdrawal and suppressed"
+                    " identity conflict. Smith & True (2014) identify isolation"
+                    " as a primary driver of acute transition stress and"
+                    " identity fragmentation."
+                ),
             )
 
     with c2:
         st.markdown(
             "<div class='card-box'><h3>Option B (Mentorship)</h3>"
-            "<p>Connect proactively with a local veteran mentorship group to openly discuss the psychological "
-            "shift of leaving service and redefine your personal core values.</p></div>",
+            "<p>Connect proactively with a local veteran mentorship group to"
+            " openly discuss the psychological shift of leaving service and"
+            " redefine your personal core values.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n1_b", use_container_width=True):
+            apply_choice(
+                5,
+                10,
+                15,
+                20,
+                "NODE_2",
+                "1B",
+                "Engaged proactively with veteran mentorship and peer discussion.",
+                (
+                    "**[RIGHT / BEST PRACTICE]** Aligns with Smith & True (2014)"
+                    " and Demers (2011). Proactive peer engagement successfully"
+                    " bridges the gap between military and civilian identity"
+                    " markers."
+                ),
+            )
+
+    with c3:
+        st.markdown(
+            "<div class='card-box'><h3>Option C (Distraction)</h3>"
+            "<p>Immerse yourself immediately in civilian recreational hobbies"
+            " and casual entertainment to distract yourself from thinking about"
+            " your military past.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option C", key="n1_c", use_container_width=True):
+            apply_choice(
+                5,
+                0,
+                0,
+                5,
+                "NODE_2",
+                "1C",
+                "Relied on casual hobbies and recreational distraction.",
+                (
+                    "**[NEUTRAL / MODERATE RISK]** Temporary avoidance provides"
+                    " short-term relief but delays confronting deep-seated"
+                    " identity reorganization, leaving root transition friction"
+                    " unaddressed."
+                ),
+            )
+
+# -----------------------------------------------------------------------------
+# NODE 2: MONTH 4 — SOCIAL RELATIONSHIPS & HOUSEHOLD ROLE RENEGOTIATION
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_2":
+    char = get_current_char()
+    st.progress(
+        0.33, text="Node 2 of 6: Month 4 — Household Role Renegotiation"
+    )
+
+    st.warning(
+        "**🔬 Academic Citation & Research Analysis**\n\n"
+        "*Source: Schuetz (1945) / Demers (2011)*\n\n"
+        "Schuetz's Homecoming theory demonstrates that home is not a static"
+        " haven. Spouses and partners have adapted to manage household"
+        " operations independently during deployments, requiring active"
+        " relational role renegotiation."
+    )
+
+    h_col1, h_col2 = st.columns([3, 1])
+    with h_col1:
+        st.header(f"Month 4: Domestic Boundaries & Expectations — {char['name']}")
+    with h_col2:
+        if st.button("⬅ Back to Dossiers", key="b_n2"):
+            st.session_state.state = "CHAR_SELECT"
+            st.rerun()
+
+    st.info(
+        "Four months post-discharge, friction arises over household routines."
+        " Your partner notes that you are attempting to manage domestic life"
+        " like a military unit rather than an equal partnership."
+    )
+
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.markdown(
+            "<div class='card-box'><h3>Option A (Abdicating)</h3>"
+            "<p>Step back from domestic choices entirely, leaving all decisions"
+            " to your partner while focusing strictly on personal job"
+            " applications.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option A", key="n2_a", use_container_width=True):
+            apply_choice(
+                5,
+                -15,
+                0,
+                -5,
+                "NODE_3",
+                "2A",
+                "Withdrew from household decision-making entirely.",
+                (
+                    "**[WRONG / HIGH RISK]** Abdicating domestic"
+                    " responsibility creates emotional detachment and fails to"
+                    " establish an equal partnership, violating Demers's (2011)"
+                    " findings on domestic cohesion."
+                ),
+            )
+
+    with c2:
+        st.markdown(
+            "<div class='card-box'><h3>Option B (Structured Check-In)</h3>"
+            "<p>Initiate a structured weekly household check-in where both you"
+            " and your partner explicitly map out responsibilities, financial"
+            " goals, and personal expectations.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n2_b", use_container_width=True):
+            apply_choice(
+                0,
+                20,
+                5,
+                10,
+                "NODE_3",
+                "2B",
+                "Established structured weekly household alignment meetings.",
+                (
+                    "**[RIGHT / BEST PRACTICE]** Directly addresses Schuetz's"
+                    " (1945) homecoming friction by replacing military command"
+                    " hierarchy with intentional, collaborative role"
+                    " renegotiation."
+                ),
+            )
+
+    with c3:
+        st.markdown(
+            "<div class='card-box'><h3>Option C (Silence)</h3>"
+            "<p>Keep your internal stress private and avoid discussing"
+            " household roles further, believing time will naturally smooth"
+            " out the tension.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option C", key="n2_c", use_container_width=True):
+            apply_choice(
+                0,
+                -20,
+                -5,
+                -10,
+                "NODE_3",
+                "2C",
+                "Suppressed household friction and avoided crucial talks.",
+                (
+                    "**[WRONG / HIGH RISK]** Suppressing stress compounds"
+                    " domestic alienation. Romaniuk et al. (2020) highlight"
+                    " unaddressed communication gaps as a major predictor of"
+                    " post-service strain."
+                ),
+            )
+
+# -----------------------------------------------------------------------------
+# NODE 3: MONTH 8 — CAREER & WORKPLACE COMMUNICATION
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_3":
+    char = get_current_char()
+    st.progress
