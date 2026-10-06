@@ -11,12 +11,10 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* Dark Theme Overrides & Global Typography */
     .stApp {
         background-color: #0F172A;
         color: #E2E8F0;
     }
-    
     .main-header {
         font-size: 2.4rem;
         font-weight: 800;
@@ -29,18 +27,11 @@ st.markdown("""
         color: #94A3B8;
         margin-bottom: 24px;
     }
-    .academic-box {
-        background: #1E293B;
-        border-left: 4px solid #38BDF8;
-        padding: 16px;
-        margin-bottom: 20px;
-        border-radius: 4px;
-    }
 </style>
 """, unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# CHARACTER DEFINITIONS (Active Duty, Gender-Neutral Names, No Pay Grades)
+# CHARACTER DEFINITIONS & 4-METRIC TRACKING (Career, Social/Rel, Community, Identity)
 # -----------------------------------------------------------------------------
 CHARACTERS = {
     "ALEX": {
@@ -49,7 +40,7 @@ CHARACTERS = {
         "service": "Active Duty — Infantry / Operations Specialist",
         "background": "Married with children; spouse managed domestic operations and household decisions through multiple long combat deployments.",
         "challenge": "Translating direct leadership into consensus-driven corporate culture; renegotiating household authority and overcoming military cultural stoicism.",
-        "stats": {"OT": 45, "RC": 40, "SNI": 50}
+        "stats": {"CT": 45, "SR": 40, "CE": 40, "SI": 50}
     },
     "MORGAN": {
         "name": "Morgan Ellis",
@@ -57,7 +48,7 @@ CHARACTERS = {
         "service": "Active Duty — Logistics & Supply Chain Officer",
         "background": "Dual-career household (no children); partner holds a demanding corporate leadership position in a major city.",
         "challenge": "Re-aligning executive expectations (managing large military operational budgets vs. corporate office politics); balancing partner's career priorities with transition friction.",
-        "stats": {"OT": 60, "RC": 45, "SNI": 40}
+        "stats": {"CT": 60, "SR": 45, "CE": 35, "SI": 45}
     }
 }
 
@@ -69,12 +60,13 @@ if "char_key" not in st.session_state:
 if "path" not in st.session_state:
     st.session_state.path = []
 if "stats" not in st.session_state:
-    st.session_state.stats = {"OT": 50, "RC": 50, "SNI": 50}
+    st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
 
-def apply_choice(ot_change, rc_change, sni_change, next_node, choice_id):
-    st.session_state.stats["OT"] = max(0, min(100, st.session_state.stats["OT"] + ot_change))
-    st.session_state.stats["RC"] = max(0, min(100, st.session_state.stats["RC"] + rc_change))
-    st.session_state.stats["SNI"] = max(0, min(100, st.session_state.stats["SNI"] + sni_change))
+def apply_choice(ct_change, sr_change, ce_change, si_change, next_node, choice_id):
+    st.session_state.stats["CT"] = max(0, min(100, st.session_state.stats["CT"] + ct_change))
+    st.session_state.stats["SR"] = max(0, min(100, st.session_state.stats["SR"] + sr_change))
+    st.session_state.stats["CE"] = max(0, min(100, st.session_state.stats["CE"] + ce_change))
+    st.session_state.stats["SI"] = max(0, min(100, st.session_state.stats["SI"] + si_change))
     st.session_state.path.append(choice_id)
     st.session_state.state = next_node
     st.rerun()
@@ -83,56 +75,50 @@ def apply_choice(ot_change, rc_change, sni_change, next_node, choice_id):
 # SIDEBAR DASHBOARD
 # -----------------------------------------------------------------------------
 with st.sidebar:
-    st.title("🎖 MVS 100 UnFinal")
+    st.title("🎖 MVS 100 Project")
     st.markdown("**Author:** Austin Dodd")
     st.markdown("**Course:** MVS 100: Introduction to Military Studies")
-    st.markdown("**Instructor:** Professor Goff")
     st.divider()
 
     if st.session_state.char_key:
         char = CHARACTERS[st.session_state.char_key]
-        st.markdown(f"### 📋 Active Dossier: {char['name']}")
+        st.markdown(f"### 📋 Dossier: {char['name']}")
         st.write(f"**Rank:** {char['rank']}")
         st.write(f"**Service:** {char['service']}")
-        st.write(f"**Context:** {char['background']}")
+        st.divider()
         
-        st.markdown("### 📊 Transition Metrics")
-        col_s1, col_s2, col_s3 = st.columns(3)
-        col_s1.metric("Operational", f"{st.session_state.stats['OT']}%")
-        col_s2.metric("Relational", f"{st.session_state.stats['RC']}%")
-        col_s3.metric("System Nav", f"{st.session_state.stats['SNI']}%")
-        st.caption("OT: Operational Translation | RC: Relational Cohesion | SNI: System Navigation")
+        st.markdown("### 📊 4-Domain Metrics")
+        st.metric("Career Translation (CT)", f"{st.session_state.stats['CT']}%")
+        st.metric("Social & Rel. (SR)", f"{st.session_state.stats['SR']}%")
+        st.metric("Community Eng. (CE)", f"{st.session_state.stats['CE']}%")
+        st.metric("Self-Identity (SI)", f"{st.session_state.stats['SI']}%")
         st.divider()
 
     if st.button("🔄 Reset Simulation", use_container_width=True):
         st.session_state.state = "CHAR_SELECT"
         st.session_state.char_key = None
         st.session_state.path = []
-        st.session_state.stats = {"OT": 50, "RC": 50, "SNI": 50}
+        st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
         st.rerun()
 
 # -----------------------------------------------------------------------------
-# SCREEN 1: CHARACTER SELECTION WITH RESEARCH CONTEXT
+# SCREEN 1: CHARACTER SELECTION & ACADEMIC FRAMEWORK
 # -----------------------------------------------------------------------------
 if st.session_state.state == "CHAR_SELECT":
-    st.markdown('<p class="main-header">OPERATION CIVILIAN RE-ENTRY</p>', unsafe_allow_html=True)
-    st.markdown('<p class="sub-header">An Interactive 24-Month Reintegration Simulation & Research Framework</p>', unsafe_allow_html=True)
+    st.markdown("<div class='main-header'>OPERATION CIVILIAN RE-ENTRY</div>", unsafe_allow_html=True)
+    st.markdown("<div class='sub-header'>An Interactive 24-Month Reintegration Simulation & Research Model</div>", unsafe_allow_html=True)
+    
+    with st.expander("📖 View Research Question, Thesis & Academic Framework", expanded=True):
+        st.markdown("""
+        * **Research Question:** *"How do the operational, cultural, and psychological experiences of military service shape a veteran's post-service reintegration across their employment, social relationships, community engagement, and self-identity?"*
+        * **Thesis Statement:** *"The military-to-civilian transition cannot be accurately modeled as a single administrative event or linear job-placement milestone; rather, it is a prolonged, 24-month existential and cultural reorganization where pre-service identity, institutional friction with American bureaucratic systems (DOD/VA), and domestic role renegotiation dictate long-term post-service stability."*
+        * **Core Framework:** Synthesizing Schuetz's (1945) Homecoming theory, Zoli et al. (2015) institutional friction, and Mobbs & Bonanno (2018) transition stress.
+        """)
+
     st.divider()
-
-    st.markdown("""
-    <div class="academic-box">
-        <h4>🎯 Learning Objective & Research Framework</h4>
-        <p><strong>Learning Objective:</strong> Evaluate the multifaceted dimensions of American institutions such as the DOD and VA, examining how active-duty service, military culture, and institutional policies shape long-term veteran reintegration and post-service identity reconstruction.</p>
-        <hr style="border-color: #334155; margin: 10px 0;">
-        <p><strong>Research Question:</strong> <em>"How do the operational, cultural, and psychological experiences of military service shape a veteran's post-service reintegration across their employment, social relationships, community engagement, and self-identity?"</em></p>
-        <p style="margin-top: 8px;"><strong>Thesis Statement:</strong> <em>"The military-to-civilian transition cannot be accurately modeled as a single administrative event or linear job-placement milestone; rather, it is a prolonged, 24-month existential and cultural reorganization where pre-service identity, institutional friction with American bureaucratic systems (DOD/VA), and domestic role renegotiation dictate long-term post-service stability."</em></p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.subheader("Select a Service Member Dossier to Begin Simulation")
-    st.markdown("Choose a subject to guide through their 24-month post-discharge transition journey:")
-
+    st.subheader("Select a Service Member Dossier")
     cols = st.columns(2)
+    
     for idx, (key, char) in enumerate(CHARACTERS.items()):
         with cols[idx]:
             st.markdown(f"### {char['name']}")
@@ -147,275 +133,233 @@ if st.session_state.state == "CHAR_SELECT":
                 st.rerun()
 
 # -----------------------------------------------------------------------------
-# NODE 1: MONTH 1 — ADMINISTRATIVE & IMMEDIATE SEPARATION
+# NODE 1: MONTH 2 — SELF-IDENTITY & UNIFORM SEPARATION (New Self-Identity Question)
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_1":
     char = CHARACTERS[st.session_state.char_key]
-    st.progress(0.14, text="Node 1 of 7: Month 1 — Immediate Separation & Priorities")
-    st.header(f"Month 1: The Administrative Handshake — {char['name']}")
+    st.progress(0.16, text="Node 1 of 6: Month 2 — Self-Identity & Uniform Separation")
     
-    st.info("It is Week 2 post-discharge. Your active-duty service is complete, and your official discharge papers are in hand. You receive a notification from the VA stating that your military electronic health records require manual verification before your primary care team can be assigned, creating a 60-day administrative delay. Simultaneously, household setup, financial budgeting, and initial corporate networking opportunities demand your immediate focus.")
+    st.warning("**🔬 Academic Citation & Research Analysis**\n\n*Source: Smith & True (2014) — Warring Identities*\n\nTransitioning out of a total military institution triggers a psychological friction between martial self-concept and civilian individualism. Reconstructing a stable post-identity requires confronting the immediate loss of rank, title, and mission.")
 
-    st.subheader("How do you allocate your primary focus during this first month?")
+    h_col1, h_col2 = st.columns([3, 1])
+    with h_col1:
+        st.header(f"Month 2: Stripping the Uniform — {char['name']}")
+    with h_col2:
+        if st.button("⬅ Back to Dossiers"):
+            st.session_state.state = "CHAR_SELECT"
+            st.rerun()
+            
+    st.info("You have been out of uniform for two months. Stripped of your rank insignia and daily operational structure, you find yourself answering civilian acquaintances with vague descriptions of your past service. You feel an internal loss of purpose and professional validation.")
+
+    st.subheader("How do you handle the initial loss of identity and structure?")
 
     c1, c2, c3 = st.columns(3)
-    
     with c1:
         st.markdown("### Option A")
-        st.write("Spend dedicated morning hours coordinating with veteran advocates, tracking medical verification queues, and securing official service documentation before taking on new external commitments.")
+        st.write("Isolate yourself socially, relying solely on your own internal discipline to push through the transition without seeking external validation or veteran networks.")
         if st.button("Select Option A", key="n1_a", use_container_width=True):
-            apply_choice(ot_change=-5, rc_change=-5, sni_change=20, next_node="NODE_2", choice_id="1A")
+            apply_choice(ct_change=0, sr_change=-10, ce_change=-10, si_change=-15, next_node="NODE_2", choice_id="1A")
 
     with c2:
         st.markdown("### Option B")
-        st.write("Channel your energy into submitting corporate applications, attending virtual networking events, and interviewing, letting administrative records process in the background.")
+        st.write("Connect proactively with a local veteran mentorship group to openly discuss the psychological shift of leaving service and redefine your personal core values.")
         if st.button("Select Option B", key="n1_b", use_container_width=True):
-            apply_choice(ot_change=20, rc_change=-5, sni_change=-10, next_node="NODE_2", choice_id="1B")
+            apply_choice(ct_change=5, sr_change=10, ce_change=15, si_change=20, next_node="NODE_2", choice_id="1B")
 
     with c3:
         st.markdown("### Option C")
-        st.write("Prioritize home life, partner alignment, and establishing household routines during the first month, taking time to decompress before committing to rigid application or paperwork schedules.")
+        st.write("Immerse yourself immediately in civilian recreational hobbies and casual entertainment to distract yourself from thinking about your military past.")
         if st.button("Select Option C", key="n1_c", use_container_width=True):
-            apply_choice(ot_change=-10, rc_change=20, sni_change=-5, next_node="NODE_2", choice_id="1C")
+            apply_choice(ct_change=5, sr_change=0, ce_change=0, si_change=5, next_node="NODE_2", choice_id="1C")
 
 # -----------------------------------------------------------------------------
-# NODE 2: MONTH 3 — EARLY RELATIONSHIP & HOUSEHOLD DYNAMICS
+# NODE 2: MONTH 4 — SOCIAL RELATIONSHIPS & HOUSEHOLD ROLE RENEGOTIATION
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_2":
     char = CHARACTERS[st.session_state.char_key]
-    st.progress(0.28, text="Node 2 of 7: Month 3 — Household Role Renegotiation")
+    st.progress(0.33, text="Node 2 of 6: Month 4 — Household Role Renegotiation")
     
-    st.warning("**🔬 Academic Citation & Research Analysis**\n\n*Source: Schuetz (1945) — Homecoming Theory / Demers (2011)*\n\nReintegration is relational rather than isolated. Schuetz's Homecoming Theory demonstrates that both the returning service member and their home community evolve independently during separation. When a veteran returns, established household routines must be renegotiated. Assuming the household can instantly resume past patterns or adapt to military-style domestic management leads to subtle marital friction.")
+    st.warning("**🔬 Academic Citation & Research Analysis**\n\n*Source: Schuetz (1945) / Demers (2011)*\n\nSchuetz's Homecoming theory demonstrates that home is not a static haven. Spouses and partners have adapted to manage household operations independently during deployments, requiring active relational role renegotiation.")
 
-    st.header(f"Month 3: Domestic Boundaries & Expectations — {char['name']}")
-    
-    st.info("You have been home for ninety days. During your active service deployments, your partner managed all daily domestic choices, finances, and household logistics independently. Lately, friction arises over daily routines and decision-making authority. After a disagreement regarding household schedules, your partner remarks that you are treating the home like a military unit rather than a shared partnership.")
-
-    st.subheader("How do you respond to this domestic friction?")
+    st.header(f"Month 4: Domestic Boundaries & Expectations — {char['name']}")
+    st.info("Four months post-discharge, friction arises over household routines. Your partner notes that you are attempting to manage domestic life like a military unit rather than an equal partnership.")
 
     c1, c2, c3 = st.columns(3)
-
     with c1:
         st.markdown("### Option A")
-        st.write("Step back from domestic management entirely, leaving daily decisions to your partner while focusing strictly on your personal work or job search tasks.")
+        st.write("Step back from domestic choices entirely, leaving all decisions to your partner while focusing strictly on personal job applications.")
         if st.button("Select Option A", key="n2_a", use_container_width=True):
-            apply_choice(ot_change=5, rc_change=-15, sni_change=0, next_node="NODE_3", choice_id="2A")
+            apply_choice(ct_change=5, sr_change=-15, ce_change=0, si_change=-5, next_node="NODE_3", choice_id="2A")
 
     with c2:
         st.markdown("### Option B")
         st.write("Initiate a structured weekly household check-in where both you and your partner explicitly map out responsibilities, financial goals, and personal expectations.")
         if st.button("Select Option B", key="n2_b", use_container_width=True):
-            apply_choice(ot_change=0, rc_change=20, sni_change=5, next_node="NODE_3", choice_id="2B")
+            apply_choice(ct_change=0, sr_change=20, ce_change=5, si_change=10, next_node="NODE_3", choice_id="2B")
 
     with c3:
         st.markdown("### Option C")
-        st.write("Keep your internal stress private and avoid discussing household roles further, believing that time and routine will naturally smooth out the tension.")
+        st.write("Keep your internal stress private and avoid discussing household roles further, believing time will naturally smooth out the tension.")
         if st.button("Select Option C", key="n2_c", use_container_width=True):
-            apply_choice(ot_change=0, rc_change=-20, sni_change=-5, next_node="NODE_3", choice_id="2C")
+            apply_choice(ct_change=0, sr_change=-20, ce_change=-5, si_change=-10, next_node="NODE_3", choice_id="2C")
 
 # -----------------------------------------------------------------------------
-# NODE 3: MONTH 6 — WORKPLACE INTEGRATION & COMMUNICATION
+# NODE 3: MONTH 8 — CAREER & WORKPLACE COMMUNICATION
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_3":
     char = CHARACTERS[st.session_state.char_key]
-    st.progress(0.42, text="Node 3 of 7: Month 6 — Corporate Culture & Team Friction")
-
-    st.warning("**🔬 Academic Citation & Research Analysis**\n\n*Source: Zoli, Maury, & Fay (2015) — IVMF / Syracuse University*\n\nResearch indicates that military operational culture relies on rapid, direct communication, precise SOPs, and absolute command responsibility. In civilian corporate spaces, this directness frequently clashes with norms centered on consensus-building and indirect feedback. The inability of civilian HR systems to translate military leadership assets—combined with veteran frustration over corporate ambiguity—creates a primary barrier to long-term post-service employment retention.")
-
-    st.header(f"Month 6: The Project Review — {char['name']}")
+    st.progress(0.50, text="Node 3 of 6: Month 8 — Corporate Culture & Team Friction")
     
-    st.info("You are six months into your new corporate position. During a major cross-functional meeting, a key project deadline slips because two department leads disagree on resource allocation. Your manager turns to you and asks how you would align the team to resolve the impasse and keep deliverables moving forward.")
+    st.warning("**🔬 Academic Citation & Research Analysis**\n\n*Source: Zoli, Maury, & Fay (2015)*\n\nMilitary operational culture relies on direct communication and SOPs. In civilian corporate spaces, this often clashes with consensus-building and indirect office politics.")
+
+    st.header(f"Month 8: The Project Deadlock — {char['name']}")
+    st.info("Eight months into your civilian career, a major cross-functional project stalls because two department leads disagree on resource allocation. Your manager asks for your approach.")
 
     c1, c2, c3 = st.columns(3)
-
     with c1:
         st.markdown("### Option A")
-        st.write("Establish a formal project tracking matrix with clear, documented ownership for every task, scheduling a joint review session where team leads publicly account for roadblocks.")
+        st.write("Issue a formal project tracking matrix with rigid deadlines and public accountability check-ins for all department leads.")
         if st.button("Select Option A", key="n3_a", use_container_width=True):
-            apply_choice(ot_change=-10, rc_change=0, sni_change=5, next_node="NODE_4", choice_id="3A")
+            apply_choice(ct_change=-10, sr_change=-5, ce_change=0, si_change=5, next_node="NODE_4", choice_id="3A")
 
     with c2:
         st.markdown("### Option B")
-        st.write("Hold informal, one-on-one alignment discussions with each department lead outside the main meeting to understand their constraints and co-create a compromise before updating the schedule.")
+        st.write("Hold informal, one-on-one alignment discussions with each leader outside meetings to understand constraints and co-create a compromise.")
         if st.button("Select Option B", key="n3_b", use_container_width=True):
-            apply_choice(ot_change=20, rc_change=10, sni_change=0, next_node="NODE_4", choice_id="3B")
+            apply_choice(ct_change=25, sr_change=10, ce_change=10, si_change=10, next_node="NODE_4", choice_id="3B")
 
     with c3:
         st.markdown("### Option C")
-        st.write("Focus on delivering your assigned components ahead of schedule while providing clear technical status updates to leadership, letting the project owner manage stakeholder friction.")
+        st.write("Focus strictly on your own deliverables, letting the project owner manage stakeholder friction without your direct intervention.")
         if st.button("Select Option C", key="n3_c", use_container_width=True):
-            apply_choice(ot_change=-15, rc_change=-10, sni_change=-5, next_node="NODE_4", choice_id="3C")
+            apply_choice(ct_change=-15, sr_change=0, ce_change=-5, si_change=-5, next_node="NODE_4", choice_id="3C")
 
 # -----------------------------------------------------------------------------
-# NODE 4: MONTH 9 — SOCIAL NETWORKS & PEER ISOLATION
+# NODE 4: MONTH 12 — COMMUNITY ENGAGEMENT & CIVIC SERVICE (New Community Question)
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_4":
     char = CHARACTERS[st.session_state.char_key]
-    st.progress(0.57, text="Node 4 of 7: Month 9 — Social Connection & Community")
-
-    st.warning("**🔬 Academic Citation & Research Analysis**\n\n*Source: Smith & True (2014) / Romaniuk et al. (2020)*\n\nPost-military social adjustment often involves a sense of cultural isolation when civilian peer groups lack shared operational experiences. Smith & True note that veterans frequently navigate 'warring identities' when attempting to connect with civilian peers who operate under different social values. Re-establishing meaningful community ties is essential for long-term psychological well-being.")
-
-    st.header(f"Month 9: Community & Social Networks — {char['name']}")
+    st.progress(0.66, text="Node 4 of 6: Month 12 — Community Embedding & Civic Service")
     
-    st.info("Nine months post-discharge, you realize that most of your non-work social interaction consists of messaging former service members online. While supportive, these distant conversations leave you feeling somewhat isolated in your local community. Coworkers invite you to join an informal weekend recreational league.")
+    st.warning("**🔬 Academic Citation & Research Analysis**\n\n*Source: Demers (2011) — Community Reintegration*\n\nCivilian community networks often lack cultural competency regarding military service, leading to isolation. Active civic engagement and local community embedding are critical for bridging this gap.")
+
+    st.header(f"Month 12: Local Embedding — {char['name']}")
+    st.info("One year post-discharge, you realize your life is split strictly between your workplace and your immediate household. You feel disconnected from your broader local town/city community.")
 
     c1, c2, c3 = st.columns(3)
-
     with c1:
         st.markdown("### Option A")
-        st.write("Decline the coworker invitation and instead join a local veteran service organization focused on community action projects with former military peers.")
+        st.write("Volunteer to lead a local youth mentorship or community resilience program, translating your leadership skills into civic action.")
         if st.button("Select Option A", key="n4_a", use_container_width=True):
-            apply_choice(ot_change=5, rc_change=10, sni_change=15, next_node="NODE_5", choice_id="4A")
+            apply_choice(ct_change=10, sr_change=10, ce_change=25, si_change=15, next_node="NODE_5", choice_id="4A")
 
     with c2:
         st.markdown("### Option B")
-        st.write("Accept the coworker invitation, actively using the casual environment to build civilian friendships outside of professional or military topics.")
+        st.write("Join an exclusively veteran-focused social club online, keeping your local civic engagement minimal and staying within familiar military circles.")
         if st.button("Select Option B", key="n4_b", use_container_width=True):
-            apply_choice(ot_change=15, rc_change=15, sni_change=0, next_node="NODE_5", choice_id="4B")
+            apply_choice(ct_change=0, sr_change=5, ce_change=10, si_change=10, next_node="NODE_5", choice_id="4B")
 
     with c3:
         st.markdown("### Option C")
-        st.write("Politely decline social invitations to protect your personal weekend downtime, focusing your energy strictly on family and rest.")
+        st.write("Decline all local civic involvement to focus entirely on personal relaxation and weekend recovery from work stress.")
         if st.button("Select Option C", key="n4_c", use_container_width=True):
-            apply_choice(ot_change=0, rc_change=-10, sni_change=-5, next_node="NODE_5", choice_id="4C")
+            apply_choice(ct_change=0, sr_change=-5, ce_change=-20, si_change=-10, next_node="NODE_5", choice_id="4C")
 
 # -----------------------------------------------------------------------------
-# NODE 5: MONTH 12 — HEALTHCARE & SYSTEM NAVIGATION
+# NODE 5: MONTH 18 — SYSTEM NAVIGATION & HEALTHCARE
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_5":
     char = CHARACTERS[st.session_state.char_key]
-    st.progress(0.71, text="Node 5 of 7: Month 12 — Institutional Health Navigation")
-
-    st.warning("**🔬 Academic Citation & Research Analysis**\n\n*Source: Mobbs & Bonanno (2018) — Transition Stress Framework*\n\nNavigating complex institutional bureaucracies during post-service transition can trigger significant frustration. Mobbs & Bonanno emphasize that administrative delays in benefits or healthcare processing often compound everyday transition stress, making proactive institutional advocacy a key factor in long-term stability.")
-
-    st.header(f"Month 12: Healthcare & Claims Follow-Up — {char['name']}")
+    st.progress(0.83, text="Node 5 of 6: Month 18 — Institutional System Navigation")
     
-    st.info("One year post-discharge, an administrative review reveals that a service-connected disability claim was deferred due to incomplete medical records transfer between DOD and VA systems. Resolving it requires resubmitting clinical evidence and attending additional appointments during work hours.")
+    st.warning("**🔬 Academic Citation & Research Analysis**\n\n*Source: Mobbs & Bonanno (2018)*\n\nAdministrative delays in benefits and healthcare processing compound everyday transition stress. Proactive institutional navigation is essential for long-term stability.")
+
+    st.header(f"Month 18: VA & Healthcare Bureaucracy — {char['name']}")
+    st.info("At 18 months, an audit reveals that your service-connected disability claim was stalled due to electronic medical record transfer errors between DOD and VA systems.")
 
     c1, c2, c3 = st.columns(3)
-
     with c1:
         st.markdown("### Option A")
-        st.write("Take time off work to personally coordinate with accredited Veteran Service Officers (VSOs) and congressional liaison offices to resolve the claim file.")
+        st.write("Take time off work to personally coordinate with accredited VSOs and congressional liaison offices to resolve your claim file.")
         if st.button("Select Option A", key="n5_a", use_container_width=True):
-            apply_choice(ot_change=-5, rc_change=5, sni_change=25, next_node="NODE_6", choice_id="5A")
+            apply_choice(ct_change=-5, sr_change=5, ce_change=10, si_change=15, next_node="NODE_6", choice_id="5A")
 
     with c2:
         st.markdown("### Option B")
-        st.write("File a standard online extension request through official web portals, maintaining your regular work schedule while letting the system process standard queues.")
+        st.write("Submit a standard online portal inquiry and wait for standard bureaucratic processing queues to clear.")
         if st.button("Select Option B", key="n5_b", use_container_width=True):
-            apply_choice(ot_change=5, rc_change=0, sni_change=5, next_node="NODE_6", choice_id="5B")
+            apply_choice(ct_change=5, sr_change=0, ce_change=0, si_change=0, next_node="NODE_6", choice_id="5B")
 
     with c3:
         st.markdown("### Option C")
-        st.write("Delay the appeal process for now to avoid taking time away from current career and domestic commitments, intending to address it later.")
+        st.write("Abandon the claim process out of frustration, deciding the administrative friction is not worth the effort.")
         if st.button("Select Option C", key="n5_c", use_container_width=True):
-            apply_choice(ot_change=5, rc_change=-5, sni_change=-20, next_node="NODE_6", choice_id="5C")
+            apply_choice(ct_change=0, sr_change=-5, ce_change=-10, si_change=-20, next_node="NODE_6", choice_id="5C")
 
 # -----------------------------------------------------------------------------
-# NODE 6: MONTH 18 — CAREER TRAJECTORY & IDENTITY RECONSTRUCTION
+# NODE 6: MONTH 24 — FINAL DEBRIEF & 4-DOMAIN AAR EVALUATION
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_6":
     char = CHARACTERS[st.session_state.char_key]
-    st.progress(0.85, text="Node 6 of 7: Month 18 — Career Trajectory & Purpose")
+    st.progress(1.00, text="Node 6 of 6: Month 24 — Reintegration Evaluation")
 
-    st.warning("**🔬 Academic Citation & Research Analysis**\n\n*Source: Mobbs & Bonanno (2018) / Romaniuk et al. (2020)*\n\nBy month 18, the initial operational shift gives way to broader identity reconstruction. Transitioning out of a total military institution requires constructing a personal identity and sense of purpose that exists independently of rank, title, or uniform.")
+    st.warning("**🔬 Academic Citation & Research Analysis**\n\n*Source: Synthesis of Course Research (Zoli et al., Schuetz, Demers, Mobbs & Bonanno)*\n\nTwo years post-discharge marks a critical stabilization milestone. Reintegration success is measured across workforce contribution, relational cohesion, community embedding, and self-identity.")
 
-    st.header(f"Month 18: Career Trajectory & Purpose — {char['name']}")
-    
-    st.info("At 18 months post-discharge, your employer offers you an opportunity to lead a new internal initiative. One path involves taking over a highly structured operational role with predictable tasks; another path involves leading an exploratory cross-departmental team with high ambiguity but higher growth potential.")
-
-    c1, c2, c3 = st.columns(3)
-
-    with c1:
-        st.markdown("### Option A")
-        st.write("Choose the structured operational role, leveraging your familiarity with clear logistics, defined processes, and predictable milestones.")
-        if st.button("Select Option A", key="n6_a", use_container_width=True):
-            apply_choice(ot_change=10, rc_change=0, sni_change=5, next_node="NODE_7", choice_id="6A")
-
-    with c2:
-        st.markdown("### Option B")
-        st.write("Choose the exploratory cross-departmental lead role, intentionally stepping into organizational ambiguity to build broader civilian executive skills.")
-        if st.button("Select Option B", key="n6_b", use_container_width=True):
-            apply_choice(ot_change=25, rc_change=10, sni_change=0, next_node="NODE_7", choice_id="6B")
-
-    with c3:
-        st.markdown("### Option C")
-        st.write("Decline the leadership promotion to focus on maintaining a stable work-life balance and dedicated home time.")
-        if st.button("Select Option C", key="n6_c", use_container_width=True):
-            apply_choice(ot_change=-10, rc_change=15, sni_change=0, next_node="NODE_7", choice_id="6C")
-
-# -----------------------------------------------------------------------------
-# NODE 7: MONTH 24 — FINAL DEBRIEF, SCORING & DETAILED RESEARCH FINDINGS
-# -----------------------------------------------------------------------------
-elif st.session_state.state == "NODE_7":
-    char = CHARACTERS[st.session_state.char_key]
-    st.progress(1.00, text="Node 7 of 7: Month 24 — Reintegration Evaluation & Research Findings")
-
-    st.header(f"Month 24 After Action Report (AAR) & Research Synthesis — {char['name']}")
+    st.header(f"Month 24 After Action Report (AAR) — {char['name']}")
     st.divider()
 
-    st.subheader("📊 Final Transition Profile & Scoring Sheet")
+    st.subheader("Final 4-Domain Transition Scores")
     
-    col_f1, col_f2, col_f3 = st.columns(3)
-    col_f1.metric("Operational Translation", f"{st.session_state.stats['OT']}%")
-    col_f2.metric("Relational Cohesion", f"{st.session_state.stats['RC']}%")
-    col_f3.metric("System Navigation", f"{st.session_state.stats['SNI']}%")
+    col_f1, col_f2, col_f3, col_f4 = st.columns(4)
+    col_f1.metric("Career (CT)", f"{st.session_state.stats['CT']}%")
+    col_f2.metric("Social/Rel. (SR)", f"{st.session_state.stats['SR']}%")
+    col_f3.metric("Community (CE)", f"{st.session_state.stats['CE']}%")
+    col_f4.metric("Self-Identity (SI)", f"{st.session_state.stats['SI']}%")
 
     st.markdown("### Decision Trajectory Path")
     st.code(" ➔ ".join(["START"] + st.session_state.path))
 
-    st.divider()
-    st.subheader("📖 Detailed Research Findings & Literature Explanation")
-    st.write("This simulation's scoring model and trajectory outcomes directly substantiate the research question and thesis by mapping user decisions against empirical academic literature across four core pillars:")
-
-    st.markdown("""
-    * **1. Theoretical Framework & Institutional Friction (*Schuetz, 1945; Zoli et al., 2015*):** 
-      As demonstrated in the early decision nodes, transitioning from a total military institution into fragmented civilian bureaucracies (DOD/VA) generates immediate structural friction. Alfred Schuetz's 'Homecomer' paradigm explains why returning veterans perceive civilian environments as unfamiliar cultural landscapes where military operational rules no longer apply.
-    * **2. Employment & Operational Translation (*Zoli et al., 2015; Mobbs & Bonanno, 2018*):** 
-      The operational score reflects the challenge of translating Military Occupational Specialties (MOS) into corporate currency. Research reveals that veterans face misaligned placement when civilian HR systems misunderstand military leadership structures, frequently converting what should be leadership assets into transitional stress.
-    * **3. Social Relationships & Domestic Role Renegotiation (*Demers, 2011; Romaniuk et al., 2020*):** 
-      The relational cohesion score mirrors household dynamics. Utilizing the M-CARM model, research shows that cultural reintegration requires actively renegotiating domestic roles, overcoming military stoicism, and bridging gaps with civilian community networks that lack operational cultural competency.
-    * **4. Self-Identity & Community Embedding (*Smith & True, 2014*):** 
-      By month 24, the simulation captures 'warring identities'—the internal friction between martial self-concepts (discipline, mission focus) and civilian expectations (ambiguity, individualism). Long-term stability requires structured community engagement rather than brief administrative milestones.
-    """)
-
-    st.divider()
-    st.subheader("Subject Performance Analysis")
+    st.markdown("### Comprehensive Academic Synthesis & Findings")
     
-    ot_score = st.session_state.stats["OT"]
-    rc_score = st.session_state.stats["RC"]
-    sni_score = st.session_state.stats["SNI"]
+    ct_score = st.session_state.stats["CT"]
+    sr_score = st.session_state.stats["SR"]
+    ce_score = st.session_state.stats["CE"]
+    si_score = st.session_state.stats["SI"]
 
-    st.write(f"**Subject Evaluated:** {char['name']} ({char['rank']})")
+    st.write(f"**Subject Dossier:** {char['name']} ({char['rank']})")
     
-    if ot_score >= 60:
-        st.success("**Workforce Domain:** Highly successful translation of military skill sets into civilian corporate value. Minimal friction regarding authority structures.")
+    if ct_score >= 60:
+        st.success("**Career & Operational Translation (CT):** High proficiency in translating military proficiencies into civilian corporate value. Successfully navigated corporate cultural ambiguity (*Zoli et al., 2015*).")
     else:
-        st.warning("**Workforce Domain:** Experiencing ongoing organizational ambiguity or underemployment friction. Indicates a need for better employer onboarding systems (*Zoli et al., 2015*).")
+        st.warning("**Career & Operational Translation (CT):** Experiencing ongoing underemployment friction or corporate cultural mismatch.")
 
-    if rc_score >= 60:
-        st.success("**Domestic & Social Domain:** Strong relational cohesion established. Successfully negotiated domestic role shifts and overcome military cultural stoicism (*Demers, 2011; Schuetz, 1945*).")
+    if sr_score >= 60:
+        st.success("**Social & Relationships (SR):** Strong domestic and social cohesion established. Successfully renegotiated household roles and overcame military stoicism (*Schuetz, 1945; Demers, 2011*).")
     else:
-        st.error("**Domestic & Social Domain:** High social isolation or domestic strain noted. Highlights the risk of unaddressed military cultural stoicism (*Smith & True, 2014*).")
+        st.error("**Social & Relationships (SR):** Elevated social isolation or household strain identified.")
 
-    if sni_score >= 60:
-        st.success("**System Navigation & Identity Domain:** Proactive institutional navigation. Successfully established long-term healthcare access and reconstructed identity (*Mobbs & Bonanno, 2018*).")
+    if ce_score >= 60:
+        st.success("**Community Engagement (CE):** Effective local civic embedding. Established strong community ties beyond insular veteran circles (*Demers, 2011*).")
     else:
-        st.warning("**System Navigation & Identity Domain:** Administrative exhaustion or disengagement from DOD/VA support systems noted.")
+        st.warning("**Community Engagement (CE):** Low community embedding; at risk of social alienation from civilian neighbors.")
+
+    if si_score >= 60:
+        st.success("**Self-Identity & Purpose (SI):** Successfully resolved 'warring identities' and established a stable post-service self-concept independent of military rank (*Smith & True, 2014*).")
+    else:
+        st.warning("**Self-Identity & Purpose (SI):** Unresolved identity displacement; ongoing struggle with post-service purpose.")
 
     st.divider()
     st.subheader("Verified APA References")
     st.markdown("""* **Demers, A. (2011).** When veterans return: The role of community in post-combat reintegration. *Journal of Loss and Trauma*, 16(2), 160–179.
 - **Mobbs, M. C., & Bonanno, G. A. (2018).** Beyond war and PTSD: The crucial role of transition stress in the lives of military veterans. *Clinical Psychology Review*, 59, 137–144.
-- **Romaniuk, M., Foran, A., Evans, L., Finlay, A., & McManus, D. (2020).** Assessing psychological adjustment and cultural reintegration after military service (M-CARM). *BMC Psychiatry*, 20(1), 1–13.
+- **Romaniuk, M., et al. (2020).** Assessing psychological adjustment and cultural reintegration after military service (M-CARM). *BMC Psychiatry*, 20(1), 1–13.
 - **Schuetz, A. (1945).** The homecomer. *American Journal of Sociology*, 50(5), 369–376.
 - **Smith, R. T., & True, G. (2014).** Warring identities: Identity conflict and the military-to-civilian transition. *Armed Forces & Society*, 40(1), 147–156.
 - **Zoli, C., Maury, R., & Fay, D. (2015).** *Missing perspectives: Servicemembers' transition from service to civilian life*. Institute for Veterans and Military Families, Syracuse University.""")
 
-    if st.button("🔄 Restart Simulation with Another Character", type="primary"):
+    if st.button("🔄 Restart Simulation with Another Character", type="primary", use_container_width=True):
         st.session_state.state = "CHAR_SELECT"
         st.session_state.char_key = None
         st.session_state.path = []
-        st.session_state.stats = {"OT": 50, "RC": 50, "SNI": 50}
+        st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
         st.rerun()
