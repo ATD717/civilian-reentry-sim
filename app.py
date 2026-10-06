@@ -77,8 +77,8 @@ def apply_choice(ot_change, rc_change, sni_change, next_node, choice_id):
 # -----------------------------------------------------------------------------
 with st.sidebar:
     st.title("🎖️️ MVS 100 UnFinal")
-    st.markdown("**Author:** Austin T. Dodd")
-    st.markdown("**Course:** Intro to Veteran Studies")
+    st.markdown("**Author:** Austin Dodd")
+    st.markdown("**Course:** MVSIOO: Introduction to Military Studies")
     st.markdown("**Instructor:** Professor Goff")
     st.divider()
 
