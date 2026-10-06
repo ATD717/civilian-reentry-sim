@@ -406,4 +406,195 @@ elif st.session_state.state == "NODE_2":
     c1, c2, c3 = st.columns(3)
     with c1:
         st.markdown(
-            "<div class='card-box'><h3>
+            "<div class='card-box'><h3>Option A (Abdicating)</h3>"
+            "<p>Step back from domestic choices entirely, leaving all decisions"
+            " to your partner while focusing strictly on personal job"
+            " applications.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option A", key="n2_a", use_container_width=True):
+            apply_choice(
+                5,
+                -15,
+                0,
+                -5,
+                "NODE_3",
+                "2A",
+                "Withdrew from household decision-making entirely.",
+                (
+                    "**[HIGH RISK / RED]** Abdicating domestic"
+                    " responsibility creates emotional detachment and fails to"
+                    " establish an equal partnership, violating Demers's (2011)"
+                    " findings on domestic cohesion."
+                ),
+                "red",
+            )
+
+    with c2:
+        st.markdown(
+            "<div class='card-box'><h3>Option B (Structured Check-In)</h3>"
+            "<p>Initiate a structured weekly household check-in where both you"
+            " and your partner explicitly map out responsibilities, financial"
+            " goals, and personal expectations.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n2_b", use_container_width=True):
+            apply_choice(
+                0,
+                20,
+                5,
+                10,
+                "NODE_3",
+                "2B",
+                "Established structured weekly household alignment meetings.",
+                (
+                    "**[BEST PRACTICE / GREEN]** Directly addresses Schuetz's"
+                    " (1945) homecoming friction by replacing military command"
+                    " hierarchy with intentional, collaborative role"
+                    " renegotiation."
+                ),
+                "green",
+            )
+
+    with c3:
+        st.markdown(
+            "<div class='card-box'><h3>Option C (Silence)</h3>"
+            "<p>Keep your internal stress private and avoid discussing"
+            " household roles further, believing time will naturally smooth"
+            " out the tension.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option C", key="n2_c", use_container_width=True):
+            apply_choice(
+                0,
+                -20,
+                -5,
+                -10,
+                "NODE_3",
+                "2C",
+                "Suppressed household friction and avoided crucial talks.",
+                (
+                    "**[HIGH RISK / RED]** Suppressing stress compounds"
+                    " domestic alienation. Romaniuk et al. (2020) highlight"
+                    " unaddressed communication gaps as a major predictor of"
+                    " post-service strain."
+                ),
+                "red",
+            )
+
+# -----------------------------------------------------------------------------
+# NODE 3: MONTH 8 — CAREER & WORKPLACE COMMUNICATION
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_3":
+    char = get_current_char()
+    st.progress(
+        50, text="Node 3 of 6: Month 8 — Corporate Culture & Team Friction"
+    )
+
+    st.warning(
+        "**🔬 Academic Citation & Research Analysis**\n\n"
+        "*Source: Zoli, Maury, & Fay (2015)*\n\n"
+        "Military operational culture relies on direct communication and SOPs."
+        " In civilian corporate spaces, this often clashes with"
+        " consensus-building and indirect office politics."
+    )
+
+    h_col1, h_col2 = st.columns([3, 1])
+    with h_col1:
+        st.header(f"Month 8: The Project Deadlock — {char['name']}")
+    with h_col2:
+        if st.button("⬅ Back to Dossiers", key="b_n3"):
+            st.session_state.state = "CHAR_SELECT"
+            st.rerun()
+
+    st.info(
+        "Eight months into your civilian career, a major cross-functional"
+        " project stalls because two department leads disagree on resource"
+        " allocation. Your manager asks for your approach."
+    )
+
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.markdown(
+            "<div class='card-box'><h3>Option A (Rigid SOP)</h3>"
+            "<p>Issue a formal project tracking matrix with rigid deadlines and"
+            " public accountability check-ins for all department leads.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option A", key="n3_a", use_container_width=True):
+            apply_choice(
+                -10,
+                -5,
+                0,
+                5,
+                "NODE_4",
+                "3A",
+                "Enforced rigid military-style tracking matrices on civilian staff.",
+                (
+                    "**[HIGH RISK / RED]** Illustrates institutional"
+                    " mismatch (Zoli et al., 2015). Forcing top-down military"
+                    " SOPs onto civilian peers creates cultural resistance and"
+                    " damages workplace relationships."
+                ),
+                "red",
+            )
+
+    with c2:
+        st.markdown(
+            "<div class='card-box'><h3>Option B (Compromise)</h3>"
+            "<p>Hold informal, one-on-one alignment discussions with each"
+            " leader outside meetings to understand constraints and co-create"
+            " a compromise.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n3_b", use_container_width=True):
+            apply_choice(
+                25,
+                10,
+                10,
+                10,
+                "NODE_4",
+                "3B",
+                "Facilitated one-on-one alignments and co-created compromises.",
+                (
+                    "**[BEST PRACTICE / GREEN]** Demonstrates successful"
+                    " translation of leadership skills into civilian corporate"
+                    " currency by mastering consensus-building (*Zoli et al.,"
+                    " 2015*)."
+                ),
+                "green",
+            )
+
+    with c3:
+        st.markdown(
+            "<div class='card-box'><h3>Option C (Disengagement)</h3>"
+            "<p>Focus strictly on your own deliverables, letting the project"
+            " owner manage stakeholder friction without your direct"
+            " intervention.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option C", key="n3_c", use_container_width=True):
+            apply_choice(
+                -15,
+                0,
+                -5,
+                -5,
+                "NODE_4",
+                "3C",
+                "Withdrew from team conflict and siloed personal work.",
+                (
+                    "**[CAUTION / YELLOW]** Siloing stalls professional"
+                    " growth and underutilizes valuable leadership capacity,"
+                    " leading to underemployment friction."
+                ),
+                "yellow",
+            )
+
+# -----------------------------------------------------------------------------
+# NODE 4: MONTH 12 — COMMUNITY ENGAGEMENT & CIVIC SERVICE
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_4":
+    char = get_current_char()
+    st.progress(
+        66,
+        text="Node 4 of 6: Month 12
