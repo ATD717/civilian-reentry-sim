@@ -1,12 +1,12 @@
-import pandas as pd
 import streamlit as st
+import pandas as pd
 
 # -----------------------------------------------------------------------------
 # PAGE CONFIGURATION & ENHANCED UI STYLING
 # -----------------------------------------------------------------------------
 st.set_page_config(
     page_title="Operation Civilian Re-Entry | MVS 100",
-    page_icon="🎖",
+    page_icon="🎖️",
     layout="wide",
 )
 
@@ -125,8 +125,6 @@ if "stats" not in st.session_state:
     st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
 if "choice_history" not in st.session_state:
     st.session_state.choice_history = []
-if "current_node" not in st.session_state:
-    st.session_state.current_node = "START"
 
 
 def apply_choice(
@@ -152,98 +150,61 @@ def apply_choice(
     st.session_state.stats["SI"] = max(
         0, min(100, st.session_state.stats["SI"] + si_change)
     )
-
+    st.session_state.path.append(choice_id)
     st.session_state.choice_history.append(
         {
-            "node": st.session_state.current_node,
+            "node": next_node,
             "choice_id": choice_id,
             "summary": choice_summary,
             "feedback": feedback_text,
-            "eval_type": eval_type,
+            "eval_type": eval_type,  # "green", "yellow", or "red"
+            "deltas": {
+                "CT": ct_change,
+                "SR": sr_change,
+                "CE": ce_change,
+                "SI": si_change,
+            },
         }
     )
-    st.session_state.current_node = next_node
+    st.session_state.state = next_node
     st.rerun()
 
 
 # -----------------------------------------------------------------------------
-# MAIN APP FLOW
+# SIDEBAR DASHBOARD WITH VISUAL BAR CHART
 # -----------------------------------------------------------------------------
-st.markdown(
-    '<div class="main-header">Operation Civilian Re-Entry</div>',
-    unsafe_allow_html=True,
-)
-st.markdown(
-    '<div class="sub-header">MVS 100: Military Transition & Human Systems'
-    " Simulation</div>",
-    unsafe_allow_html=True,
-)
+with st.sidebar:
+    st.title("🎖 MVS 100 Project")
+    st.markdown("**Author:** Austin Dodd")
+    st.markdown("**Course:** MVS 100: Introduction to Military Studies")
+    st.divider()
 
-if st.session_state.state == "CHAR_SELECT":
-    st.markdown("### Select Your Transition Profile")
-    st.write(
-        "Choose a profile to begin your transition journey. Each candidate"
-        " presents unique leadership, household, and career dynamics."
-    )
+    if st.session_state.char_key and st.session_state.char_key in CHARACTERS:
+        char = CHARACTERS[st.session_state.char_key]
+        st.markdown(f"### 📋 Dossier: {char['name']}")
+        st.write(f"**Rank:** {char['rank']}")
+        st.write(f"**Service:** {char['service']}")
+        st.divider()
 
-    col1, col2 = st.columns(2)
+        st.markdown("### 📊 4-Domain Metrics")
+        stats = st.session_state.stats
 
-    with col1:
-        st.markdown(
-            f"""
-        <div class="card-box">
-            <h3>{CHARACTERS['ALEX']['name']}</h3>
-            <p><b>Rank:</b> {CHARACTERS['ALEX']['rank']}</p>
-            <p><b>Service:</b> {CHARACTERS['ALEX']['service']}</p>
-            <p><b>Background:</b> {CHARACTERS['ALEX']['background']}</p>
-            <p><b>Challenge:</b> {CHARACTERS['ALEX']['challenge']}</p>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Alex Vance", use_container_width=True):
-            st.session_state.char_key = "ALEX"
-            st.session_state.stats = CHARACTERS["ALEX"]["stats"].copy()
-            st.session_state.state = "SIMULATION"
-            st.rerun()
+        st.write(f"**Career Translation (CT):** {stats['CT']}%")
+        st.progress(stats["CT"])
 
-    with col2:
-        st.markdown(
-            f"""
-        <div class="card-box">
-            <h3>{CHARACTERS['MORGAN']['name']}</h3>
-            <p><b>Rank:</b> {CHARACTERS['MORGAN']['rank']}</p>
-            <p><b>Service:</b> {CHARACTERS['MORGAN']['service']}</p>
-            <p><b>Background:</b> {CHARACTERS['MORGAN']['background']}</p>
-            <p><b>Challenge:</b> {CHARACTERS['MORGAN']['challenge']}</p>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Morgan Ellis", use_container_width=True):
-            st.session_state.char_key = "MORGAN"
-            st.session_state.stats = CHARACTERS["MORGAN"]["stats"].copy()
-            st.session_state.state = "SIMULATION"
-            st.rerun()
+        st.write(f"**Social & Rel. (SR):** {stats['SR']}%")
+        st.progress(stats["SR"])
 
-elif st.session_state.state == "SIMULATION":
-    # Sidebar for stats
-    st.sidebar.markdown("### Status Metrics")
-    stats = st.session_state.stats
-    st.sidebar.metric("Career Translation (CT)", f"{stats['CT']}%")
-    st.sidebar.metric("Social/Relational (SR)", f"{stats['SR']}%")
-    st.sidebar.metric("Cultural Equity (CE)", f"{stats['CE']}%")
-    st.sidebar.metric("Self-Identity (SI)", f"{stats['SI']}%")
+        st.write(f"**Community Eng. (CE):** {stats['CE']}%")
+        st.progress(stats["CE"])
 
-    if st.sidebar.button("Restart Simulation"):
+        st.write(f"**Self-Identity (SI):** {stats['SI']}%")
+        st.progress(stats["SI"])
+
+        st.divider()
+
+    if st.button("🔄 Reset Simulation", use_container_width=True):
         st.session_state.state = "CHAR_SELECT"
-        st.session_state.current_node = "START"
-        st.session_state.choice_history = []
-        st.rerun()
-
-    # Simple placeholder loop for node handling
-    st.markdown(f"**Current Simulation Node:** `{st.session_state.current_node}`")
-    st.write(
-        "Simulation engine active. Choices are now presented neutrally without"
-        " giveaway headers."
-    )
+        st.session_state.char_key = None
+        st.session_state.path = []
+        st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI":
