@@ -1166,5 +1166,3 @@ elif st.session_state.state == "SUMMARY":
         st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
         st.session_state.choice_history = []
         st.rerun()
-
-```
