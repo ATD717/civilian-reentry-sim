@@ -1,13 +1,4 @@
 
-* **Node 1:** Green option stays in **Column 2 (B)**
-* **Node 2:** Green option moves to **Column 1 (A)**
-* **Node 3:** Green option moves to **Column 3 (C)**
-* **Node 4:** Green option moves to **Column 1 (A)**
-* **Node 5:** Green option stays in **Column 2 (B)**
-* **Node 6:** Green option moves to **Column 3 (C)**
-
-#The underlying handler functions, IDs (`1A`, `2B`, etc.), stat changes, and narrative feedback remain completely locked to their correct texts, ensuring logical integrity while breaking up the visual predictability.
-
 ```python
 import pandas as pd
 import streamlit as st
