@@ -36,6 +36,18 @@ st.markdown(
         border-radius: 10px;
         margin-bottom: 15px;
     }
+    .illustration-box {
+        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+        border: 2px dashed #38BDF8;
+        padding: 22px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #38BDF8;
+        font-size: 1.05rem;
+        font-weight: 500;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
     .card-green {
         background-color: #064E3B;
         border: 1px solid #059669;
@@ -294,12 +306,12 @@ elif st.session_state.state == "NODE_1":
             st.session_state.state = "CHAR_SELECT"
             st.rerun()
 
-    st.info(
-        "🖼️ **Illustration:** *The Morning After the DD-214.* You wake up in a"
-        " quiet suburban house. There is no muster, no formation, and no rank"
-        " insignia on your shirt. When you go to the local hardware store, a"
-        " cashier asks what you do, and you hesitate for five full seconds"
-        " before mumbling something vague about logistics."
+    st.markdown(
+        "<div class='illustration-box'>"
+        "🖼️ <b>SCENARIO ILLUSTRATION: The Morning After the DD-214</b><br>"
+        "<i>You wake up in a quiet suburban house. There is no muster, no formation, and no rank insignia on your shirt. When you go to the local hardware store, a cashier asks what you do, and you hesitate for five full seconds before mumbling something vague about logistics.</i>"
+        "</div>",
+        unsafe_allow_html=True,
     )
 
     st.subheader("How do you handle the initial loss of identity and structure?")
@@ -419,12 +431,12 @@ elif st.session_state.state == "NODE_2":
             st.session_state.state = "CHAR_SELECT"
             st.rerun()
 
-    st.info(
-        "🖼️ **Illustration:** *The Kitchen Table Debrief.* Four months"
-        " post-discharge, friction erupts when you attempt to direct how household"
-        " chores and grocery shopping are managed. Your partner looks at you"
-        " across the table and says: *'You aren't my commander, and I've been"
-        " running this household just fine while you were deployed or on duty.'*"
+    st.markdown(
+        "<div class='illustration-box'>"
+        "🖼️ <b>SCENARIO ILLUSTRATION: The Kitchen Table Debrief</b><br>"
+        "<i>Four months post-discharge, friction erupts when you attempt to direct how household chores and grocery shopping are managed. Your partner looks at you across the table and says: 'You aren't my commander, and I've been running this household just fine while you were deployed or on duty.'</i>"
+        "</div>",
+        unsafe_allow_html=True,
     )
 
     c1, c2, c3 = st.columns(3)
@@ -488,317 +500,4 @@ elif st.session_state.state == "NODE_2":
             " out the tension.</p></div>",
             unsafe_allow_html=True,
         )
-        if st.button("Select Option C", key="n2_c", use_container_width=True):
-            apply_choice(
-                0,
-                -20,
-                -5,
-                -10,
-                "NODE_3",
-                "C",
-                "Keep your internal stress private and avoid discussing household roles further, believing time will naturally smooth out the tension.",
-                (
-                    "**[HIGH RISK / RED]** Suppressing stress compounds"
-                    " domestic alienation. Romaniuk et al. (2020) highlight"
-                    " unaddressed communication gaps as a major predictor of"
-                    " post-service strain."
-                ),
-                "red",
-            )
-
-    st.divider()
-    with st.expander("📌 What this simulation teaches us & Veteran Actionable Information"):
-        st.markdown("""
-        - **What this simulation teaches us:** Home is not a static museum waiting for the veteran's return; partners have evolved and established independent autonomy (*Schuetz, 1945*). Attempting to impose top-down command structures at home damages marital trust and emotional intimacy.
-        - **Veteran Actionable Information:**
-          1. Hold explicit, egalitarian household meetings to reset domestic boundaries.
-          2. Acknowledge and validate the partner's independent management role during military service.
-          3. Practice active listening rather than issuing directives during family disagreements.
-        """)
-
-# -----------------------------------------------------------------------------
-# NODE 3: MONTH 6 — FINANCIAL BUDGETING & VA BENEFITS TRANSITION
-# -----------------------------------------------------------------------------
-elif st.session_state.state == "NODE_3":
-    char = get_current_char()
-    st.progress(
-        42, text="Node 3 of 7: Month 6 — Financial & Benefits Budgeting"
-    )
-
-    st.warning(
-        "**🔬 Academic Citation & Research Analysis**\n\n"
-        "*Source: Mobbs & Bonanno (2018) / Zoli et al. (2015)*\n\n"
-        "Financial anxiety is one of the leading triggers of early transition"
-        " friction. Navigating GI Bill stipends, terminal leave payouts, and"
-        " adjusting to civilian cash flow cycles requires proactive financial"
-        " planning rather than reactive spending."
-    )
-
-    h_col1, h_col2 = st.columns([3, 1])
-    with h_col1:
-        st.header(f"Month 6: The Cash Flow Gap — {char['name']}")
-    with h_col2:
-        if st.button("⬅ Back to Dossiers", key="b_n3"):
-            st.session_state.state = "CHAR_SELECT"
-            st.rerun()
-
-    st.info(
-        "🖼️ **Illustration:** *The Bank Statement.* Six months out, your"
-        " terminal leave payout has completely cleared, but your first standard"
-        " civilian payroll cycle hits a three-week gap. You look at your online"
-        " banking app as credit card balances begin to creep up to cover groceries"
-        " and vehicle payments."
-    )
-
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.markdown(
-            "<div class='card-box'><h3>Option A</h3>"
-            "<p>Rely on high-interest revolving credit lines to maintain your"
-            " family's current lifestyle while waiting for the next pay"
-            " cycle.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option A", key="n3_a", use_container_width=True):
-            apply_choice(
-                -10,
-                -10,
-                0,
-                -5,
-                "NODE_4",
-                "A",
-                "Rely on high-interest revolving credit lines to maintain your family's current lifestyle while waiting for the next pay cycle.",
-                (
-                    "**[HIGH RISK / RED]** Exacerbates financial strain and"
-                    " creates long-term debt burdens, directly compounding"
-                    " transition stress (*Mobbs & Bonanno, 2018*)."
-                ),
-                "red",
-            )
-
-    with c2:
-        st.markdown(
-            "<div class='card-box'><h3>Option B</h3>"
-            "<p>Build a strict 90-day zero-based cash flow budget with your"
-            " spouse, cutting non-essential subscriptions and tapping emergency"
-            " savings.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option B", key="n3_b", use_container_width=True):
-            apply_choice(
-                15,
-                15,
-                5,
-                10,
-                "NODE_4",
-                "B",
-                "Build a strict 90-day zero-based cash flow budget with your spouse, cutting non-essential subscriptions and tapping emergency savings.",
-                (
-                    "**[BEST PRACTICE / GREEN]** Proactive financial management"
-                    " mitigates early transition shock and establishes family"
-                    " alignment around monetary goals (*Zoli et al., 2015*)."
-                ),
-                "green",
-            )
-
-    with c3:
-        st.markdown(
-            "<div class='card-box'><h3>Option C</h3>"
-            "<p>Ignore the cash flow discrepancy and hope incoming paychecks"
-            " naturally cover outstanding balances over time.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option C", key="n3_c", use_container_width=True):
-            apply_choice(
-                -5,
-                -5,
-                0,
-                -5,
-                "NODE_4",
-                "C",
-                "Ignore the cash flow discrepancy and hope incoming paychecks naturally cover outstanding balances over time.",
-                (
-                    "**[CAUTION / YELLOW]** Passive financial management leads"
-                    " to preventable monetary friction and unnecessary family"
-                    " anxiety."
-                ),
-                "yellow",
-            )
-
-    st.divider()
-    with st.expander("📌 What this simulation teaches us & Veteran Actionable Information"):
-        st.markdown("""
-        - **What this simulation teaches us:** Financial uncertainty is a major amplifier of post-service psychological distress (*Mobbs & Bonanno, 2018*). Moving from predictable military pay schedules to variable civilian cash flow cycles demands deliberate budgeting.
-        - **Veteran Actionable Information:**
-          1. Build a 3-to-6 month emergency fund prior to separation.
-          2. Account for gaps between military separation pay and first civilian paychecks.
-          3. Involve your spouse in financial planning to ensure aligned household priorities.
-        """)
-
-# -----------------------------------------------------------------------------
-# NODE 4: MONTH 9 — CAREER & WORKPLACE COMMUNICATION
-# -----------------------------------------------------------------------------
-elif st.session_state.state == "NODE_4":
-    char = get_current_char()
-    st.progress(
-        57, text="Node 4 of 7: Month 9 — Corporate Culture & Team Friction"
-    )
-
-    st.warning(
-        "**🔬 Academic Citation & Research Analysis**\n\n"
-        "*Source: Zoli, Maury, & Fay (2015)*\n\n"
-        "Military operational culture relies on direct communication and SOPs."
-        " In civilian corporate spaces, this often clashes with"
-        " consensus-building and indirect office politics."
-    )
-
-    h_col1, h_col2 = st.columns([3, 1])
-    with h_col1:
-        st.header(f"Month 9: The Project Deadlock — {char['name']}")
-    with h_col2:
-        if st.button("⬅ Back to Dossiers", key="b_n4"):
-            st.session_state.state = "CHAR_SELECT"
-            st.rerun()
-
-    st.info(
-        "🖼️ **Illustration:** *The Corporate Conference Room.* Nine months"
-        " into your civilian career, a major cross-functional project stalls"
-        " because two department leads are engaging in passive-aggressive email"
-        " chains over resource allocation. You find yourself fighting the urge"
-        " to slam your hand on the table and issue a direct order."
-    )
-
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.markdown(
-            "<div class='card-box'><h3>Option A</h3>"
-            "<p>Issue a formal project tracking matrix with rigid deadlines and"
-            " public accountability check-ins for all department leads.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option A", key="n4_a", use_container_width=True):
-            apply_choice(
-                -10,
-                -5,
-                0,
-                5,
-                "NODE_5",
-                "A",
-                "Issue a formal project tracking matrix with rigid deadlines and public accountability check-ins for all department leads.",
-                (
-                    "**[HIGH RISK / RED]** Illustrates institutional"
-                    " mismatch (Zoli et al., 2015). Forcing top-down military"
-                    " SOPs onto civilian peers creates cultural resistance and"
-                    " damages workplace relationships."
-                ),
-                "red",
-            )
-
-    with c2:
-        st.markdown(
-            "<div class='card-box'><h3>Option B</h3>"
-            "<p>Hold informal, one-on-one alignment discussions with each"
-            " leader outside meetings to understand constraints and co-create"
-            " a compromise.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option B", key="n4_b", use_container_width=True):
-            apply_choice(
-                25,
-                10,
-                10,
-                10,
-                "NODE_5",
-                "B",
-                "Hold informal, one-on-one alignment discussions with each leader outside meetings to understand constraints and co-create a compromise.",
-                (
-                    "**[BEST PRACTICE / GREEN]** Demonstrates successful"
-                    " translation of leadership skills into civilian corporate"
-                    " currency by mastering consensus-building (*Zoli et al.,"
-                    " 2015*)."
-                ),
-                "green",
-            )
-
-    with c3:
-        st.markdown(
-            "<div class='card-box'><h3>Option C</h3>"
-            "<p>Focus strictly on your own deliverables, letting the project"
-            " owner manage stakeholder friction without your direct"
-            " intervention.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option C", key="n4_c", use_container_width=True):
-            apply_choice(
-                -15,
-                0,
-                -5,
-                -5,
-                "NODE_5",
-                "C",
-                "Focus strictly on your own deliverables, letting the project owner manage stakeholder friction without your direct intervention.",
-                (
-                    "**[CAUTION / YELLOW]** Siloing stalls professional"
-                    " growth and underutilizes valuable leadership capacity,"
-                    " leading to underemployment friction."
-                ),
-                "yellow",
-            )
-
-    st.divider()
-    with st.expander("📌 What this simulation teaches us & Veteran Actionable Information"):
-        st.markdown("""
-        - **What this simulation teaches us:** Institutional mismatch occurs when veterans attempt to apply rigid hierarchical command styles in decentralized civilian corporate cultures (*Zoli et al., 2015*). Success requires mastering influence without authority.
-        - **Veteran Actionable Information:**
-          1. Learn corporate communication norms and stakeholder management strategies.
-          2. Translate tactical problem-solving frameworks into strategic business outcomes.
-          3. Build horizontal peer relationships rather than relying on positional authority.
-        """)
-
-# -----------------------------------------------------------------------------
-# NODE 5: MONTH 12 — COMMUNITY ENGAGEMENT & CIVIC SERVICE
-# -----------------------------------------------------------------------------
-elif st.session_state.state == "NODE_5":
-    char = get_current_char()
-    st.progress(
-        71,
-        text="Node 5 of 7: Month 12 — Community Embedding & Civic Service",
-    )
-
-    st.warning(
-        "**🔬 Academic Citation & Research Analysis**\n\n"
-        "*Source: Demers (2011) — Community Reintegration*\n\n"
-        "Civilian community networks often lack cultural competency regarding"
-        " military service, leading to isolation. Active civic engagement and"
-        " local community embedding are critical for bridging this gap."
-    )
-
-    h_col1, h_col2 = st.columns([3, 1])
-    with h_col1:
-        st.header(f"Month 12: Local Embedding — {char['name']}")
-    with h_col2:
-        if st.button("⬅ Back to Dossiers", key="b_n5"):
-            st.session_state.state = "CHAR_SELECT"
-            st.rerun()
-
-    st.info(
-        "🖼️ **Illustration:** *The Neighborhood Fence Line.* One year"
-        " post-discharge, you realize your entire life is confined to a binary"
-        " commute: home to your office, and office back home. You feel entirely"
-        " disconnected from the civic life of your local town or city."
-    )
-
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.markdown(
-            "<div class='card-box'><h3>Option A</h3>"
-            "<p>Volunteer to lead a local youth mentorship or community"
-            " resilience program, translating your leadership skills into civic"
-            " action.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option A", key="n5_a", use_container_width=True):
-            apply_choice(
-                10,
-                1
-        )
+        if st.
