@@ -85,6 +85,13 @@ st.markdown(
         margin-bottom: 15px;
         color: #FEF2F2;
     }
+    .takeaway-box {
+        background-color: #1E293B;
+        border-left: 4px solid #38BDF8;
+        padding: 20px;
+        border-radius: 0 10px 10px 0;
+        margin-bottom: 20px;
+    }
 </style>
 """,
     unsafe_allow_html=True,
@@ -186,7 +193,7 @@ def apply_choice(
 # SIDEBAR DASHBOARD WITH VISUAL BAR CHART
 # -----------------------------------------------------------------------------
 with st.sidebar:
-    st.title("🎖 MVS 100 Project")
+    st.title("🎖️ MVS 100 Project")
     st.markdown("**Author:** Austin Dodd")
     st.markdown("**Course:** MVS 100: Introduction to Military Studies")
     st.divider()
@@ -1083,6 +1090,21 @@ elif st.session_state.state == "SUMMARY":
         " the academic research framework."
     )
 
+    # -------------------------------------------------------------------------
+    # WHAT THIS SIMULATION TEACHES US (PROFESSOR FEEDBACK INTEGRATION)
+    # -------------------------------------------------------------------------
+    st.markdown("### 🎓 What This Simulation Teaches Us")
+    st.markdown(
+        """
+        <div class='takeapp-box takeaway-box'>
+            <p><b>1. Transition as a Prolonged Process:</b> The military-to-civilian transition cannot be accurately modeled as a single administrative event or linear job-placement milestone. Rather, it is a complex, 24-month cultural and psychological reorganization.</p>
+            <p><b>2. The Cost of Isolation vs. Proactive Engagement:</b> Decisions that lean toward isolation, suppression, or avoidance consistently compound transition stress and widen the civil-military divide. Conversely, proactive peer networking, structured role renegotiation, and accredited administrative advocacy yield high long-term stability.</p>
+            <p><b>3. Identity Synthesis Over Erasure:</b> Sustainable post-service success relies on neither hiding one's military background nor remaining exclusively siloed within veteran-only circles. True integration requires synthesizing core service values with civic community leadership.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
     st.subheader("📊 Final 4-Domain Metric Scores")
     stats = st.session_state.stats
 
@@ -1142,4 +1164,4 @@ elif st.session_state.state == "SUMMARY":
         st.session_state.path = []
         st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
         st.session_state.choice_history = []
-        st.rerun() 
+        st.rerun()
