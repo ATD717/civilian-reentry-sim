@@ -101,7 +101,7 @@ CHARACTERS = {
     },
 }
 
-# Initialize Session State
+# Robust Session State Initialization & Fallbacks
 if "state" not in st.session_state:
     st.session_state.state = "CHAR_SELECT"
 if "char_key" not in st.session_state:
@@ -112,6 +112,13 @@ if "stats" not in st.session_state:
     st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
 if "choice_history" not in st.session_state:
     st.session_state.choice_history = []
+
+
+def get_current_char():
+    key = st.session_state.get("char_key")
+    if key and key in CHARACTERS:
+        return CHARACTERS[key]
+    return CHARACTERS["ALEX"]
 
 
 def apply_choice(
@@ -125,6 +132,10 @@ def apply_choice(
     feedback_text,
     eval_type,
 ):
+    # Ensure stats dictionary exists before modifying
+    if "stats" not in st.session_state:
+        st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
+
     st.session_state.stats["CT"] = max(
         0, min(100, st.session_state.stats["CT"] + ct_change)
     )
@@ -137,7 +148,13 @@ def apply_choice(
     st.session_state.stats["SI"] = max(
         0, min(100, st.session_state.stats["SI"] + si_change)
     )
+
+    if "path" not in st.session_state:
+        st.session_state.path = []
     st.session_state.path.append(choice_id)
+
+    if "choice_history" not in st.session_state:
+        st.session_state.choice_history = []
     st.session_state.choice_history.append(
         {
             "node": next_node,
@@ -166,7 +183,7 @@ with st.sidebar:
     st.markdown("**Course:** MVS 100: Introduction to Military Studies")
     st.divider()
 
-    if st.session_state.char_key and st.session_state.char_key in CHARACTERS:
+    if st.session_state.get("char_key") and st.session_state.char_key in CHARACTERS:
         char = CHARACTERS[st.session_state.char_key]
         st.markdown(f"### 📋 Dossier: {char['name']}")
         st.write(f"**Rank:** {char['rank']}")
@@ -174,7 +191,9 @@ with st.sidebar:
         st.divider()
 
         st.markdown("### 📊 4-Domain Metrics")
-        stats = st.session_state.stats
+        stats = st.session_state.get(
+            "stats", {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
+        )
 
         st.write(f"**Career Translation (CT):** {stats['CT']}%")
         st.progress(stats["CT"])
@@ -197,13 +216,6 @@ with st.sidebar:
         st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
         st.session_state.choice_history = []
         st.rerun()
-
-
-def get_current_char():
-    key = st.session_state.get("char_key")
-    if key in CHARACTERS:
-        return CHARACTERS[key]
-    return CHARACTERS["ALEX"]
 
 
 # -----------------------------------------------------------------------------
@@ -372,4 +384,21 @@ elif st.session_state.state == "NODE_1":
             )
 
 # -----------------------------------------------------------------------------
-# NODE 2: MONTH 4 — SOCIAL RELATIONSHIPS & HOUSEHOLD ROLE RENEGOTIATION (Correct Answer:
+# NODE 2: MONTH 4 — SOCIAL RELATIONSHIPS & HOUSEHOLD ROLE RENEGOTIATION
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_2":
+    char = get_current_char()
+    st.progress(
+        28, text="Node 2 of 7: Month 4 — Household Role Renegotiation"
+    )
+
+    st.warning(
+        "**🔬 Academic Citation & Research Analysis**\n\n"
+        "*Source: Schuetz (1945) / Demers (2011)*\n\n"
+        "Schuetz's Homecoming theory demonstrates that home is not a static"
+        " haven. Spouses and partners have adapted to manage household"
+        " operations independently during deployments, requiring active"
+        " relational role renegotiation."
+    )
+
+    h_col1, h_col
