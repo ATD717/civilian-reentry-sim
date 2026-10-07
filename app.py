@@ -9,7 +9,7 @@ Here is the distribution pattern implemented:
 * **Node 5:** Green option stays in **Column 2 (B)**
 * **Node 6:** Green option moves to **Column 3 (C)**
 
-The underlying handler functions, IDs (`1A`, `2B`, etc.), stat changes, and narrative feedback remain completely locked to their correct texts, ensuring logical integrity while breaking up the visual predictability.
+#The underlying handler functions, IDs (`1A`, `2B`, etc.), stat changes, and narrative feedback remain completely locked to their correct texts, ensuring logical integrity while breaking up the visual predictability.
 
 ```python
 import pandas as pd
