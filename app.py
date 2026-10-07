@@ -295,10 +295,11 @@ elif st.session_state.state == "NODE_1":
             st.rerun()
 
     st.info(
-        "You have been out of uniform for two months. Stripped of your rank"
-        " insignia and daily operational structure, you find yourself answering"
-        " civilian acquaintances with vague descriptions of your past service."
-        " You feel an internal loss of purpose and professional validation."
+        "🖼️ **Illustration:** *The Morning After the DD-214.* You wake up in a"
+        " quiet suburban house. There is no muster, no formation, and no rank"
+        " insignia on your shirt. When you go to the local hardware store, a"
+        " cashier asks what you do, and you hesitate for five full seconds"
+        " before mumbling something vague about logistics."
     )
 
     st.subheader("How do you handle the initial loss of identity and structure?")
@@ -382,6 +383,16 @@ elif st.session_state.state == "NODE_1":
                 "green",
             )
 
+    st.divider()
+    with st.expander("📌 What this simulation teaches us & Veteran Actionable Information"):
+        st.markdown("""
+        - **What this simulation teaches us:** Transitioning out of a total military institution triggers psychological friction between martial self-concept and civilian individualism (*Smith & True, 2014*). Reconstructing a stable post-identity requires confronting the immediate loss of rank, title, and mission rather than relying on isolation.
+        - **Veteran Actionable Information:** 
+          1. Actively seek out peer mentorship networks (e.g., American Legion, Team Rubicon, or local veteran groups) during your first 90 days.
+          2. Translate military accomplishments into competency-based civilian terms on resumes rather than relying on military jargon.
+          3. Acknowledge that grief over the loss of institutional community is normal and expected.
+        """)
+
 # -----------------------------------------------------------------------------
 # NODE 2: MONTH 4 — SOCIAL RELATIONSHIPS & HOUSEHOLD ROLE RENEGOTIATION
 # -----------------------------------------------------------------------------
@@ -409,9 +420,11 @@ elif st.session_state.state == "NODE_2":
             st.rerun()
 
     st.info(
-        "Four months post-discharge, friction arises over household routines."
-        " Your partner notes that you are attempting to manage domestic life"
-        " like a military unit rather than an equal partnership."
+        "🖼️ **Illustration:** *The Kitchen Table Debrief.* Four months"
+        " post-discharge, friction erupts when you attempt to direct how household"
+        " chores and grocery shopping are managed. Your partner looks at you"
+        " across the table and says: *'You aren't my commander, and I've been"
+        " running this household just fine while you were deployed or on duty.'*"
     )
 
     c1, c2, c3 = st.columns(3)
@@ -493,6 +506,16 @@ elif st.session_state.state == "NODE_2":
                 "red",
             )
 
+    st.divider()
+    with st.expander("📌 What this simulation teaches us & Veteran Actionable Information"):
+        st.markdown("""
+        - **What this simulation teaches us:** Home is not a static museum waiting for the veteran's return; partners have evolved and established independent autonomy (*Schuetz, 1945*). Attempting to impose top-down command structures at home damages marital trust and emotional intimacy.
+        - **Veteran Actionable Information:**
+          1. Hold explicit, egalitarian household meetings to reset domestic boundaries.
+          2. Acknowledge and validate the partner's independent management role during military service.
+          3. Practice active listening rather than issuing directives during family disagreements.
+        """)
+
 # -----------------------------------------------------------------------------
 # NODE 3: MONTH 6 — FINANCIAL BUDGETING & VA BENEFITS TRANSITION
 # -----------------------------------------------------------------------------
@@ -520,10 +543,11 @@ elif st.session_state.state == "NODE_3":
             st.rerun()
 
     st.info(
-        "Six months post-separation, terminal leave payouts have cleared, but"
-        " your first standard civilian payroll cycle leaves a 3-week gap."
-        " Household expenses are tight, and credit card balances are starting"
-        " to creep up."
+        "🖼️ **Illustration:** *The Bank Statement.* Six months out, your"
+        " terminal leave payout has completely cleared, but your first standard"
+        " civilian payroll cycle hits a three-week gap. You look at your online"
+        " banking app as credit card balances begin to creep up to cover groceries"
+        " and vehicle payments."
     )
 
     c1, c2, c3 = st.columns(3)
@@ -601,6 +625,16 @@ elif st.session_state.state == "NODE_3":
                 "yellow",
             )
 
+    st.divider()
+    with st.expander("📌 What this simulation teaches us & Veteran Actionable Information"):
+        st.markdown("""
+        - **What this simulation teaches us:** Financial uncertainty is a major amplifier of post-service psychological distress (*Mobbs & Bonanno, 2018*). Moving from predictable military pay schedules to variable civilian cash flow cycles demands deliberate budgeting.
+        - **Veteran Actionable Information:**
+          1. Build a 3-to-6 month emergency fund prior to separation.
+          2. Account for gaps between military separation pay and first civilian paychecks.
+          3. Involve your spouse in financial planning to ensure aligned household priorities.
+        """)
+
 # -----------------------------------------------------------------------------
 # NODE 4: MONTH 9 — CAREER & WORKPLACE COMMUNICATION
 # -----------------------------------------------------------------------------
@@ -627,9 +661,11 @@ elif st.session_state.state == "NODE_4":
             st.rerun()
 
     st.info(
-        "Nine months into your civilian career, a major cross-functional"
-        " project stalls because two department leads disagree on resource"
-        " allocation. Your manager asks for your approach."
+        "🖼️ **Illustration:** *The Corporate Conference Room.* Nine months"
+        " into your civilian career, a major cross-functional project stalls"
+        " because two department leads are engaging in passive-aggressive email"
+        " chains over resource allocation. You find yourself fighting the urge"
+        " to slam your hand on the table and issue a direct order."
     )
 
     c1, c2, c3 = st.columns(3)
@@ -709,6 +745,16 @@ elif st.session_state.state == "NODE_4":
                 "yellow",
             )
 
+    st.divider()
+    with st.expander("📌 What this simulation teaches us & Veteran Actionable Information"):
+        st.markdown("""
+        - **What this simulation teaches us:** Institutional mismatch occurs when veterans attempt to apply rigid hierarchical command styles in decentralized civilian corporate cultures (*Zoli et al., 2015*). Success requires mastering influence without authority.
+        - **Veteran Actionable Information:**
+          1. Learn corporate communication norms and stakeholder management strategies.
+          2. Translate tactical problem-solving frameworks into strategic business outcomes.
+          3. Build horizontal peer relationships rather than relying on positional authority.
+        """)
+
 # -----------------------------------------------------------------------------
 # NODE 5: MONTH 12 — COMMUNITY ENGAGEMENT & CIVIC SERVICE
 # -----------------------------------------------------------------------------
@@ -736,9 +782,10 @@ elif st.session_state.state == "NODE_5":
             st.rerun()
 
     st.info(
-        "One year post-discharge, you realize your life is split strictly"
-        " between your workplace and your immediate household. You feel"
-        " disconnected from your broader local town/city community."
+        "🖼️ **Illustration:** *The Neighborhood Fence Line.* One year"
+        " post-discharge, you realize your entire life is confined to a binary"
+        " commute: home to your office, and office back home. You feel entirely"
+        " disconnected from the civic life of your local town or city."
     )
 
     c1, c2, c3 = st.columns(3)
@@ -753,220 +800,4 @@ elif st.session_state.state == "NODE_5":
         if st.button("Select Option A", key="n5_a", use_container_width=True):
             apply_choice(
                 10,
-                10,
-                25,
-                15,
-                "NODE_6",
-                "A",
-                "Volunteer to lead a local youth mentorship or community resilience program, translating your leadership skills into civic action.",
-                (
-                    "**[BEST PRACTICE / GREEN]** Directly fulfills Demers's"
-                    " (2011) recommendation for active civic embedding,"
-                    " bridging the military-civilian cultural divide."
-                ),
-                "green",
-            )
-
-    with c2:
-        st.markdown(
-            "<div class='card-box'><h3>Option B</h3>"
-            "<p>Join an exclusively veteran-focused social club online, keeping"
-            " your local civic engagement minimal and staying within familiar"
-            " military circles.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option B", key="n5_b", use_container_width=True):
-            apply_choice(
-                0,
-                5,
-                10,
-                10,
-                "NODE_6",
-                "B",
-                "Join an exclusively veteran-focused social club online, keeping your local civic engagement minimal and staying within familiar military circles.",
-                (
-                    "**[CAUTION / YELLOW]** Provides comfortable peer support"
-                    " but fails to embed the veteran into their local civilian"
-                    " community, leaving broader civic disconnect unaddressed."
-                ),
-                "yellow",
-            )
-
-    with c3:
-        st.markdown(
-            "<div class='card-box'><h3>Option C</h3>"
-            "<p>Decline all local civic involvement to focus entirely on"
-            " personal relaxation and weekend recovery from work stress.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option C", key="n5_c", use_container_width=True):
-            apply_choice(
-                0,
-                -5,
-                -20,
-                -10,
-                "NODE_6",
-                "C",
-                "Decline all local civic involvement to focus entirely on personal relaxation and weekend recovery from work stress.",
-                (
-                    "**[HIGH RISK / RED]** Deepens social isolation and"
-                    " alienates the veteran from civilian community support"
-                    " networks (*Demers, 2011*)."
-                ),
-                "red",
-            )
-
-# -----------------------------------------------------------------------------
-# NODE 6: MONTH 15 — HEALTH & WELLNESS ROUTINES
-# -----------------------------------------------------------------------------
-elif st.session_state.state == "NODE_6":
-    char = get_current_char()
-    st.progress(
-        85, text="Node 6 of 7: Month 15 — Health, Fitness & Sleep Regulation"
-    )
-
-    st.warning(
-        "**🔬 Academic Citation & Research Analysis**\n\n"
-        "*Source: Mobbs & Bonanno (2018) — Psychological Resilience*\n\n"
-        "Transition stress often manifests physically through disrupted sleep"
-        " patterns and loss of structured physical fitness regimens. Establishing"
-        " sustainable civilian health habits is essential for long-term stability."
-    )
-
-    h_col1, h_col2 = st.columns([3, 1])
-    with h_col1:
-        st.header(f"Month 15: Physical & Mental Reset — {char['name']}")
-    with h_col2:
-        if st.button("⬅ Back to Dossiers", key="b_n6"):
-            st.session_state.state = "CHAR_SELECT"
-            st.rerun()
-
-    st.info(
-        "Fifteen months out, irregular work hours have eroded your sleep"
-        " quality and physical routine. You feel sluggish and notice mounting"
-        " mental fatigue."
-    )
-
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.markdown(
-            "<div class='card-box'><h3>Option A</h3>"
-            "<p>Establish a consistent physical training and sleep schedule,"
-            " incorporating cardiovascular fitness and mindfulness practices.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option A", key="n6_a", use_container_width=True):
-            apply_choice(
-                10,
-                15,
-                10,
-                20,
-                "NODE_7",
-                "A",
-                "Establish a consistent physical training and sleep schedule, incorporating cardiovascular fitness and mindfulness practices.",
-                (
-                    "**[BEST PRACTICE / GREEN]** Directly mitigates"
-                    " transition fatigue and supports holistic health (*Mobbs &"
-                    " Bonanno, 2018*)."
-                ),
-                "green",
-            )
-
-    with c2:
-        st.markdown(
-            "<div class='card-box'><h3>Option B</h3>"
-            "<p>Rely on caffeine and energy drinks to push through fatigue"
-            " without altering your daily schedule or exercise habits.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option B", key="n6_b", use_container_width=True):
-            apply_choice(
-                0,
-                -5,
-                0,
-                -10,
-                "NODE_7",
-                "B",
-                "Rely on caffeine and energy drinks to push through fatigue without altering your daily schedule or exercise habits.",
-                (
-                    "**[HIGH RISK / RED]** Masks underlying burnout and"
-                    " degrades long-term health resilience."
-                ),
-                "red",
-            )
-
-    with c3:
-        st.markdown(
-            "<div class='card-box'><h3>Option C</h3>"
-            "<p>Join a local recreational sports league to combine physical"
-            " fitness with informal social networking.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option C", key="n6_c", use_container_width=True):
-            apply_choice(
-                5,
-                15,
-                15,
-                15,
-                "NODE_7",
-                "C",
-                "Join a local recreational sports league to combine physical fitness with informal social networking.",
-                (
-                    "**[BEST PRACTICE / GREEN]** Combines physical well-being"
-                    " with community embedding (*Demers, 2011*)."
-                ),
-                "green",
-            )
-
-# -----------------------------------------------------------------------------
-# NODE 7: MONTH 24 — FINAL REINTEGRATION DEBRIEF & AFTER ACTION REPORT
-# -----------------------------------------------------------------------------
-elif st.session_state.state == "NODE_7":
-    char = get_current_char()
-    st.progress(
-        100, text="Node 7 of 7: Month 24 — Final Reintegration Debrief"
-    )
-
-    st.header(f"After Action Report: 24-Month Reintegration Debrief — {char['name']}")
-    st.success(
-        "You have successfully navigated the 24-month civilian reintegration window."
-        " Review your final domain metrics and path analysis below."
-    )
-
-    stats = st.session_state.get("stats", {"CT": 50, "SR": 50, "CE": 50, "SI": 50})
-
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Career Translation", f"{stats['CT']}%")
-    col2.metric("Social & Relational", f"{stats['SR']}%")
-    col3.metric("Community Engagement", f"{stats['CE']}%")
-    col4.metric("Self-Identity", f"{stats['SI']}%")
-
-    st.divider()
-    st.subheader("📋 Decision History & Academic Evaluation")
-
-    for idx, item in enumerate(st.session_state.get("choice_history", [])):
-        # Safely assign CSS card type to avoid quote collision
-        if item["eval_type"] == "green":
-            eval_class = "card-green"
-        elif item["eval_type"] == "yellow":
-            eval_class = "card-yellow"
-        else:
-            eval_class = "card-red"
-
-        st.markdown(
-            f"<div class='{eval_class}'>"
-            f"<h4>Step {idx+1}: Option {item['choice_id']}</h4>"
-            f"<p><b>Action:</b> {item['summary']}</p>"
-            f"<p><b>Feedback:</b> {item['feedback']}</p>"
-            f"</div>",
-            unsafe_allow_html=True,
-        )
-
-    st.divider()
-    if st.button("🔄 Restart Simulation", use_container_width=True, type="primary"):
-        st.session_state.state = "CHAR_SELECT"
-        st.session_state.char_key = None
-        st.session_state.path = []
-        st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
-        st.session_state.choice_history = []
-        st.rerun()
+                1
