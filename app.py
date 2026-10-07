@@ -1,3 +1,17 @@
+Here is the updated version of your app (`app_4.py`). I have hardcoded a mixed structural pattern across **Nodes 1 through 6** so that the optimal choices (Green) are distributed across different column positions rather than always landing in the middle column (Option B).
+
+Here is the distribution pattern implemented:
+
+* **Node 1:** Green option stays in **Column 2 (B)**
+* **Node 2:** Green option moves to **Column 1 (A)**
+* **Node 3:** Green option moves to **Column 3 (C)**
+* **Node 4:** Green option moves to **Column 1 (A)**
+* **Node 5:** Green option stays in **Column 2 (B)**
+* **Node 6:** Green option moves to **Column 3 (C)**
+
+The underlying handler functions, IDs (`1A`, `2B`, etc.), stat changes, and narrative feedback remain completely locked to their correct texts, ensuring logical integrity while breaking up the visual predictability.
+
+```python
 import pandas as pd
 import streamlit as st
 
@@ -6,7 +20,7 @@ import streamlit as st
 # -----------------------------------------------------------------------------
 st.set_page_config(
     page_title="Operation Civilian Re-Entry | MVS 100",
-    page_icon="🎖️️",
+    page_icon="🎖",
     layout="wide",
 )
 
@@ -292,7 +306,7 @@ if st.session_state.state == "CHAR_SELECT":
                 st.rerun()
 
 # -----------------------------------------------------------------------------
-# NODE 1: MONTH 2 — SELF-IDENTITY & UNIFORM SEPARATION
+# NODE 1: MONTH 2 — SELF-IDENTITY & UNIFORM SEPARATION (Green in Column B)
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_1":
     char = get_current_char()
@@ -425,7 +439,7 @@ elif st.session_state.state == "NODE_1":
             )
 
 # -----------------------------------------------------------------------------
-# NODE 2: MONTH 4 — SOCIAL RELATIONSHIPS & HOUSEHOLD ROLE RENEGOTIATION
+# NODE 2: MONTH 4 — SOCIAL RELATIONSHIPS (Green moved to Column A)
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_2":
     char = get_current_char()
@@ -474,41 +488,13 @@ elif st.session_state.state == "NODE_2":
         st.markdown(
             "<div class='choice-card-container'>"
             "<div><h3>Option A</h3>"
-            "<p>Step back from domestic choices entirely, leaving all decisions"
-            " to your partner while focusing strictly on personal job"
-            " applications.</p></div>"
-            "</div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option A", key="n2_a", use_container_width=True):
-            apply_choice(
-                5,
-                -15,
-                0,
-                -5,
-                "NODE_3",
-                "2A",
-                "Withdrew from household decision-making entirely.",
-                (
-                    "**[HIGH RISK / RED]** Abdicating domestic"
-                    " responsibility creates emotional detachment and fails to"
-                    " establish an equal partnership, violating Demers's (2011)"
-                    " findings on domestic cohesion."
-                ),
-                "red",
-            )
-
-    with c2:
-        st.markdown(
-            "<div class='choice-card-container'>"
-            "<div><h3>Option B</h3>"
             "<p>Initiate a structured weekly household check-in where both you"
             " and your partner explicitly map out responsibilities, financial"
             " goals, and personal expectations.</p></div>"
             "</div>",
             unsafe_allow_html=True,
         )
-        if st.button("Select Option B", key="n2_b", use_container_width=True):
+        if st.button("Select Option A", key="n2_a", use_container_width=True):
             apply_choice(
                 0,
                 20,
@@ -524,6 +510,34 @@ elif st.session_state.state == "NODE_2":
                     " renegotiation."
                 ),
                 "green",
+            )
+
+    with c2:
+        st.markdown(
+            "<div class='choice-card-container'>"
+            "<div><h3>Option B</h3>"
+            "<p>Step back from domestic choices entirely, leaving all decisions"
+            " to your partner while focusing strictly on personal job"
+            " applications.</p></div>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n2_b", use_container_width=True):
+            apply_choice(
+                5,
+                -15,
+                0,
+                -5,
+                "NODE_3",
+                "2A",
+                "Withdrew from household decision-making entirely.",
+                (
+                    "**[HIGH RISK / RED]** Abdicating domestic"
+                    " responsibility creates emotional detachment and fails to"
+                    " establish an equal partnership, violating Demers's (2011)"
+                    " findings on domestic cohesion."
+                ),
+                "red",
             )
 
     with c3:
@@ -555,7 +569,7 @@ elif st.session_state.state == "NODE_2":
             )
 
 # -----------------------------------------------------------------------------
-# NODE 3: MONTH 8 — CAREER & WORKPLACE COMMUNICATION
+# NODE 3: MONTH 8 — CAREER & WORKPLACE (Green moved to Column C)
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_3":
     char = get_current_char()
@@ -633,13 +647,40 @@ elif st.session_state.state == "NODE_3":
         st.markdown(
             "<div class='choice-card-container'>"
             "<div><h3>Option B</h3>"
+            "<p>Say nothing to the colleague and quietly complete their portion"
+            " of the work yourself to avoid conflict and keep the project on"
+            " schedule.</p></div>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n3_b", use_container_width=True):
+            apply_choice(
+                -5,
+                0,
+                -5,
+                -5,
+                "NODE_4",
+                "3C",
+                "Completed work independently to avoid direct confrontation.",
+                (
+                    "**[CAUTION / YELLOW]** Avoids immediate friction but"
+                    " enables underperformance and builds internal resentment,"
+                    " failing to establish healthy professional boundaries."
+                ),
+                "yellow",
+            )
+
+    with c3:
+        st.markdown(
+            "<div class='choice-card-container'>"
+            "<div><h3>Option C</h3>"
             "<p>Pull the colleague aside for a private, constructive dialogue,"
             " coaching them on workflow management while explaining project"
             " expectations clearly.</p></div>"
             "</div>",
             unsafe_allow_html=True,
         )
-        if st.button("Select Option B", key="n3_b", use_container_width=True):
+        if st.button("Select Option C", key="n3_c", use_container_width=True):
             apply_choice(
                 20,
                 5,
@@ -657,35 +698,8 @@ elif st.session_state.state == "NODE_3":
                 "green",
             )
 
-    with c3:
-        st.markdown(
-            "<div class='choice-card-container'>"
-            "<div><h3>Option C</h3>"
-            "<p>Say nothing to the colleague and quietly complete their portion"
-            " of the work yourself to avoid conflict and keep the project on"
-            " schedule.</p></div>"
-            "</div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option C", key="n3_c", use_container_width=True):
-            apply_choice(
-                -5,
-                0,
-                -5,
-                -5,
-                "NODE_4",
-                "3C",
-                "Completed work independently to avoid direct confrontation.",
-                (
-                    "**[CAUTION / YELLOW]** Avoids immediate friction but"
-                    " enables underperformance and builds internal resentment,"
-                    " failing to establish healthy professional boundaries."
-                ),
-                "yellow",
-            )
-
 # -----------------------------------------------------------------------------
-# NODE 4: MONTH 12 — COMMUNITY ENGAGEMENT & BUREAUCRATIC FRICTION
+# NODE 4: MONTH 12 — COMMUNITY & BUREAUCRATIC FRICTION (Green moved to Column A)
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_4":
     char = get_current_char()
@@ -736,40 +750,13 @@ elif st.session_state.state == "NODE_4":
         st.markdown(
             "<div class='choice-card-container'>"
             "<div><h3>Option A</h3>"
-            "<p>Abandon the claims process entirely out of sheer disgust with"
-            " government bureaucracy, absorbing your physical and mental"
-            " strain silently.</p></div>"
-            "</div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option A", key="n4_a", use_container_width=True):
-            apply_choice(
-                0,
-                -10,
-                -15,
-                -15,
-                "NODE_5",
-                "4A",
-                "Abandoned VA disability and healthcare claims out of frustration.",
-                (
-                    "**[HIGH RISK / RED]** Abandoning administrative advocacy"
-                    " leaves critical health and financial needs unmet,"
-                    " reinforcing isolation and institutional distrust."
-                ),
-                "red",
-            )
-
-    with c2:
-        st.markdown(
-            "<div class='choice-card-container'>"
-            "<div><h3>Option B</h3>"
             "<p>Partner with an accredited Veterans Service Organization (VSO)"
             " representative to systematically audit your records and"
             " resubmit the claim with proper documentation.</p></div>"
             "</div>",
             unsafe_allow_html=True,
         )
-        if st.button("Select Option B", key="n4_b", use_container_width=True):
+        if st.button("Select Option A", key="n4_a", use_container_width=True):
             apply_choice(
                 10,
                 10,
@@ -784,6 +771,33 @@ elif st.session_state.state == "NODE_4":
                     " networks, aligning with Tanielian et al. (2014) findings."
                 ),
                 "green",
+            )
+
+    with c2:
+        st.markdown(
+            "<div class='choice-card-container'>"
+            "<div><h3>Option B</h3>"
+            "<p>Abandon the claims process entirely out of sheer disgust with"
+            " government bureaucracy, absorbing your physical and mental"
+            " strain silently.</p></div>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n4_b", use_container_width=True):
+            apply_choice(
+                0,
+                -10,
+                -15,
+                -15,
+                "NODE_5",
+                "4A",
+                "Abandoned VA disability and healthcare claims out of frustration.",
+                (
+                    "**[HIGH RISK / RED]** Abandoning administrative advocacy"
+                    " leaves critical health and financial needs unmet,"
+                    " reinforcing isolation and institutional distrust."
+                ),
+                "red",
             )
 
     with c3:
@@ -813,7 +827,7 @@ elif st.session_state.state == "NODE_4":
             )
 
 # -----------------------------------------------------------------------------
-# NODE 5: MONTH 18 — SOCIAL & COMMUNITY CIVIC ENGAGEMENT
+# NODE 5: MONTH 18 — SOCIAL & COMMUNITY CIVIC ENGAGEMENT (Green stays in Column B)
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_5":
     char = get_current_char()
@@ -941,7 +955,7 @@ elif st.session_state.state == "NODE_5":
             )
 
 # -----------------------------------------------------------------------------
-# NODE 6: MONTH 24 — LONG-TERM SYNTHESIS & IDENTITY CONSOLIDATION
+# NODE 6: MONTH 24 — LONG-TERM SYNTHESIS (Green moved to Column C)
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_6":
     char = get_current_char()
@@ -1017,13 +1031,40 @@ elif st.session_state.state == "NODE_6":
         st.markdown(
             "<div class='choice-card-container'>"
             "<div><h3>Option B</h3>"
+            "<p>Remain anchored primarily in your military veteran identity,"
+            " spending most of your time exclusively within veteran-only social"
+            " circles.</p></div>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n6_b", use_container_width=True):
+            apply_choice(
+                0,
+                -10,
+                -10,
+                5,
+                "SUMMARY",
+                "6C",
+                "Remained exclusively within veteran social circles.",
+                (
+                    "**[CAUTION / YELLOW]** Provides comfort and peer"
+                    " support, but limits broader community integration and"
+                    " long-term professional adaptability (Schuetz, 1945)."
+                ),
+                "yellow",
+            )
+
+    with c3:
+        st.markdown(
+            "<div class='choice-card-container'>"
+            "<div><h3>Option C</h3>"
             "<p>Integrate your military values with your new civilian life,"
             " honoring your service while embracing your role as a civilian"
             " community leader and mentor.</p></div>"
             "</div>",
             unsafe_allow_html=True,
         )
-        if st.button("Select Option B", key="n6_b", use_container_width=True):
+        if st.button("Select Option C", key="n6_c", use_container_width=True):
             apply_choice(
                 15,
                 15,
@@ -1039,33 +1080,6 @@ elif st.session_state.state == "NODE_6":
                     " Bonanno, 2018)."
                 ),
                 "green",
-            )
-
-    with c3:
-        st.markdown(
-            "<div class='choice-card-container'>"
-            "<div><h3>Option C</h3>"
-            "<p>Remain anchored primarily in your military veteran identity,"
-            " spending most of your time exclusively within veteran-only social"
-            " circles.</p></div>"
-            "</div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option C", key="n6_c", use_container_width=True):
-            apply_choice(
-                0,
-                -10,
-                -10,
-                5,
-                "SUMMARY",
-                "6C",
-                "Remained exclusively within veteran social circles.",
-                (
-                    "**[CAUTION / YELLOW]** Provides comfort and peer"
-                    " support, but limits broader community integration and"
-                    " long-term professional adaptability (Schuetz, 1945)."
-                ),
-                "yellow",
             )
 
 # -----------------------------------------------------------------------------
@@ -1165,3 +1179,5 @@ elif st.session_state.state == "SUMMARY":
         st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
         st.session_state.choice_history = []
         st.rerun()
+
+```
