@@ -196,7 +196,9 @@ def apply_choice(
 with st.sidebar:
     st.title("🎖️ MVS 100 Project")
     st.markdown("**Author:** Austin Dodd")
+    st.markdown("**School:** Arizona State University")
     st.markdown("**Course:** MVS 100: Introduction to Military Studies")
+    st.markdown("**Intructor:** Dr. Goff")
     st.divider()
 
     if st.session_state.char_key and st.session_state.char_key in CHARACTERS:
