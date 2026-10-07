@@ -308,8 +308,8 @@ elif st.session_state.state == "NODE_1":
                 -10,
                 -15,
                 "NODE_2",
-                "1A",
-                "Chose isolation and internal stoicism over peer support.",
+                "A",
+                "Isolate yourself socially, relying solely on your own internal discipline to push through the transition without seeking external validation or veteran networks.",
                 (
                     "**[HIGH RISK / RED]** Reflects withdrawal and suppressed"
                     " identity conflict. Smith & True (2014) identify isolation"
@@ -334,8 +334,8 @@ elif st.session_state.state == "NODE_1":
                 0,
                 5,
                 "NODE_2",
-                "1B",
-                "Relied on casual hobbies and recreational distraction.",
+                "B",
+                "Immerse yourself immediately in civilian recreational hobbies and casual entertainment to distract yourself from thinking about your military past.",
                 (
                     "**[CAUTION / YELLOW]** Temporary avoidance provides"
                     " short-term relief but delays confronting deep-seated"
@@ -360,8 +360,8 @@ elif st.session_state.state == "NODE_1":
                 15,
                 20,
                 "NODE_2",
-                "1C",
-                "Engaged proactively with veteran mentorship and peer discussion.",
+                "C",
+                "Connect proactively with a local veteran mentorship group to openly discuss the psychological shift of leaving service and redefine your personal core values.",
                 (
                     "**[BEST PRACTICE / GREEN]** Aligns with Smith & True (2014)"
                     " and Demers (2011). Proactive peer engagement successfully"
@@ -419,8 +419,8 @@ elif st.session_state.state == "NODE_2":
                 5,
                 10,
                 "NODE_3",
-                "2A",
-                "Established structured weekly household alignment meetings.",
+                "A",
+                "Initiate a structured weekly household check-in where both you and your partner explicitly map out responsibilities, financial goals, and personal expectations.",
                 (
                     "**[BEST PRACTICE / GREEN]** Directly addresses Schuetz's"
                     " (1945) homecoming friction by replacing military command"
@@ -445,8 +445,8 @@ elif st.session_state.state == "NODE_2":
                 0,
                 -5,
                 "NODE_3",
-                "2B",
-                "Withdrew from household decision-making entirely.",
+                "B",
+                "Step back from domestic choices entirely, leaving all decisions to your partner while focusing strictly on personal job applications.",
                 (
                     "**[HIGH RISK / RED]** Abdicating domestic"
                     " responsibility creates emotional detachment and fails to"
@@ -471,8 +471,8 @@ elif st.session_state.state == "NODE_2":
                 -5,
                 -10,
                 "NODE_3",
-                "2C",
-                "Suppressed household friction and avoided crucial talks.",
+                "C",
+                "Keep your internal stress private and avoid discussing household roles further, believing time will naturally smooth out the tension.",
                 (
                     "**[HIGH RISK / RED]** Suppressing stress compounds"
                     " domestic alienation. Romaniuk et al. (2020) highlight"
@@ -531,8 +531,8 @@ elif st.session_state.state == "NODE_3":
                 0,
                 -5,
                 "NODE_4",
-                "3A",
-                "Relied on high-interest revolving debt to cover cash gaps.",
+                "A",
+                "Rely on high-interest revolving credit lines to maintain your family's current lifestyle while waiting for the next pay cycle.",
                 (
                     "**[HIGH RISK / RED]** Exacerbates financial strain and"
                     " creates long-term debt burdens, directly compounding"
@@ -556,8 +556,8 @@ elif st.session_state.state == "NODE_3":
                 5,
                 10,
                 "NODE_4",
-                "3B",
-                "Implemented a strict 90-day zero-based cash flow budget.",
+                "B",
+                "Build a strict 90-day zero-based cash flow budget with your spouse, cutting non-essential subscriptions and tapping emergency savings.",
                 (
                     "**[BEST PRACTICE / GREEN]** Proactive financial management"
                     " mitigates early transition shock and establishes family"
@@ -580,8 +580,8 @@ elif st.session_state.state == "NODE_3":
                 0,
                 -5,
                 "NODE_4",
-                "3C",
-                "Ignored short-term cash flow gaps without budgeting adjustments.",
+                "C",
+                "Ignore the cash flow discrepancy and hope incoming paychecks naturally cover outstanding balances over time.",
                 (
                     "**[CAUTION / YELLOW]** Passive financial management leads"
                     " to preventable monetary friction and unnecessary family"
@@ -636,8 +636,8 @@ elif st.session_state.state == "NODE_4":
                 0,
                 5,
                 "NODE_5",
-                "4A",
-                "Enforced rigid military-style tracking matrices on civilian staff.",
+                "A",
+                "Issue a formal project tracking matrix with rigid deadlines and public accountability check-ins for all department leads.",
                 (
                     "**[HIGH RISK / RED]** Illustrates institutional"
                     " mismatch (Zoli et al., 2015). Forcing top-down military"
@@ -662,8 +662,8 @@ elif st.session_state.state == "NODE_4":
                 10,
                 10,
                 "NODE_5",
-                "4B",
-                "Facilitated one-on-one alignments and co-created compromises.",
+                "B",
+                "Hold informal, one-on-one alignment discussions with each leader outside meetings to understand constraints and co-create a compromise.",
                 (
                     "**[BEST PRACTICE / GREEN]** Demonstrates successful"
                     " translation of leadership skills into civilian corporate"
@@ -688,8 +688,8 @@ elif st.session_state.state == "NODE_4":
                 -5,
                 -5,
                 "NODE_5",
-                "4C",
-                "Withdrew from team conflict and siloed personal work.",
+                "C",
+                "Focus strictly on your own deliverables, letting the project owner manage stakeholder friction without your direct intervention.",
                 (
                     "**[CAUTION / YELLOW]** Siloing stalls professional"
                     " growth and underutilizes valuable leadership capacity,"
@@ -746,8 +746,8 @@ elif st.session_state.state == "NODE_5":
                 25,
                 15,
                 "NODE_6",
-                "5A",
-                "Volunteered to lead local youth mentorship and community programs.",
+                "A",
+                "Volunteer to lead a local youth mentorship or community resilience program, translating your leadership skills into civic action.",
                 (
                     "**[BEST PRACTICE / GREEN]** Directly fulfills Demers's"
                     " (2011) recommendation for active civic embedding,"
@@ -771,8 +771,8 @@ elif st.session_state.state == "NODE_5":
                 10,
                 10,
                 "NODE_6",
-                "5B",
-                "Confined social networking exclusively to online veteran groups.",
+                "B",
+                "Join an exclusively veteran-focused social club online, keeping your local civic engagement minimal and staying within familiar military circles.",
                 (
                     "**[CAUTION / YELLOW]** Provides comfortable peer support"
                     " but fails to embed the veteran into their local civilian"
@@ -795,8 +795,8 @@ elif st.session_state.state == "NODE_5":
                 -20,
                 -10,
                 "NODE_6",
-                "5C",
-                "Declined all civic involvement in favor of complete seclusion.",
+                "C",
+                "Decline all local civic involvement to focus entirely on personal relaxation and weekend recovery from work stress.",
                 (
                     "**[HIGH RISK / RED]** Deepens social isolation and"
                     " alienates the veteran from civilian community support"
@@ -854,8 +854,8 @@ elif st.session_state.state == "NODE_6":
                 0,
                 -15,
                 "NODE_7",
-                "6A",
-                "Relied on caffeine and screen time while abandoning exercise.",
+                "A",
+                "Rely on late-night screen time and caffeine to power through exhaustion, skipping exercise entirely due to a busy work schedule.",
                 (
                     "**[HIGH RISK / RED]** Compounds somatic stress and sleep"
                     " deprivation, accelerating burnout (*Mobbs & Bonanno,"
@@ -878,8 +878,8 @@ elif st.session_state.state == "NODE_6":
                 15,
                 20,
                 "NODE_7",
-                "6B",
-                "Joined local fitness groups, combining health with community.",
+                "B",
+                "Join a local recreational sports league or fitness community, blending physical training with social connection.",
                 (
                     "**[BEST PRACTICE / GREEN]** Effectively re-establishes"
                     " physical discipline while fostering community embedding"
@@ -903,8 +903,8 @@ elif st.session_state.state == "NODE_6":
                 0,
                 5,
                 "NODE_7",
-                "6C",
-                "Maintained sporadic solo workouts without social engagement.",
+                "C",
+                "Exercise strictly alone in your garage with sporadic workouts, avoiding any group fitness settings or health consultations.",
                 (
                     "**[CAUTION / YELLOW]** Better than total inactivity, but"
                     " misses the opportunity for community embedding and peer"
@@ -1014,7 +1014,7 @@ elif st.session_state.state == "NODE_7":
 
         card_html = (
             f"<div class='{eval_class}'>"
-            f"<h4>Decision {idx} ({item['node']}) — Choice: {item['choice_id']}</h4>"
+            f"<h4>Decision {idx} — Choice: {item['choice_id']}</h4>"
             f"<p><b>Action Taken:</b> {summary_text}</p>"
             f"<p><b>Academic Feedback:</b> {feedback_text}</p>"
             f"<p><b>Score Impact:</b> Career: {item['deltas']['CT']:+d}% | "
@@ -1031,49 +1031,4 @@ elif st.session_state.state == "NODE_7":
     st.write(
         "This simulation's scoring model and trajectory outcomes directly"
         " substantiate the research question and thesis by mapping user"
-        " decisions against empirical academic literature across four core"
-        " pillars:"
-    )
-
-    st.markdown("""
-    * **1. Theoretical Framework & Institutional Friction (*Schuetz, 1945; Zoli et al., 2015*):** 
-      Transitioning from a total military institution into fragmented civilian bureaucracies (DOD/VA) generates immediate structural friction. Alfred Schuetz's 'Homecomer' paradigm explains why returning veterans perceive civilian environments as unfamiliar cultural landscapes where military operational rules no longer apply.
-    * **2. Employment & Operational Translation (*Zoli et al., 2015; Mobbs & Bonanno, 2018*):** 
-      The operational score reflects the challenge of translating Military Occupational Specialties (MOS) into corporate currency. Research reveals that veterans face misaligned placement when civilian HR systems misunderstand military leadership structures, frequently converting what should be leadership assets into transitional stress.
-    * **3. Social Relationships & Domestic Role Renegotiation (*Demers, 2011; Romaniuk et al., 2020*):** 
-      The relational cohesion score mirrors household dynamics. Research shows that cultural reintegration requires actively renegotiating domestic roles, overcoming military stoicism, and bridging gaps with civilian community networks that lack operational cultural competency.
-    * **4. Self-Identity & Community Embedding (*Smith & True, 2014*):** 
-      By month 24, the simulation captures 'warring identities'—the internal friction between martial self-concepts (discipline, mission focus) and civilian expectations (ambiguity, individualism). Long-term stability requires structured community embedding rather than brief administrative milestones.
-    """)
-
-    st.divider()
-    st.subheader("Verified APA References")
-    st.markdown(
-        """* **Demers, A. (2011).** When veterans return: The role of community in"
-        " post-combat reintegration. *Journal of Loss and Trauma*, 16(2),"
-        " 160–179.\n- **Mobbs, M. C., & Bonanno, G. A. (2018).** Beyond war and"
-        " PTSD: The crucial role of transition stress in the lives of military"
-        " veterans. *Clinical Psychology Review*, 59, 137–144.\n-"
-        " **Romaniuk, M., et al. (2020).** Assessing psychological adjustment"
-        " and cultural reintegration after military service (M-CARM). *BMC"
-        " Psychiatry*, 20(1), 1–13.\n- **Schuetz, A. (1945).** The homecomer."
-        " *American Journal of Sociology*, 50(5), 369–376.\n- **Smith, R."
-        " T., & True, G. (2014).** Warring identities: Identity conflict and"
-        " the military-to-civilian transition. *Armed Forces & Society*, 40(1),"
-        " 147–156.\n- **Zoli, C., Maury, R., & Fay, D. (2015).** *Missing"
-        " perspectives: Servicemembers' transition from service to civilian"
-        " life*. Institute for Veterans and Military Families, Syracuse"
-        " University."""
-    )
-
-    if st.button(
-        "🔄 Restart Simulation with Another Character",
-        type="primary",
-        use_container_width=True,
-    ):
-        st.session_state.state = "CHAR_SELECT"
-        st.session_state.char_key = None
-        st.session_state.path = []
-        st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
-        st.session_state.choice_history = []
-        st.rerun()
+        " decisions
