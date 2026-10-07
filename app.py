@@ -1105,6 +1105,20 @@ elif st.session_state.state == "SUMMARY":
         """,
         unsafe_allow_html=True,
     )
+    st.markdown(
+        """
+        <div class='card-box'>
+            <h3>🎒 Actionable Takeaways for Veterans</h3>
+            <ul>
+            <li><b>Redefine Identity Beyond the Uniform:</b> Actively seek veteran mentorship early to process the loss of rank and establish a civilian value system (<i>Smith & True, 2014</i>).</li>
+            <li><b>Communicate Proactively at Home:</b> Recognize that spouses and partners have built independent household routines during deployments; establish regular, structured check-ins rather than imposing military command structures.</li>
+            <li><b>Bridge the Corporate Culture Gap:</b> Balance direct military decisiveness with civilian consensus-building and active listening in cross-functional team environments.</li>
+            <li><b>Engage Locally:</b> Step outside insular veteran circles to embed yourself in local civic, youth, or community resilience initiatives.</li>
+            </ul>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     st.subheader("📊 Final 4-Domain Metric Scores")
     stats = st.session_state.stats
