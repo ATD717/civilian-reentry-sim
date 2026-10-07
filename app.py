@@ -1,4 +1,3 @@
-import base64
 import pandas as pd
 import streamlit as st
 
@@ -65,21 +64,6 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
-
-
-# -----------------------------------------------------------------------------
-# SVG ILLUSTRATION HELPER FUNCTION
-# -----------------------------------------------------------------------------
-def render_svg(svg_code, height=220):
-    """Renders raw SVG code cleanly inside Streamlit with a specified height."""
-    b64 = base64.b64encode(svg_code.encode("utf-8")).decode("utf-8")
-    html = f"""
-    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-        <img src="data:image/svg+xml;base64,{b64}" style="max-width: 100%; height: {height}px; border-radius: 8px; border: 1px solid #334155;" />
-    </div>
-    """
-    st.markdown(html, unsafe_allow_html=True)
-
 
 # -----------------------------------------------------------------------------
 # CHARACTER DEFINITIONS & 4-METRIC TRACKING
@@ -247,38 +231,6 @@ if st.session_state.state == "CHAR_SELECT":
         unsafe_allow_html=True,
     )
 
-    # Hero Illustration for Home Screen
-    render_svg(
-        """
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 260" width="100%" height="100%">
-            <defs>
-                <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#1E293B" />
-                    <stop offset="100%" stop-color="#0F172A" />
-                </linearGradient>
-            </defs>
-            <rect width="800" height="260" fill="url(#bg-grad)" rx="12"/>
-            <!-- Decorative Grid Lines -->
-            <path d="M0 65 L800 65 M0 130 L800 130 M0 195 L800 195" stroke="#334155" stroke-width="0.5" stroke-dasharray="5,5"/>
-            <path d="M200 0 L200 260 M400 0 L400 260 M600 0 L600 260" stroke="#334155" stroke-width="0.5" stroke-dasharray="5,5"/>
-            
-            <!-- Central Badge / Graphic -->
-            <circle cx="400" cy="130" r="55" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
-            <polygon points="400,90 420,120 440,130 420,140 400,170 380,140 360,130 380,120" fill="#38BDF8" opacity="0.8"/>
-            <circle cx="400" cy="130" r="15" fill="#0F172A" stroke="#E2E8F0" stroke-width="2"/>
-            
-            <!-- Typography inside banner -->
-            <text x="40" y="85" fill="#38BDF8" font-family="sans-serif" font-weight="bold" font-size="22">MVS 100 RESEARCH MODEL</text>
-            <text x="40" y="115" fill="#94A3B8" font-family="sans-serif" font-size="14">24-Month Existential & Cultural Reorganization</text>
-            <text x="40" y="150" fill="#E2E8F0" font-family="sans-serif" font-size="12">■ Career Translation &nbsp;&nbsp; ■ Social & Relational</text>
-            <text x="40" y="170" fill="#E2E8F0" font-family="sans-serif" font-size="12">■ Community Eng. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ■ Self-Identity</text>
-
-            <text x="760" y="235" fill="#64748B" font-family="sans-serif" font-size="11" text-anchor="end">OPERATION CIVILIAN RE-ENTRY</text>
-        </svg>
-    """,
-        height=220,
-    )
-
     with st.expander(
         "📖 View Research Question, Thesis & Academic Framework", expanded=True
     ):
@@ -323,29 +275,6 @@ elif st.session_state.state == "NODE_1":
     char = get_current_char()
     st.progress(
         14, text="Node 1 of 7: Month 2 — Self-Identity & Uniform Separation"
-    )
-
-    render_svg(
-        """
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
-            <rect width="800" height="200" fill="#1E293B" rx="10"/>
-            <!-- Left: Uniform / Rank Symbol -->
-            <path d="M120 50 L160 80 L160 130 L120 150 L80 130 L80 80 Z" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
-            <polygon points="120,70 135,100 105,100" fill="#38BDF8"/>
-            <text x="120" y="175" fill="#94A3B8" font-family="sans-serif" font-size="12" text-anchor="middle">Institutional Identity</text>
-
-            <!-- Center Arrow -->
-            <path d="M260 100 L340 100 M320 90 L340 100 L320 110" stroke="#CBD5E1" stroke-width="3" fill="none"/>
-            <text x="300" y="80" fill="#CBD5E1" font-family="sans-serif" font-size="12" text-anchor="middle">Month 2</text>
-
-            <!-- Right: Civilian Transition -->
-            <circle cx="560" cy="100" r="45" fill="#0F172A" stroke="#34D399" stroke-width="2"/>
-            <circle cx="560" cy="85" r="15" fill="#34D399"/>
-            <path d="M535 125 Q560 110 585 125" fill="none" stroke="#34D399" stroke-width="3"/>
-            <text x="560" y="175" fill="#94A3B8" font-family="sans-serif" font-size="12" text-anchor="middle">Civilian Re-entry</text>
-        </svg>
-    """,
-        height=180,
     )
 
     st.warning(
@@ -462,23 +391,6 @@ elif st.session_state.state == "NODE_2":
         28, text="Node 2 of 7: Month 4 — Household Role Renegotiation"
     )
 
-    render_svg(
-        """
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
-            <rect width="800" height="200" fill="#1E293B" rx="10"/>
-            <!-- Household Balance Illustration -->
-            <rect x="250" y="110" width="300" height="10" fill="#334155" rx="5"/>
-            <polygon points="400,120 380,150 420,150" fill="#38BDF8"/>
-            <circle cx="280" cy="85" r="22" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
-            <circle cx="520" cy="85" r="22" fill="#0F172A" stroke="#34D399" stroke-width="2"/>
-            <text x="280" y="90" fill="#38BDF8" font-family="sans-serif" font-size="12" text-anchor="middle">Partner</text>
-            <text x="520" y="90" fill="#34D399" font-family="sans-serif" font-size="12" text-anchor="middle">Veteran</text>
-            <text x="400" y="50" fill="#E2E8F0" font-family="sans-serif" font-weight="bold" font-size="16" text-anchor="middle">Month 4: Domestic Role Alignment</text>
-        </svg>
-    """,
-        height=180,
-    )
-
     st.warning(
         "**🔬 Academic Citation & Research Analysis**\n\n"
         "*Source: Schuetz (1945) / Demers (2011)*\n\n"
@@ -590,22 +502,6 @@ elif st.session_state.state == "NODE_3":
         42, text="Node 3 of 7: Month 6 — Financial & Benefits Budgeting"
     )
 
-    render_svg(
-        """
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
-            <rect width="800" height="200" fill="#1E293B" rx="10"/>
-            <!-- Financial Chart Graphic -->
-            <rect x="220" y="120" width="50" height="40" fill="#334155" rx="4"/>
-            <rect x="300" y="90" width="50" height="70" fill="#38BDF8" rx="4"/>
-            <rect x="380" y="60" width="50" height="100" fill="#34D399" rx="4"/>
-            <rect x="460" y="100" width="50" height="60" fill="#F59E0B" rx="4"/>
-            <text x="400" y="35" fill="#E2E8F0" font-family="sans-serif" font-weight="bold" font-size="16" text-anchor="middle">Month 6: Cash Flow & Budget Stability</text>
-            <line x1="200" y1="165" x2="600" y2="165" stroke="#64748B" stroke-width="2"/>
-        </svg>
-    """,
-        height=180,
-    )
-
     st.warning(
         "**🔬 Academic Citation & Research Analysis**\n\n"
         "*Source: Mobbs & Bonanno (2018) / Zoli et al. (2015)*\n\n"
@@ -712,26 +608,6 @@ elif st.session_state.state == "NODE_4":
     char = get_current_char()
     st.progress(
         57, text="Node 4 of 7: Month 9 — Corporate Culture & Team Friction"
-    )
-
-    render_svg(
-        """
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
-            <rect width="800" height="200" fill="#1E293B" rx="10"/>
-            <!-- Corporate Network Diagram -->
-            <circle cx="400" cy="100" r="30" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
-            <circle cx="280" cy="70" r="20" fill="#0F172A" stroke="#64748B" stroke-width="2"/>
-            <circle cx="520" cy="70" r="20" fill="#0F172A" stroke="#64748B" stroke-width="2"/>
-            <circle cx="340" cy="150" r="20" fill="#0F172A" stroke="#64748B" stroke-width="2"/>
-            <circle cx="460" cy="150" r="20" fill="#0F172A" stroke="#64748B" stroke-width="2"/>
-            <line x1="380" y1="85" x2="300" y2="75" stroke="#334155" stroke-width="2"/>
-            <line x1="420" y1="85" x2="500" y2="75" stroke="#334155" stroke-width="2"/>
-            <line x1="380" y1="115" x2="350" y2="135" stroke="#334155" stroke-width="2"/>
-            <line x1="420" y1="115" x2="450" y2="135" stroke="#334155" stroke-width="2"/>
-            <text x="400" y="35" fill="#E2E8F0" font-family="sans-serif" font-weight="bold" font-size="16" text-anchor="middle">Month 9: Corporate Communication & Consensus</text>
-        </svg>
-    """,
-        height=180,
     )
 
     st.warning(
@@ -843,24 +719,6 @@ elif st.session_state.state == "NODE_5":
         text="Node 5 of 7: Month 12 — Community Embedding & Civic Service",
     )
 
-    render_svg(
-        """
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
-            <rect width="800" height="200" fill="#1E293B" rx="10"/>
-            <!-- Community / House Icons -->
-            <polygon points="400,50 350,90 450,90" fill="#38BDF8"/>
-            <rect x="365" y="90" width="70" height="60" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
-            <!-- Smaller surrounding houses -->
-            <polygon points="280,70 250,95 310,95" fill="#64748B"/>
-            <rect x="260" y="95" width="40" height="35" fill="#0F172A" stroke="#64748B" stroke-width="2"/>
-            <polygon points="520,70 490,95 550,95" fill="#64748B"/>
-            <rect x="500" y="95" width="40" height="35" fill="#0F172A" stroke="#64748B" stroke-width="2"/>
-            <text x="400" y="175" fill="#E2E8F0" font-family="sans-serif" font-size="14" text-anchor="middle">Month 12: Local Civic Embedding</text>
-        </svg>
-    """,
-        height=180,
-    )
-
     st.warning(
         "**🔬 Academic Citation & Research Analysis**\n\n"
         "*Source: Demers (2011) — Community Reintegration*\n\n"
@@ -967,18 +825,6 @@ elif st.session_state.state == "NODE_6":
         85, text="Node 6 of 7: Month 15 — Health, Fitness & Sleep Regulation"
     )
 
-    render_svg(
-        """
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
-            <rect width="800" height="200" fill="#1E293B" rx="10"/>
-            <!-- Health / Pulse Graphic -->
-            <path d="M200 100 L300 100 L330 60 L360 140 L390 80 L420 120 L450 100 L600 100" fill="none" stroke="#34D399" stroke-width="3"/>
-            <text x="400" y="45" fill="#E2E8F0" font-family="sans-serif" font-weight="bold" font-size="16" text-anchor="middle">Month 15: Physical & Mental Health Regulation</text>
-        </svg>
-    """,
-        height=180,
-    )
-
     st.warning(
         "**🔬 Academic Citation & Research Analysis**\n\n"
         "*Source: Mobbs & Bonanno (2018) — Psychological Resilience*\n\n"
@@ -1081,19 +927,6 @@ elif st.session_state.state == "NODE_7":
         100, text="Node 7 of 7: Month 24 — Final Reintegration Debrief"
     )
 
-    render_svg(
-        """
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
-            <rect width="800" height="200" fill="#1E293B" rx="10"/>
-            <!-- Completion Trophy / Check Graphic -->
-            <circle cx="400" cy="90" r="40" fill="#0F172A" stroke="#34D399" stroke-width="3"/>
-            <path d="M380 90 L395 105 L425 75" fill="none" stroke="#34D399" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="400" y="160" fill="#E2E8F0" font-family="sans-serif" font-weight="bold" font-size="16" text-anchor="middle">24-Month Reintegration Debrief Complete</text>
-        </svg>
-    """,
-        height=180,
-    )
-
     st.header(f"After Action Report: 24-Month Reintegration Debrief — {char['name']}")
     st.success(
         "You have successfully navigated the 24-month civilian reintegration window."
@@ -1112,6 +945,7 @@ elif st.session_state.state == "NODE_7":
     st.subheader("📋 Decision History & Academic Evaluation")
 
     for idx, item in enumerate(st.session_state.get("choice_history", [])):
+        # Safely assign CSS card type to avoid quote collision
         if item["eval_type"] == "green":
             eval_class = "card-green"
         elif item["eval_type"] == "yellow":
