@@ -801,3 +801,4 @@ elif st.session_state.state == "NODE_5":
             apply_choice(
                 10,
                 1
+        )
