@@ -1,6 +1,3 @@
-Here is the updated version of your app (`app_4.py`). I have hardcoded a mixed structural pattern across **Nodes 1 through 6** so that the optimal choices (Green) are distributed across different column positions rather than always landing in the middle column (Option B).
-
-Here is the distribution pattern implemented:
 
 * **Node 1:** Green option stays in **Column 2 (B)**
 * **Node 2:** Green option moves to **Column 1 (A)**
