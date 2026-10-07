@@ -445,3 +445,528 @@ elif st.session_state.state == "NODE_2":
         st.markdown(
             "<div class='card-box'><h3>Option B</h3>"
             "<p>Step back from domestic choices entirely, leaving all decisions"
+            " to your partner while focusing strictly on personal job"
+            " applications.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n2_b", use_container_width=True):
+            apply_choice(
+                5,
+                -15,
+                0,
+                -5,
+                "NODE_3",
+                "B",
+                "Step back from domestic choices entirely, leaving all decisions to your partner while focusing strictly on personal job applications.",
+                (
+                    "**[HIGH RISK / RED]** Abdicating domestic"
+                    " responsibility creates emotional detachment and fails to"
+                    " establish an equal partnership, violating Demers's (2011)"
+                    " findings on domestic cohesion."
+                ),
+                "red",
+            )
+
+    with c3:
+        st.markdown(
+            "<div class='card-box'><h3>Option C</h3>"
+            "<p>Keep your internal stress private and avoid discussing"
+            " household roles further, believing time will naturally smooth"
+            " out the tension.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option C", key="n2_c", use_container_width=True):
+            apply_choice(
+                0,
+                -20,
+                -5,
+                -10,
+                "NODE_3",
+                "C",
+                "Keep your internal stress private and avoid discussing household roles further, believing time will naturally smooth out the tension.",
+                (
+                    "**[HIGH RISK / RED]** Suppressing stress compounds"
+                    " domestic alienation. Romaniuk et al. (2020) highlight"
+                    " unaddressed communication gaps as a major predictor of"
+                    " post-service strain."
+                ),
+                "red",
+            )
+
+# -----------------------------------------------------------------------------
+# NODE 3: MONTH 6 — FINANCIAL BUDGETING & VA BENEFITS TRANSITION
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_3":
+    char = get_current_char()
+    st.progress(
+        42, text="Node 3 of 7: Month 6 — Financial & Benefits Budgeting"
+    )
+
+    st.warning(
+        "**🔬 Academic Citation & Research Analysis**\n\n"
+        "*Source: Mobbs & Bonanno (2018) / Zoli et al. (2015)*\n\n"
+        "Financial anxiety is one of the leading triggers of early transition"
+        " friction. Navigating GI Bill stipends, terminal leave payouts, and"
+        " adjusting to civilian cash flow cycles requires proactive financial"
+        " planning rather than reactive spending."
+    )
+
+    h_col1, h_col2 = st.columns([3, 1])
+    with h_col1:
+        st.header(f"Month 6: The Cash Flow Gap — {char['name']}")
+    with h_col2:
+        if st.button("⬅ Back to Dossiers", key="b_n3"):
+            st.session_state.state = "CHAR_SELECT"
+            st.rerun()
+
+    st.info(
+        "Six months post-separation, terminal leave payouts have cleared, but"
+        " your first standard civilian payroll cycle leaves a 3-week gap."
+        " Household expenses are tight, and credit card balances are starting"
+        " to creep up."
+    )
+
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.markdown(
+            "<div class='card-box'><h3>Option A</h3>"
+            "<p>Rely on high-interest revolving credit lines to maintain your"
+            " family's current lifestyle while waiting for the next pay"
+            " cycle.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option A", key="n3_a", use_container_width=True):
+            apply_choice(
+                -10,
+                -10,
+                0,
+                -5,
+                "NODE_4",
+                "A",
+                "Rely on high-interest revolving credit lines to maintain your family's current lifestyle while waiting for the next pay cycle.",
+                (
+                    "**[HIGH RISK / RED]** Exacerbates financial strain and"
+                    " creates long-term debt burdens, directly compounding"
+                    " transition stress (*Mobbs & Bonanno, 2018*)."
+                ),
+                "red",
+            )
+
+    with c2:
+        st.markdown(
+            "<div class='card-box'><h3>Option B</h3>"
+            "<p>Build a strict 90-day zero-based cash flow budget with your"
+            " spouse, cutting non-essential subscriptions and tapping emergency"
+            " savings.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n3_b", use_container_width=True):
+            apply_choice(
+                15,
+                15,
+                5,
+                10,
+                "NODE_4",
+                "B",
+                "Build a strict 90-day zero-based cash flow budget with your spouse, cutting non-essential subscriptions and tapping emergency savings.",
+                (
+                    "**[BEST PRACTICE / GREEN]** Proactive financial management"
+                    " mitigates early transition shock and establishes family"
+                    " alignment around monetary goals (*Zoli et al., 2015*)."
+                ),
+                "green",
+            )
+
+    with c3:
+        st.markdown(
+            "<div class='card-box'><h3>Option C</h3>"
+            "<p>Ignore the cash flow discrepancy and hope incoming paychecks"
+            " naturally cover outstanding balances over time.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option C", key="n3_c", use_container_width=True):
+            apply_choice(
+                -5,
+                -5,
+                0,
+                -5,
+                "NODE_4",
+                "C",
+                "Ignore the cash flow discrepancy and hope incoming paychecks naturally cover outstanding balances over time.",
+                (
+                    "**[CAUTION / YELLOW]** Passive financial management leads"
+                    " to preventable monetary friction and unnecessary family"
+                    " anxiety."
+                ),
+                "yellow",
+            )
+
+# -----------------------------------------------------------------------------
+# NODE 4: MONTH 9 — CAREER & WORKPLACE COMMUNICATION
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_4":
+    char = get_current_char()
+    st.progress(
+        57, text="Node 4 of 7: Month 9 — Corporate Culture & Team Friction"
+    )
+
+    st.warning(
+        "**🔬 Academic Citation & Research Analysis**\n\n"
+        "*Source: Zoli, Maury, & Fay (2015)*\n\n"
+        "Military operational culture relies on direct communication and SOPs."
+        " In civilian corporate spaces, this often clashes with"
+        " consensus-building and indirect office politics."
+    )
+
+    h_col1, h_col2 = st.columns([3, 1])
+    with h_col1:
+        st.header(f"Month 9: The Project Deadlock — {char['name']}")
+    with h_col2:
+        if st.button("⬅ Back to Dossiers", key="b_n4"):
+            st.session_state.state = "CHAR_SELECT"
+            st.rerun()
+
+    st.info(
+        "Nine months into your civilian career, a major cross-functional"
+        " project stalls because two department leads disagree on resource"
+        " allocation. Your manager asks for your approach."
+    )
+
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.markdown(
+            "<div class='card-box'><h3>Option A</h3>"
+            "<p>Issue a formal project tracking matrix with rigid deadlines and"
+            " public accountability check-ins for all department leads.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option A", key="n4_a", use_container_width=True):
+            apply_choice(
+                -10,
+                -5,
+                0,
+                5,
+                "NODE_5",
+                "A",
+                "Issue a formal project tracking matrix with rigid deadlines and public accountability check-ins for all department leads.",
+                (
+                    "**[HIGH RISK / RED]** Illustrates institutional"
+                    " mismatch (Zoli et al., 2015). Forcing top-down military"
+                    " SOPs onto civilian peers creates cultural resistance and"
+                    " damages workplace relationships."
+                ),
+                "red",
+            )
+
+    with c2:
+        st.markdown(
+            "<div class='card-box'><h3>Option B</h3>"
+            "<p>Hold informal, one-on-one alignment discussions with each"
+            " leader outside meetings to understand constraints and co-create"
+            " a compromise.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n4_b", use_container_width=True):
+            apply_choice(
+                25,
+                10,
+                10,
+                10,
+                "NODE_5",
+                "B",
+                "Hold informal, one-on-one alignment discussions with each leader outside meetings to understand constraints and co-create a compromise.",
+                (
+                    "**[BEST PRACTICE / GREEN]** Demonstrates successful"
+                    " translation of leadership skills into civilian corporate"
+                    " currency by mastering consensus-building (*Zoli et al.,"
+                    " 2015*)."
+                ),
+                "green",
+            )
+
+    with c3:
+        st.markdown(
+            "<div class='card-box'><h3>Option C</h3>"
+            "<p>Focus strictly on your own deliverables, letting the project"
+            " owner manage stakeholder friction without your direct"
+            " intervention.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option C", key="n4_c", use_container_width=True):
+            apply_choice(
+                -15,
+                0,
+                -5,
+                -5,
+                "NODE_5",
+                "C",
+                "Focus strictly on your own deliverables, letting the project owner manage stakeholder friction without your direct intervention.",
+                (
+                    "**[CAUTION / YELLOW]** Siloing stalls professional"
+                    " growth and underutilizes valuable leadership capacity,"
+                    " leading to underemployment friction."
+                ),
+                "yellow",
+            )
+
+# -----------------------------------------------------------------------------
+# NODE 5: MONTH 12 — COMMUNITY ENGAGEMENT & CIVIC SERVICE
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_5":
+    char = get_current_char()
+    st.progress(
+        71,
+        text="Node 5 of 7: Month 12 — Community Embedding & Civic Service",
+    )
+
+    st.warning(
+        "**🔬 Academic Citation & Research Analysis**\n\n"
+        "*Source: Demers (2011) — Community Reintegration*\n\n"
+        "Civilian community networks often lack cultural competency regarding"
+        " military service, leading to isolation. Active civic engagement and"
+        " local community embedding are critical for bridging this gap."
+    )
+
+    h_col1, h_col2 = st.columns([3, 1])
+    with h_col1:
+        st.header(f"Month 12: Local Embedding — {char['name']}")
+    with h_col2:
+        if st.button("⬅ Back to Dossiers", key="b_n5"):
+            st.session_state.state = "CHAR_SELECT"
+            st.rerun()
+
+    st.info(
+        "One year post-discharge, you realize your life is split strictly"
+        " between your workplace and your immediate household. You feel"
+        " disconnected from your broader local town/city community."
+    )
+
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.markdown(
+            "<div class='card-box'><h3>Option A</h3>"
+            "<p>Volunteer to lead a local youth mentorship or community"
+            " resilience program, translating your leadership skills into civic"
+            " action.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option A", key="n5_a", use_container_width=True):
+            apply_choice(
+                10,
+                10,
+                25,
+                15,
+                "NODE_6",
+                "A",
+                "Volunteer to lead a local youth mentorship or community resilience program, translating your leadership skills into civic action.",
+                (
+                    "**[BEST PRACTICE / GREEN]** Directly fulfills Demers's"
+                    " (2011) recommendation for active civic embedding,"
+                    " bridging the military-civilian cultural divide."
+                ),
+                "green",
+            )
+
+    with c2:
+        st.markdown(
+            "<div class='card-box'><h3>Option B</h3>"
+            "<p>Join an exclusively veteran-focused social club online, keeping"
+            " your local civic engagement minimal and staying within familiar"
+            " military circles.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n5_b", use_container_width=True):
+            apply_choice(
+                0,
+                5,
+                10,
+                10,
+                "NODE_6",
+                "B",
+                "Join an exclusively veteran-focused social club online, keeping your local civic engagement minimal and staying within familiar military circles.",
+                (
+                    "**[CAUTION / YELLOW]** Provides comfortable peer support"
+                    " but fails to embed the veteran into their local civilian"
+                    " community, leaving broader civic disconnect unaddressed."
+                ),
+                "yellow",
+            )
+
+    with c3:
+        st.markdown(
+            "<div class='card-box'><h3>Option C</h3>"
+            "<p>Decline all local civic involvement to focus entirely on"
+            " personal relaxation and weekend recovery from work stress.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option C", key="n5_c", use_container_width=True):
+            apply_choice(
+                0,
+                -5,
+                -20,
+                -10,
+                "NODE_6",
+                "C",
+                "Decline all local civic involvement to focus entirely on personal relaxation and weekend recovery from work stress.",
+                (
+                    "**[HIGH RISK / RED]** Deepens social isolation and"
+                    " alienates the veteran from civilian community support"
+                    " networks (*Demers, 2011*)."
+                ),
+                "red",
+            )
+
+# -----------------------------------------------------------------------------
+# NODE 6: MONTH 15 — HEALTH & WELLNESS ROUTINES
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_6":
+    char = get_current_char()
+    st.progress(
+        85, text="Node 6 of 7: Month 15 — Health, Fitness & Sleep Regulation"
+    )
+
+    st.warning(
+        "**🔬 Academic Citation & Research Analysis**\n\n"
+        "*Source: Mobbs & Bonanno (2018) — Psychological Resilience*\n\n"
+        "Transition stress often manifests physically through disrupted sleep"
+        " patterns and loss of structured physical fitness regimens. Establishing"
+        " sustainable civilian health habits is essential for long-term stability."
+    )
+
+    h_col1, h_col2 = st.columns([3, 1])
+    with h_col1:
+        st.header(f"Month 15: Physical & Mental Reset — {char['name']}")
+    with h_col2:
+        if st.button("⬅ Back to Dossiers", key="b_n6"):
+            st.session_state.state = "CHAR_SELECT"
+            st.rerun()
+
+    st.info(
+        "Fifteen months out, irregular work hours have eroded your sleep"
+        " quality and physical routine. You feel sluggish and notice mounting"
+        " mental fatigue."
+    )
+
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.markdown(
+            "<div class='card-box'><h3>Option A</h3>"
+            "<p>Establish a consistent physical training and sleep schedule,"
+            " incorporating cardiovascular fitness and mindfulness practices.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option A", key="n6_a", use_container_width=True):
+            apply_choice(
+                10,
+                15,
+                10,
+                20,
+                "NODE_7",
+                "A",
+                "Establish a consistent physical training and sleep schedule, incorporating cardiovascular fitness and mindfulness practices.",
+                (
+                    "**[BEST PRACTICE / GREEN]** Directly mitigates"
+                    " transition fatigue and supports holistic health (*Mobbs &"
+                    " Bonanno, 2018*)."
+                ),
+                "green",
+            )
+
+    with c2:
+        st.markdown(
+            "<div class='card-box'><h3>Option B</h3>"
+            "<p>Rely on caffeine and energy drinks to push through fatigue"
+            " without altering your daily schedule or exercise habits.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option B", key="n6_b", use_container_width=True):
+            apply_choice(
+                0,
+                -5,
+                0,
+                -10,
+                "NODE_7",
+                "B",
+                "Rely on caffeine and energy drinks to push through fatigue without altering your daily schedule or exercise habits.",
+                (
+                    "**[HIGH RISK / RED]** Masks underlying burnout and"
+                    " degrades long-term health resilience."
+                ),
+                "red",
+            )
+
+    with c3:
+        st.markdown(
+            "<div class='card-box'><h3>Option C</h3>"
+            "<p>Join a local recreational sports league to combine physical"
+            " fitness with informal social networking.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Select Option C", key="n6_c", use_container_width=True):
+            apply_choice(
+                5,
+                15,
+                15,
+                15,
+                "NODE_7",
+                "C",
+                "Join a local recreational sports league to combine physical fitness with informal social networking.",
+                (
+                    "**[BEST PRACTICE / GREEN]** Combines physical well-being"
+                    " with community embedding (*Demers, 2011*)."
+                ),
+                "green",
+            )
+
+# -----------------------------------------------------------------------------
+# NODE 7: MONTH 24 — FINAL REINTEGRATION DEBRIEF & AFTER ACTION REPORT
+# -----------------------------------------------------------------------------
+elif st.session_state.state == "NODE_7":
+    char = get_current_char()
+    st.progress(
+        100, text="Node 7 of 7: Month 24 — Final Reintegration Debrief"
+    )
+
+    st.header(f"After Action Report: 24-Month Reintegration Debrief — {char['name']}")
+    st.success(
+        "You have successfully navigated the 24-month civilian reintegration window."
+        " Review your final domain metrics and path analysis below."
+    )
+
+    stats = st.session_state.get("stats", {"CT": 50, "SR": 50, "CE": 50, "SI": 50})
+
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Career Translation", f"{stats['CT']}%")
+    col2.metric("Social & Relational", f"{stats['SR']}%")
+    col3.metric("Community Engagement", f"{stats['CE']}%")
+    col4.metric("Self-Identity", f"{stats['SI']}%")
+
+    st.divider()
+    st.subheader("📋 Decision History & Academic Evaluation")
+
+    for idx, item in enumerate(st.session_state.get("choice_history", [])):
+        # Safely assign CSS card type to avoid quote collision
+        if item["eval_type"] == "green":
+            eval_class = "card-green"
+        elif item["eval_type"] == "yellow":
+            eval_class = "card-yellow"
+        else:
+            eval_class = "card-red"
+
+        st.markdown(
+            f"<div class='{eval_class}'>"
+            f"<h4>Step {idx+1}: Option {item['choice_id']}</h4>"
+            f"<p><b>Action:</b> {item['summary']}</p>"
+            f"<p><b>Feedback:</b> {item['feedback']}</p>"
+            f"</div>",
+            unsafe_allow_html=True,
+        )
+
+    st.divider()
+    if st.button("🔄 Restart Simulation", use_container_width=True, type="primary"):
+        st.session_state.state = "CHAR_SELECT"
+        st.session_state.char_key = None
+        st.session_state.path = []
+        st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
+        st.session_state.choice_history = []
+        st.rerun()
