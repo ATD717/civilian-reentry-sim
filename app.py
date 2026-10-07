@@ -132,7 +132,6 @@ def apply_choice(
     feedback_text,
     eval_type,
 ):
-    # Ensure stats dictionary exists before modifying
     if "stats" not in st.session_state:
         st.session_state.stats = {"CT": 50, "SR": 50, "CE": 50, "SI": 50}
 
@@ -161,7 +160,7 @@ def apply_choice(
             "choice_id": choice_id,
             "summary": choice_summary,
             "feedback": feedback_text,
-            "eval_type": eval_type,  # "green", "yellow", or "red"
+            "eval_type": eval_type,
             "deltas": {
                 "CT": ct_change,
                 "SR": sr_change,
@@ -270,7 +269,7 @@ if st.session_state.state == "CHAR_SELECT":
                 st.rerun()
 
 # -----------------------------------------------------------------------------
-# NODE 1: MONTH 2 — SELF-IDENTITY & UNIFORM SEPARATION (Correct Answer: Option C)
+# NODE 1: MONTH 2 — SELF-IDENTITY & UNIFORM SEPARATION
 # -----------------------------------------------------------------------------
 elif st.session_state.state == "NODE_1":
     char = get_current_char()
@@ -310,95 +309,3 @@ elif st.session_state.state == "NODE_1":
             "<div class='card-box'><h3>Option A</h3>"
             "<p>Isolate yourself socially, relying solely on your own internal"
             " discipline to push through the transition without seeking"
-            " external validation or veteran networks.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option A", key="n1_a", use_container_width=True):
-            apply_choice(
-                0,
-                -10,
-                -10,
-                -15,
-                "NODE_2",
-                "A",
-                "Isolate yourself socially, relying solely on your own internal discipline to push through the transition without seeking external validation or veteran networks.",
-                (
-                    "**[HIGH RISK / RED]** Reflects withdrawal and suppressed"
-                    " identity conflict. Smith & True (2014) identify isolation"
-                    " as a primary driver of acute transition stress and"
-                    " identity fragmentation."
-                ),
-                "red",
-            )
-
-    with c2:
-        st.markdown(
-            "<div class='card-box'><h3>Option B</h3>"
-            "<p>Immerse yourself immediately in civilian recreational hobbies"
-            " and casual entertainment to distract yourself from thinking about"
-            " your military past.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option B", key="n1_b", use_container_width=True):
-            apply_choice(
-                5,
-                0,
-                0,
-                5,
-                "NODE_2",
-                "B",
-                "Immerse yourself immediately in civilian recreational hobbies and casual entertainment to distract yourself from thinking about your military past.",
-                (
-                    "**[CAUTION / YELLOW]** Temporary avoidance provides"
-                    " short-term relief but delays confronting deep-seated"
-                    " identity reorganization, leaving root transition friction"
-                    " unaddressed."
-                ),
-                "yellow",
-            )
-
-    with c3:
-        st.markdown(
-            "<div class='card-box'><h3>Option C</h3>"
-            "<p>Connect proactively with a local veteran mentorship group to"
-            " openly discuss the psychological shift of leaving service and"
-            " redefine your personal core values.</p></div>",
-            unsafe_allow_html=True,
-        )
-        if st.button("Select Option C", key="n1_c", use_container_width=True):
-            apply_choice(
-                5,
-                10,
-                15,
-                20,
-                "NODE_2",
-                "C",
-                "Connect proactively with a local veteran mentorship group to openly discuss the psychological shift of leaving service and redefine your personal core values.",
-                (
-                    "**[BEST PRACTICE / GREEN]** Aligns with Smith & True (2014)"
-                    " and Demers (2011). Proactive peer engagement successfully"
-                    " bridges the gap between military and civilian identity"
-                    " markers."
-                ),
-                "green",
-            )
-
-# -----------------------------------------------------------------------------
-# NODE 2: MONTH 4 — SOCIAL RELATIONSHIPS & HOUSEHOLD ROLE RENEGOTIATION
-# -----------------------------------------------------------------------------
-elif st.session_state.state == "NODE_2":
-    char = get_current_char()
-    st.progress(
-        28, text="Node 2 of 7: Month 4 — Household Role Renegotiation"
-    )
-
-    st.warning(
-        "**🔬 Academic Citation & Research Analysis**\n\n"
-        "*Source: Schuetz (1945) / Demers (2011)*\n\n"
-        "Schuetz's Homecoming theory demonstrates that home is not a static"
-        " haven. Spouses and partners have adapted to manage household"
-        " operations independently during deployments, requiring active"
-        " relational role renegotiation."
-    )
-
-    h_col1, h_col
